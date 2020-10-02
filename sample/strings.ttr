@@ -1,0 +1,17 @@
+// Basics
+val a = 'foo'
+val b = 'bar'
+
+// Templates
+val c = '$a ${b}' // Test comment
+
+// Escape sequences
+val escape = '\'test\''
+val parserTest1 = '\b'
+val parserTest2 = '\f'
+val parserTest3 = '\n'
+val parserTest4 = '\r'
+val parserTest5 = '\t'
+val parserTest6 = '\v'
+val parserTest7 = '\\'
+val parserTest8 = '\''

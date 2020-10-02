@@ -4,6 +4,7 @@ use std::fmt::{self, Debug};
 pub enum TokenType {
 	// Primitives
 	Integer, // 12
+	String, // "foo"
 	// Booleans
 	True,  // true
 	False, // false
@@ -23,6 +24,7 @@ pub enum TokenType {
 	Specifier, // :
 	// System
 	Eof,
+	Comment,
 }
 
 impl TokenType {
