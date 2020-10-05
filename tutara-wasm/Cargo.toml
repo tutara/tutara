@@ -1,0 +1,12 @@
+[package]
+name = "tutara-wasm"
+version = "0.0.0"
+authors = ["Niels van Velzen <git@ndat.nl>", "Marnix Wieffering <git@marnixwieffering.dev>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+tutara-interpreter = { path = "../tutara-interpreter" }
+wasm-bindgen = "0.2"
