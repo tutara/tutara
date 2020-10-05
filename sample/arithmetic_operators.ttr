@@ -1,0 +1,14 @@
+val a = 5 + 7
+val b = 1 + 1 + 2
+val c = 'foo' + 'bar'
+val d = 3 - 2
+val e = 1 - 3 - 5
+val f = 3 * 1
+val g = 3 * 5
+val h = 9 / 2
+val i = 12 / 4
+val j = 191 / 0 // Runtime error
+val k = 2 ^ 64
+val l = 3 ^ 2
+val m = 9 % 2
+val n = 13 % 7

@@ -13,14 +13,15 @@ pub enum TokenType {
 	Var, // Mutable
 	// Reference
 	Identifier, // NAME
-	// Operations
-	Assign,    // =
+	// Arithmetic Operations
 	Plus,      // +
-	Min,       // -
+	Minus,     // -
 	Multiply,  // *
-	Divide,    // /
+	Division,    // /
 	Pow,       // ^
 	Modulo,    // %
+	// Uncategorized
+	Assign,    // =
 	Specifier, // :
 	// System
 	Comment,
@@ -37,13 +38,14 @@ impl TokenType {
 			"val" => Some(Val),
 			"var" => Some(Var),
 			
-			"=" => Some(Assign),
 			"+" => Some(Plus),
-			"-" => Some(Min),
+			"-" => Some(Minus),
 			"*" => Some(Multiply),
-			"/" => Some(Divide),
+			"/" => Some(Division),
 			"^" => Some(Pow),
 			"%" => Some(Modulo),
+			
+			"=" => Some(Assign),
 			":" => Some(Specifier),
 			_ => None,
 		}
