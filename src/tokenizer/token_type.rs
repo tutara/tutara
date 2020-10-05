@@ -23,7 +23,6 @@ pub enum TokenType {
 	Modulo,    // %
 	Specifier, // :
 	// System
-	Eof,
 	Comment,
 }
 

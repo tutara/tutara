@@ -1,0 +1,3 @@
+// This is intended to break due too a new line character in the string
+val foo = 'foo
+bar'

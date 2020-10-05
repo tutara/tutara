@@ -46,34 +46,37 @@ fn main() {
 	println!("{}", source);
 	println!();
 
-	// Tokenize
-	let mut tokenizer = Tokenizer::new(&source);
-	tokenizer.tokenize();
+	// Convert source to tokens
+	let tokenizer = Tokenizer::new(&source);
 
 	println!("# Tokens");
 	println!();
 
 	let mut last_line = 1;
-	for token in tokenizer.tokens.iter() {
-		let mut literal_val = "".to_string();
+	for result in tokenizer {
+		if let Err(err) = result {
+			println!("Error at line {} on column {}: {}", err.line, err.column, err.message);
+		} else if let Ok(token) = result {
+			let mut literal_val = "".to_string();
 
-		if token.literal.is_some() {
-			literal_val =
-				String::new() + "literal=" + &token.literal.as_ref().unwrap().to_string() + " ";
+			if token.literal.is_some() {
+				literal_val =
+					String::new() + "literal=" + &token.literal.as_ref().unwrap().to_string() + " ";
+			}
+
+			if token.line != last_line {
+				println!();
+				last_line = token.line;
+			}
+
+			println!(
+				"{:<11}{:<30}line={:<4} column={:<4} length={:<4}",
+				format!("{:?}", token.r#type),
+				literal_val,
+				token.line,
+				token.column,
+				token.length
+			);
 		}
-
-		if token.line != last_line {
-			println!();
-			last_line = token.line;
-		}
-
-		println!(
-			"{:<11}{:<30}line={:<4} column={:<4} length={:<4}",
-			format!("{:?}", token.r#type),
-			literal_val,
-			token.line,
-			token.column,
-			token.length
-		);
 	}
 }

@@ -9,3 +9,8 @@ pub use token_type::TokenType;
 
 mod literal;
 pub use literal::Literal;
+
+mod token_result;
+pub use token_result::TokenResult;
+pub use token_result::ErrorType;
+pub use token_result::Error;
