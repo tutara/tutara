@@ -1,9 +1,10 @@
+extern crate tutara_interpreter;
+
 use std::env;
 use std::fs;
 use std::io;
 
-mod tokenizer;
-use tokenizer::Tokenizer;
+use tutara_interpreter::Tokenizer;
 
 fn main() {
 	// Read command line arguments
