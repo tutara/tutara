@@ -1,7 +1,7 @@
-use super::token_result::Error;
-use super::token_result::TokenResult;
-use super::token_result::ErrorType;
 use super::token::Token;
+use super::token_result::Error;
+use super::token_result::ErrorType;
+use super::token_result::TokenResult;
 use super::token_type::TokenType;
 use super::Literal;
 
@@ -45,9 +45,10 @@ impl Iterator for Tokenizer<'_> {
 				} else if let Some(r#type) = TokenType::get_reserved_token(&current.to_string()) {
 					token = Some(self.create_token(r#type));
 				} else {
-					println!("Crash at {} ({}:{})", current, self.line, self.column);
-
-					unimplemented!();
+					token = Some(self.create_error(
+						ErrorType::Lexical,
+						format!("Unexpected token at {} ({}:{})", current, self.line, self.column),
+					))
 				}
 
 				self.column += self.length;
@@ -82,11 +83,23 @@ impl Tokenizer<'_> {
 	}
 
 	fn create_literal_token(&mut self, r#type: TokenType, literal: Option<Literal>) -> TokenResult {
-		return Ok(Token::new(r#type, literal, self.line, self.column, self.length));
+		return Ok(Token::new(
+			r#type,
+			literal,
+			self.line,
+			self.column,
+			self.length,
+		));
 	}
 
 	fn create_error(&mut self, r#type: ErrorType, message: String) -> TokenResult {
-		return Err(Error::new(r#type, message, self.line, self.column, self.length));
+		return Err(Error::new(
+			r#type,
+			message,
+			self.line,
+			self.column,
+			self.length,
+		));
 	}
 }
 
@@ -113,7 +126,8 @@ impl Tokenizer<'_> {
 		if literal.is_err() {
 			return self.create_error(ErrorType::Lexical, "Invalid number".to_string());
 		} else {
-			return self.create_literal_token(TokenType::Integer, Some(Literal::Number(literal.unwrap())));
+			return self
+				.create_literal_token(TokenType::Integer, Some(Literal::Number(literal.unwrap())));
 		}
 	}
 
@@ -161,7 +175,10 @@ impl Tokenizer<'_> {
 					break;
 				} else if *next == '\r' {
 					// ERROR NO NEW LINE I NSTRING Pl0X
-					return self.create_error(ErrorType::Lexical, "Unexpected new line, expected end of string.".to_string());
+					return self.create_error(
+						ErrorType::Lexical,
+						"Unexpected new line, expected end of string.".to_string(),
+					);
 				} else {
 					// other characters
 					value.push(*next);

@@ -23,6 +23,7 @@ fn run(src: String, print_input: bool) {
 	for result in tokenizer {
 		if let Err(err) = result {
 			println!("Error at line {} on column {}: {}", err.line, err.column, err.message);
+			break;
 		} else if let Ok(token) = result {
 			let mut literal_val = "".to_string();
 	
