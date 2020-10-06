@@ -49,7 +49,7 @@ fn run(src: String, print_input: bool) {
 }
 
 fn interactive_mode() {
-	println!("Initialized Tutara interactive mode. Enter \".exit\" to leave.");
+	println!("Initialized Tutara interactive mode. Use \".file [path]\" to read files or \".exit\" to leave.");
 	println!();
 	
 	loop {
@@ -61,6 +61,14 @@ fn interactive_mode() {
 		if input.starts_with(".exit") {
 			println!("Exiting interactive mode");
 			break;
+		} else if input.starts_with(".file") {
+			let parts = input.split_whitespace().nth(1);
+			
+			if let Some(path) = parts {
+				run_file(&path.to_string());
+			} else {
+				println!("Invalid path. Syntax: .file [path]");	
+			}
 		} else {
 			run(input, false);
 		}
