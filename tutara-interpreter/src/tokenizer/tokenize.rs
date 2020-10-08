@@ -185,6 +185,8 @@ impl Tokenizer<'_> {
 
 				if next.is_some() {
 					value.push(next.unwrap());
+				} else {
+					break;
 				}
 
 				self.length += 1;
