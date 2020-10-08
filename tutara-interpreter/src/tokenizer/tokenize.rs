@@ -7,7 +7,6 @@ use super::Literal;
 
 pub struct Tokenizer<'a> {
 	chars: std::iter::Peekable<std::str::Chars<'a>>,
-	pub tokens: Vec<Token>,
 	// Cursor position
 	line: u32,
 	column: u32,
@@ -68,7 +67,6 @@ impl Tokenizer<'_> {
 	pub fn new(source: &str) -> Tokenizer {
 		Tokenizer {
 			chars: source.chars().peekable(),
-			tokens: Vec::new(),
 			line: 1,
 			column: 0,
 			length: 0,
@@ -204,6 +202,8 @@ impl Tokenizer<'_> {
 
 				if next.is_some() {
 					value.push(next.unwrap());
+				} else {
+					break;
 				}
 
 				self.length += 1;

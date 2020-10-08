@@ -6,10 +6,12 @@ use super::token::Token;
 
 pub type TokenResult = result::Result<Token, Error>;
 
+#[derive(Debug)]
 pub enum ErrorType {
 	Lexical,
 }
 
+#[derive(Debug)]
 pub struct Error {
 	pub r#type: ErrorType,
 	pub message: String,
