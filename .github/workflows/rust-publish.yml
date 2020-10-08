@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jetli/wasm-pack-action@v0.3.0
       - name: Build using wasm-pack
-        run: wasm-pack build --target bundler --scope tutara
+        run: wasm-pack build --target web --scope tutara
         working-directory: ./tutara-wasm/
       - uses: actions/upload-artifact@v2
         with:
