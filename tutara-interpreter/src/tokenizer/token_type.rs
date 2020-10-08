@@ -4,7 +4,7 @@ use std::fmt::{self, Debug};
 pub enum TokenType {
 	// Primitives
 	Integer, // 12
-	String, // "foo"
+	String,  // "foo"
 	// Booleans
 	True,  // true
 	False, // false
@@ -13,13 +13,22 @@ pub enum TokenType {
 	Var, // Mutable
 	// Reference
 	Identifier, // NAME
-	// Arithmetic Operations
-	Plus,      // +
-	Minus,     // -
-	Multiply,  // *
-	Division,    // /
-	Pow,       // ^
-	Modulo,    // %
+	// Operations
+	Plus,     // +
+	Minus,    // -
+	Multiply, // *
+	Division, // /
+	Pow,      // ^
+	Modulo,   // %
+	// Function
+	Function,	// fun
+	Return, 	// return
+	Separator,  // ,
+	// Braces
+	OpenParenthesis,  	// (
+	CloseParenthesis, 	// )
+	OpenCurlyBracket,   // {
+	CloseCurlyBracket,  // }
 	// Uncategorized
 	Assign,    // =
 	Specifier, // :
@@ -44,7 +53,16 @@ impl TokenType {
 			"/" => Some(Division),
 			"^" => Some(Pow),
 			"%" => Some(Modulo),
-			
+
+			"fun" => Some(Function),
+			"return" => Some(Return),
+			"," => Some(Separator),
+
+			"(" => Some(OpenParenthesis),
+			")" => Some(CloseParenthesis),
+			"{" => Some(OpenCurlyBracket),
+			"}" => Some(CloseCurlyBracket),
+
 			"=" => Some(Assign),
 			":" => Some(Specifier),
 			_ => None,
