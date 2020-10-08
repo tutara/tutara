@@ -36,7 +36,10 @@ impl LocalToken {
 	#[wasm_bindgen(getter)]
     pub fn literal(&self) -> JsValue {
 		if let Some(literal) = &self.literal {
-			return JsValue::from_str(&literal.to_string());
+			match literal {
+				Literal::Number(n) => return JsValue::from_f64(*n as f64),
+				Literal::String(s) => return JsValue::from_str(s),
+			}
 		} else{
 			return JsValue::null();
 		}
