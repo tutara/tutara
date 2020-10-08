@@ -11,3 +11,12 @@ impl fmt::Display for Literal {
 		write!(f, "{:?}", self)
 	}
 }
+
+impl Literal {
+	fn to_string(&self) -> String {
+		match self {
+			Literal::Number(n) => n.to_string(),
+			Literal::String(s) => s.clone()
+		}
+	}
+}

@@ -2,16 +2,13 @@ use wasm_bindgen::prelude::*;
 
 use tutara_interpreter::Tokenizer;
 use tutara_interpreter::Token;
-
-#[wasm_bindgen]
-pub struct LocalTokenizer {
-	tokenizer: &'static mut Tokenizer<'static>
-}
+use tutara_interpreter::TokenType;
+use tutara_interpreter::Literal;
 
 #[wasm_bindgen]
 pub struct LocalToken {
-	// pub r#type: TokenType,
-	// pub literal: Option<Literal>,
+	token_type: TokenType,
+	literal: Option<Literal>,
 	pub line: u32,
 	pub column: u32,
 	pub length: u32,
@@ -20,6 +17,8 @@ pub struct LocalToken {
 impl LocalToken {
 	pub fn from_token(token: Token) -> LocalToken {
 		return LocalToken {
+			token_type: token.r#type,
+			literal: token.literal,
 			line: token.line,
 			column: token.column,
 			length: token.length,
@@ -27,27 +26,50 @@ impl LocalToken {
 	}
 }
 
-#[wasm_bindgen]
-pub fn create_tokenizer(source: &str) -> LocalTokenizer {
-	return LocalTokenizer {
-		tokenizer: Box::leak(Box::new(Tokenizer::new(source)))
-	};
+#[wasm_bindgen]	
+impl LocalToken {
+	#[wasm_bindgen(getter)]
+    pub fn token_type(&self) -> String {
+		return self.token_type.to_string();
+	}
+	
+	#[wasm_bindgen(getter)]
+    pub fn literal(&self) -> JsValue {
+		if let Some(literal) = &self.literal {
+			return JsValue::from_str(&literal.to_string());
+		} else{
+			return JsValue::null();
+		}
+    }
+}
+
+#[wasm_bindgen(module = "/token-set.js")]
+extern "C" {
+	pub type TokenSet;
+
+	#[wasm_bindgen(constructor)]
+	fn new() -> TokenSet;
+
+	#[wasm_bindgen(method)]
+	fn append(this: &TokenSet, token: LocalToken);
 }
 
 #[wasm_bindgen]
-pub fn next_token(localTokenizer: LocalTokenizer) -> Option<LocalToken> {
-	let tokenizer = localTokenizer.tokenizer;
-	let result = tokenizer.next();
+pub fn get_tokens(source: &str) -> TokenSet {
+	let mut tokenizer = Tokenizer::new(source);
+	let token_set = TokenSet::new();
 
-	if result.is_none() {
-		return None;
+	loop {
+		let result = tokenizer.next();
+
+		if result.is_none() {
+			break;
+		}
+
+		let token = result.unwrap();
+		token_set.append(LocalToken::from_token(token.unwrap()));
 	}
 
-	let token = result.unwrap();
 
-	// if token.is_err() {
-	// 	return None;
-	// }
-
-	return Some(LocalToken::from_token(token.unwrap()));
+	return token_set;
 }
