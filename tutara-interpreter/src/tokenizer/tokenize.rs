@@ -27,7 +27,7 @@ impl Iterator for Tokenizer<'_> {
 
 				// https://doc.rust-lang.org/reference/whitespace.html
 				if current.is_whitespace() {
-					if current == '\r' {
+					if current == '\n' {
 						self.line += 1;
 						self.column = 0;
 					}
@@ -171,7 +171,7 @@ impl Tokenizer<'_> {
 					// string end
 					self.chars.next();
 					break;
-				} else if *next == '\r' {
+				} else if *next == '\n' {
 					// ERROR NO NEW LINE I NSTRING Pl0X
 					return self.create_error(
 						ErrorType::Lexical,
@@ -195,7 +195,7 @@ impl Tokenizer<'_> {
 		let mut value = String::new();
 
 		loop {
-			if self.chars.peek() == Some(&'\r') {
+			if self.chars.peek() == Some(&'\n') {
 				break;
 			} else {
 				let next = self.chars.next();

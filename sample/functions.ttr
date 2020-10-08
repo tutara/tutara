@@ -1,0 +1,25 @@
+fun foo {
+    // Do somthing
+}
+
+fun bar(parameter: string) {
+    // Do somthing
+}
+
+fun baz(firstName: string, lastName: string) {
+   // Do somthing
+}
+
+fun: string qux {
+   return 'value'
+}
+
+fun: string quux(parameter: string) {
+   parameter = 'Hello' + parameter
+   return parameter
+}
+
+fun: string quuz(firstName: string, lastName: string) {
+   val greet = 'Hello' + firstName + lastName
+   return greet
+}
