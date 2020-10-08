@@ -1,0 +1,44 @@
+name: Rust - Build & Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: 
+      - master
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  tutara-interpreter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --verbose
+        working-directory: './tutara-interpreter/'
+      - name: Run tests
+        run: cargo test --verbose
+        working-directory: './tutara-interpreter/'
+  tutara-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --verbose
+        working-directory: './tutara-cli/'
+      - name: Run tests
+        run: cargo test --verbose
+        working-directory: './tutara-cli/'
+  tutara-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build --verbose
+        working-directory: './tutara-wasm/'
+      - name: Run tests
+        run: cargo test --verbose
+        working-directory: './tutara-wasm/'
