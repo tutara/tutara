@@ -1,0 +1,47 @@
+name: Tutara WebAssembly
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tutara-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.3.0
+      - name: Clone repository 
+        uses: actions/checkout@v2
+        with:
+          path: tutara
+      - name: Build using wasm-pack
+        working-directory: ./tutara/tutara-wasm/
+        run: |
+          wasm-pack build --target web --scope tutara
+          rm -v pkg/.gitignore pkg/package.json
+      - name: Upload WebAssembly package
+        uses: actions/upload-artifact@v2
+        with:
+          name: WebAssembly package
+          path: ./tutara/tutara-wasm/pkg/
+      - name: Clone tutara.github.io repository
+        uses: actions/checkout@v2
+        with:
+          repository: tutara/tutara.github.io
+          ref: tutara.dev
+          path: tutara.github.io
+          token: ${{ secrets.GH_BOT_TOKEN }}
+      - name: Sync changes
+        run: |
+          mkdir -vp ./tutara.github.io/wasm/pkg/
+          rsync -avh --delete ./tutara/tutara-wasm/pkg/ ./tutara.github.io/wasm/pkg/
+      - name: Commit changes
+        working-directory: tutara.github.io
+        continue-on-error: true
+        run: |
+          git config user.name tutara-bot
+          git config user.email github-bot@tutara.dev
+          git add .
+          git commit -m "Update generated sources." -m "Reference: $GITHUB_REPOSITORY@$GITHUB_SHA"
+          git push
