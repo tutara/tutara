@@ -1,5 +1,5 @@
-mod tokenize;
-pub use tokenize::Tokenizer;
+mod tokenizer;
+pub use tokenizer::Tokenizer;
 
 mod token;
 pub use token::Token;
@@ -10,7 +10,7 @@ pub use token_type::TokenType;
 mod literal;
 pub use literal::Literal;
 
-mod token_result;
-pub use token_result::TokenResult;
-pub use token_result::ErrorType;
-pub use token_result::Error;
+mod result;
+pub use result::Result;
+pub use result::ErrorType;
+pub use result::Error;

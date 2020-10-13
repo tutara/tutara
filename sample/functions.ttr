@@ -19,7 +19,12 @@ fun: string quux(parameter: string) {
    return parameter
 }
 
-fun: string quuz(firstName: string, lastName: string) {
+fun: string quuux(firstName: string, lastName: string) {
+   val greet = 'Hello' + firstName + lastName
+   return greet
+}
+
+fun: string quuuux(firstName: string, lastName: string,) {
    val greet = 'Hello' + firstName + lastName
    return greet
 }
