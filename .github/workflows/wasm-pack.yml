@@ -1,4 +1,4 @@
-name: Tutara WebAssembly
+name: wasm-pack
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  tutara-wasm:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Install wasm-pack
