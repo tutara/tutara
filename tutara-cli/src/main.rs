@@ -79,7 +79,7 @@ fn interactive_mode() {
 fn run_file(path: &String) {
 	println!("Reading from file {}", path);
 	
-	let source = fs::read_to_string(path).expect("Could not read file").to_string();
+	let source = fs::read_to_string(path).expect("Could not read file");
 
 	run(source, true);
 }
