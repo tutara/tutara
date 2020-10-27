@@ -5,48 +5,77 @@ use std::fs;
 use std::io;
 use std::io::Write;
 
-use tutara_interpreter::Tokenizer;
+use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
+use tutara_interpreter::{Token, Tokenizer};
 
-fn run(src: String, print_input: bool) {
-	if print_input {
-		println!("# Input");
-		println!("{}", src);
-		println!();
+fn color_for_token(token: &Token) -> Option<Color> {
+	// Colors based on Nord color palette
+	match token.r#type {
+	    tutara_interpreter::TokenType::Integer => Some(Color::Rgb(94, 129, 172)),
+	    tutara_interpreter::TokenType::String => Some(Color::Rgb(163, 190, 140)),
+	    tutara_interpreter::TokenType::True => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::False => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::Val => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::Var => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::Identifier => Some(Color::Rgb(235, 203, 1)),
+		tutara_interpreter::TokenType::Plus => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Minus => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Multiply => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Division => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Pow => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Modulo => Some(Color::Rgb(180, 142, 173)),
+	    tutara_interpreter::TokenType::Function => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::Return => Some(Color::Rgb(208, 135, 1)),
+	    tutara_interpreter::TokenType::Separator => Some(Color::Rgb(236, 239, 244)),
+	    tutara_interpreter::TokenType::OpenParenthesis => Some(Color::Rgb(143, 188, 187)),
+	    tutara_interpreter::TokenType::CloseParenthesis => Some(Color::Rgb(143, 188, 187)),
+	    tutara_interpreter::TokenType::OpenCurlyBracket => Some(Color::Rgb(143, 188, 187)),
+	    tutara_interpreter::TokenType::CloseCurlyBracket => Some(Color::Rgb(143, 188, 187)),
+	    tutara_interpreter::TokenType::Assign => Some(Color::Rgb(236, 239, 244)),
+	    tutara_interpreter::TokenType::Specifier => Some(Color::Rgb(236, 239, 244)),
+	    tutara_interpreter::TokenType::Comment => Some(Color::Rgb(216, 222, 233)),
 	}
-	
-	let tokenizer = Tokenizer::new(&src);
+}
 
-	println!("# Tokens");
-	println!();
+fn run(src: String) {
+	let mut stdout = StandardStream::stdout(ColorChoice::Auto);
+		
+	let tokenizer = Tokenizer::new(&src);
 	
-	let mut last_line = 1;
+	let mut line_index = 1;
+	let mut column_index = 0;
+
+	let mut lines = src.lines();
+	let mut line = lines.next().unwrap();
+
 	for result in tokenizer {
 		if let Err(err) = result {
-			println!("Error at line {} on column {}: {}", err.line, err.column, err.message);
+			writeln!(&mut stdout, "Error at line {} on column {}: {}", err.line, err.column, err.message);
 			break;
 		} else if let Ok(token) = result {
-			let mut literal_val = "".to_string();
-	
-			if token.literal.is_some() {
-				literal_val =
-					String::new() + "literal=" + &token.literal.as_ref().unwrap().to_string() + " ";
+			stdout.set_color(ColorSpec::new().set_fg(color_for_token(&token)));
+
+			while token.line > line_index {
+				line_index += 1;
+				column_index = 0;
+				line = lines.next().unwrap();
+				writeln!(&mut stdout);
 			}
-	
-			if token.line != last_line {
-				println!();
-				last_line = token.line;
+
+			if (column_index < token.column) {
+				let diff = token.column - column_index;
+				write!(&mut stdout, "{}", " ".repeat(diff as usize));
+				column_index += diff;
 			}
-	
-			println!(
-				"{:<11}{:<30}line={:<4} column={:<4} length={:<4}",
-				format!("{:?}", token.r#type),
-				literal_val,
-				token.line,
-				token.column,
-				token.length
-			);
+			
+			write!(&mut stdout, "{}", line.chars().skip(token.column as usize).take(token.length as usize).collect::<String>());
+			column_index += token.length;
 		}
 	}
+
+	// Reset colors
+	stdout.set_color(&ColorSpec::new());
+	writeln!(&mut stdout);
 }
 
 fn interactive_mode() {
@@ -71,7 +100,7 @@ fn interactive_mode() {
 				println!("Invalid path. Syntax: .file [path]");	
 			}
 		} else {
-			run(input, false);
+			run(input);
 		}
 	}
 }
@@ -81,7 +110,7 @@ fn run_file(path: &String) {
 	
 	let source = fs::read_to_string(path).expect("Could not read file");
 
-	run(source, true);
+	run(source);
 }
 
 fn main() {
@@ -102,7 +131,7 @@ fn main() {
 				run_file(file_path);
 			} else {
 				println!("Reading from argument");
-				run(arg.to_string(), true);
+				run(arg.to_string());
 			}
 		}
 		// Read from stdin

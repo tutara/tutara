@@ -30,6 +30,7 @@ impl Iterator for Tokenizer<'_> {
 					if current == '\n' {
 						self.line += 1;
 						self.column = 0;
+						self.length = 0;
 					}
 				} else if current.is_digit(10) {
 					token = Some(self.number(current));
@@ -170,9 +171,9 @@ impl Tokenizer<'_> {
 				} else if *next == '\'' {
 					// string end
 					self.chars.next();
+					self.length += 1;
 					break;
 				} else if *next == '\n' {
-					// ERROR NO NEW LINE I NSTRING Pl0X
 					return self.create_error(
 						ErrorType::Lexical,
 						"Unexpected new line, expected end of string.".to_string(),
