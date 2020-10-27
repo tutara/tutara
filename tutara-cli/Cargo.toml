@@ -7,3 +7,4 @@ default-run = "tutara-cli"
 
 [dependencies]
 tutara-interpreter = { path = "../tutara-interpreter" }
+termcolor = "1.1"
