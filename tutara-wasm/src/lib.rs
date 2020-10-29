@@ -1,9 +1,9 @@
 use wasm_bindgen::prelude::*;
 
-use tutara_interpreter::Tokenizer;
+use tutara_interpreter::Literal;
 use tutara_interpreter::Token;
 use tutara_interpreter::TokenType;
-use tutara_interpreter::Literal;
+use tutara_interpreter::Tokenizer;
 
 #[wasm_bindgen]
 pub struct LocalToken {
@@ -16,7 +16,7 @@ pub struct LocalToken {
 
 impl LocalToken {
 	pub fn from_token(token: Token) -> LocalToken {
-		return LocalToken {
+		LocalToken {
 			token_type: token.r#type,
 			literal: token.literal,
 			line: token.line,
@@ -26,24 +26,23 @@ impl LocalToken {
 	}
 }
 
-#[wasm_bindgen]	
+#[wasm_bindgen]
 impl LocalToken {
 	#[wasm_bindgen(getter)]
-    pub fn token_type(&self) -> String {
-		return self.token_type.to_string();
+	pub fn token_type(&self) -> String {
+		self.token_type.to_string()
 	}
-	
 	#[wasm_bindgen(getter)]
-    pub fn literal(&self) -> JsValue {
+	pub fn literal(&self) -> JsValue {
 		if let Some(literal) = &self.literal {
 			match literal {
 				Literal::Number(n) => JsValue::from_f64(*n as f64),
 				Literal::String(s) => JsValue::from_str(s),
 			}
-		} else{
+		} else {
 			JsValue::null()
 		}
-    }
+	}
 }
 
 #[wasm_bindgen(module = "/token-set.js")]
@@ -73,6 +72,5 @@ pub fn get_tokens(source: &str) -> TokenSet {
 		token_set.append(LocalToken::from_token(token.unwrap()));
 	}
 
-
-	return token_set;
+	token_set
 }

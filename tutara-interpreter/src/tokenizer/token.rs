@@ -1,6 +1,9 @@
-use super::token_type::TokenType;
 use super::literal::Literal;
+use super::token_type::TokenType;
 
+use std::fmt::{self, Debug};
+
+#[derive(Debug, PartialEq, Eq)]
 pub struct Token {
 	pub r#type: TokenType,
 	pub literal: Option<Literal>,
@@ -24,5 +27,11 @@ impl Token {
 			column,
 			length,
 		}
+	}
+}
+
+impl fmt::Display for Token {
+	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+		write!(f, "{:#?}", self)
 	}
 }

@@ -1,6 +1,6 @@
 use std::fmt::{self, Debug};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum TokenType {
 	// Primitives
 	Integer, // 12
@@ -20,23 +20,42 @@ pub enum TokenType {
 	Division, // /
 	Pow,      // ^
 	Modulo,   // %
+	// Assignment operator
+	Assign,         // =
+	AssignPlus,     // +=
+	AssignMinus,    // -=
+	AssignMultiply, // *=
+	AssignDivision, // /=
+	AssignPow,      // ^=
+	AssignModulo,   // %=
 	// Function
-	Function,	// fun
-	Return, 	// return
-	Separator,  // ,
+	Function,  // fun
+	Return,    // return
+	Separator, // ,
 	// Braces
-	OpenParenthesis,  	// (
-	CloseParenthesis, 	// )
-	OpenCurlyBracket,   // {
-	CloseCurlyBracket,  // }
+	OpenParenthesis,   // (
+	CloseParenthesis,  // )
+	OpenCurlyBracket,  // {
+	CloseCurlyBracket, // }
 	// Uncategorized
-	Assign,    // =
 	Specifier, // :
 	// System
 	Comment,
 }
 
 impl TokenType {
+	pub fn is_operation(token: &TokenType) -> bool {
+		vec![
+			TokenType::Plus,
+			TokenType::Minus,
+			TokenType::Multiply,
+			TokenType::Division,
+			TokenType::Pow,
+			TokenType::Modulo,
+		]
+		.contains(&token)
+	}
+
 	pub fn get_reserved_token(ident: &str) -> Option<TokenType> {
 		use TokenType::*;
 
@@ -46,7 +65,6 @@ impl TokenType {
 
 			"val" => Some(Val),
 			"var" => Some(Var),
-			
 			"+" => Some(Plus),
 			"-" => Some(Minus),
 			"*" => Some(Multiply),
