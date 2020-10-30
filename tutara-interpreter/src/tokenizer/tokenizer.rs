@@ -236,8 +236,9 @@ impl Tokenizer<'_> {
 		let r#type = &token.r#type;
 
 		if TokenType::is_operation(&r#type) {
-			if let Some(next) = self.chars.next() {
-				if next == '=' {
+			if let Some(next) = self.chars.peek() {
+				if next == &'=' {
+					self.chars.next(); 
 					self.length += 1;
 					return match r#type {
 						TokenType::Plus => self.create_token(TokenType::AssignPlus),
