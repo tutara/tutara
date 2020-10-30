@@ -98,7 +98,7 @@ impl Parser<'_> {
 			None => {}
 		}
 
-		if self.peek_in_token_types(&[TokenType::Identifier]) {
+		if self.peek_token_type(TokenType::Identifier) {
 			let statement = self.expression_root();
 
 			if let Ok(expression) = statement {
@@ -124,11 +124,11 @@ impl Parser<'_> {
 			None => {}
 		}
 
-		if let Some(Ok(identifier)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
+		if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier) {
 			let mut parameters_statement: Option<Box<Statement>> = None;
 
 			if let Some(Ok(open_parenthesis)) =
-				self.next_if_in_token_types(&[TokenType::OpenParenthesis])
+				self.next_if_token_type(TokenType::OpenParenthesis)
 			{
 				let mut parameters: Vec<Statement> = Vec::new();
 				while let Some(Ok(token)) = self.tokenizer.peek() {
@@ -157,7 +157,7 @@ impl Parser<'_> {
 			}
 
 			if let Some(Ok(open_curly_bracket)) =
-				self.next_if_in_token_types(&[TokenType::OpenCurlyBracket])
+				self.next_if_token_type(TokenType::OpenCurlyBracket)
 			{
 				match self.body(open_curly_bracket) {
 					Ok(body) => Ok(Statement::Function(
@@ -199,7 +199,7 @@ impl Parser<'_> {
 	}
 
 	fn parameter(&mut self) -> Result<Statement> {
-		if let Some(Ok(identifier)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
+		if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier) {
 			let type_specification: Box<Statement>;
 
 			match self.next_if_specifier() {
@@ -208,13 +208,13 @@ impl Parser<'_> {
 				None => return self.create_statement_syntax_error("Expected type specification".to_string(), identifier)
 			}
 
-			if let Some(Ok(seperator)) = self.next_if_in_token_types(&[TokenType::Separator]) {
+			if let Some(Ok(seperator)) = self.next_if_token_type(TokenType::Separator) {
 				Ok(Statement::Parameter(
 					identifier,
 					type_specification,
 					Some(seperator),
 				))
-			} else if self.peek_in_token_types(&[TokenType::CloseParenthesis]) {
+			} else if self.peek_token_type(TokenType::CloseParenthesis) {
 				Ok(Statement::Parameter(
 					identifier,
 					type_specification,
@@ -297,14 +297,14 @@ impl Parser<'_> {
 	fn involution(&mut self) -> Result<Expression> {
 		let mut expression = self.unary()?;
 
-		while let Some(Ok(token)) = self.next_if_in_token_types(&[TokenType::Pow]) {
+		while let Some(Ok(token)) = self.next_if_token_type(TokenType::Pow) {
 			expression = Expression::Binary(Box::new(expression), token, Box::new(self.unary()?));
 		}
 		Ok(expression)
 	}
 
 	fn unary(&mut self) -> Result<Expression> {
-		if let Some(Ok(token)) = self.next_if_in_token_types(&[TokenType::Minus]) {
+		if let Some(Ok(token)) = self.next_if_token_type(TokenType::Minus) {
 			return Ok(Expression::Unary(token, Box::new(self.unary()?)));
 		}
 
@@ -312,7 +312,7 @@ impl Parser<'_> {
 	}
 
 	fn terms(&mut self) -> Result<Expression> {
-		if let Some(Ok(token)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
+		if let Some(Ok(token)) = self.next_if_token_type(TokenType::Identifier) {
 			return Ok(Expression::Identifier(token));
 		}
 
@@ -325,10 +325,10 @@ impl Parser<'_> {
 			return Ok(Expression::Literal(token));
 		}
 
-		if let Some(Ok(_token)) = self.next_if_in_token_types(&[TokenType::OpenParenthesis]) {
+		if let Some(Ok(_token)) = self.next_if_token_type(TokenType::OpenParenthesis) {
 			let expression = self.assignment()?;
 
-			if let Some(Ok(_next)) = self.next_if_in_token_types(&[TokenType::CloseParenthesis]) {
+			if let Some(Ok(_next)) = self.next_if_token_type(TokenType::CloseParenthesis) {
 				return Ok(Expression::Grouping(Box::new(expression)));
 			}
 		}
@@ -355,9 +355,24 @@ impl Parser<'_> {
 		}
 	}
 
+	fn peek_token_type(&mut self, token_type: TokenType) -> bool {
+		match self.tokenizer.peek() {
+			Some(&Ok(ref token)) => token.r#type == token_type,
+			_ => false,
+		}
+	}
+
+	fn next_if_token_type(&mut self, token_type: TokenType) -> Option<Result<Token>> {
+		if self.peek_token_type(token_type) {
+			self.tokenizer.next()
+		} else {
+			None
+		}
+	}
+
 	fn next_if_specifier(&mut self) -> Option<Result<Statement>> {
-		if let Some(Ok(specifier)) = self.next_if_in_token_types(&[TokenType::Specifier]) {
-			if let Some(Ok(r#type)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
+		if let Some(Ok(specifier)) = self.next_if_token_type(TokenType::Specifier) {
+			if let Some(Ok(r#type)) = self.next_if_token_type(TokenType::Identifier) {
 				return Some(Ok(Statement::TypeSpecification(specifier, r#type)));
 			} else {
 				return Some(self.create_statement_syntax_error(
