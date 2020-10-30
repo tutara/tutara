@@ -92,13 +92,10 @@ impl Parser<'_> {
 	fn declaration(&mut self, token: Token) -> Result<Statement> {
 		let mut type_specification: Option<Box<Statement>> = None;
 
-		if let Some(Ok(specifier)) = self.next_if_in_token_types(&[TokenType::Specifier]) {
-			if let Some(Ok(r#type)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
-				type_specification =
-					Some(Box::new(Statement::TypeSpecification(specifier, r#type)));
-			} else {
-				return self.create_statement_syntax_error("Expected type".to_string(), specifier);
-			}
+		match self.next_if_specifier() {
+			Some(Ok(next)) => type_specification = Some(Box::new(next)),
+			Some(Err(next)) => return Err(next),
+			None => {}
 		}
 
 		if self.peek_in_token_types(&[TokenType::Identifier]) {
@@ -121,13 +118,10 @@ impl Parser<'_> {
 	fn function(&mut self, token: Token) -> Result<Statement> {
 		let mut type_specification: Option<Box<Statement>> = None;
 
-		if let Some(Ok(specifier)) = self.next_if_in_token_types(&[TokenType::Specifier]) {
-			if let Some(Ok(r#type)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
-				type_specification =
-					Some(Box::new(Statement::TypeSpecification(specifier, r#type)));
-			} else {
-				return self.create_statement_syntax_error("Expected type".to_string(), specifier);
-			}
+		match self.next_if_specifier() {
+			Some(Ok(next)) => type_specification = Some(Box::new(next)),
+			Some(Err(next)) => return Err(next),
+			None => {}
 		}
 
 		if let Some(Ok(identifier)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
@@ -206,33 +200,28 @@ impl Parser<'_> {
 
 	fn parameter(&mut self) -> Result<Statement> {
 		if let Some(Ok(identifier)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
-			if let Some(Ok(specifier)) = self.next_if_in_token_types(&[TokenType::Specifier]) {
-				if let Some(Ok(r#type)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
-					if let Some(Ok(seperator)) =
-						self.next_if_in_token_types(&[TokenType::Separator])
-					{
-						Ok(Statement::Parameter(
-							identifier,
-							Box::new(Statement::TypeSpecification(specifier, r#type)),
-							Some(seperator),
-						))
-					} else if self.peek_in_token_types(&[TokenType::CloseParenthesis]) {
-						Ok(Statement::Parameter(
-							identifier,
-							Box::new(Statement::TypeSpecification(specifier, r#type)),
-							None,
-						))
-					} else {
-						self.create_statement_syntax_error(
-							"Expected seperator".to_string(),
-							specifier,
-						)
-					}
-				} else {
-					self.create_statement_syntax_error("Expected type".to_string(), specifier)
-				}
+			let type_specification: Box<Statement>;
+
+			match self.next_if_specifier() {
+				Some(Ok(next)) => type_specification = Box::new(next),
+				Some(Err(next)) => return Err(next),
+				None => return self.create_statement_syntax_error("Expected type specification".to_string(), identifier)
+			}
+
+			if let Some(Ok(seperator)) = self.next_if_in_token_types(&[TokenType::Separator]) {
+				Ok(Statement::Parameter(
+					identifier,
+					type_specification,
+					Some(seperator),
+				))
+			} else if self.peek_in_token_types(&[TokenType::CloseParenthesis]) {
+				Ok(Statement::Parameter(
+					identifier,
+					type_specification,
+					None,
+				))
 			} else {
-				self.create_statement_syntax_error("Expected specifier".to_string(), identifier)
+				self.create_statement_syntax_error("Expected seperator".to_string(), identifier)
 			}
 		} else {
 			let token = self.tokenizer.next().unwrap().unwrap();
@@ -364,5 +353,19 @@ impl Parser<'_> {
 		} else {
 			None
 		}
+	}
+
+	fn next_if_specifier(&mut self) -> Option<Result<Statement>> {
+		if let Some(Ok(specifier)) = self.next_if_in_token_types(&[TokenType::Specifier]) {
+			if let Some(Ok(r#type)) = self.next_if_in_token_types(&[TokenType::Identifier]) {
+				return Some(Ok(Statement::TypeSpecification(specifier, r#type)));
+			} else {
+				return Some(self.create_statement_syntax_error(
+					"Expected type".to_string(),
+					specifier,
+				));
+			}
+		}
+		None
 	}
 }
