@@ -43,6 +43,7 @@ fn color_for_token(token: &Token) -> Option<Color> {
 		TokenType::AssignModulo => Some(Color::Rgb(236, 239, 244)),
 		TokenType::Specifier => Some(Color::Rgb(236, 239, 244)),
 		TokenType::Comment => Some(Color::Rgb(216, 222, 233)),
+		TokenType::Dot => Some(Color::Rgb(236, 239, 244)),
 	}
 }
 

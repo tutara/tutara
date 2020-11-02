@@ -40,6 +40,7 @@ pub enum TokenType {
 	CloseCurlyBracket, // }
 	// Uncategorized
 	Specifier, // :
+	Dot,
 	// System
 	Comment,
 }
@@ -84,6 +85,7 @@ impl TokenType {
 
 			"=" => Some(Assign),
 			":" => Some(Specifier),
+			"." => Some(Dot),
 			_ => None,
 		}
 	}
