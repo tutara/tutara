@@ -2,8 +2,9 @@ use std::string::String;
 use std::fmt::{self, Debug};
 
 use super::Literal::*;
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Eq)]
+#[derive(Debug, Eq, Serialize, Deserialize)]
 pub enum Literal {
 	Number(u32),
 	String(String),
