@@ -1,8 +1,9 @@
 use crate::Token;
 
 use std::fmt::{self, Debug};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Expression {
 	Literal(Token),										// Token (With literal value)
 	Identifier(Token),

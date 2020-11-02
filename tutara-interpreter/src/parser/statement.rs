@@ -1,8 +1,9 @@
 use crate::{Expression, Token};
 
 use std::fmt::{self, Debug};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Statement {
 	Expression(Expression),
 	Declaration(Token, Option<Box<Statement>>, Expression),	// var | val, Option<TypeSpecification>, Assignment | Identifier

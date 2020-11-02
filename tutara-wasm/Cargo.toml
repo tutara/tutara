@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 tutara-interpreter = { path = "../tutara-interpreter" }
-wasm-bindgen = "0.2"
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ["-Oz", "--enable-mutable-globals"]

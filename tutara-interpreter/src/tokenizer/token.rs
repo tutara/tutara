@@ -2,8 +2,9 @@ use super::literal::Literal;
 use super::token_type::TokenType;
 
 use std::fmt::{self, Debug};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Token {
 	pub r#type: TokenType,
 	pub literal: Option<Literal>,
