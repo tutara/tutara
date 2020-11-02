@@ -82,11 +82,10 @@ impl Parser<'_> {
 	}
 
 	fn expression(&mut self) -> Result<Statement> {
-		if let Ok(expression) = self.expression_root() {
-			return Ok(Statement::Expression(expression));
+		match self.expression_root() {
+			Ok(expression) => Ok(Statement::Expression(expression)),
+			Err(error) => Err(error)
 		}
-		let token = self.tokenizer.next().unwrap().unwrap();
-		self.create_statement_syntax_error("Invalid expression".to_string(), token)
 	}
 
 	fn declaration(&mut self, token: Token) -> Result<Statement> {
@@ -127,8 +126,7 @@ impl Parser<'_> {
 		if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier) {
 			let mut parameters_statement: Option<Box<Statement>> = None;
 
-			if let Some(Ok(open_parenthesis)) =
-				self.next_if_token_type(TokenType::OpenParenthesis)
+			if let Some(Ok(open_parenthesis)) = self.next_if_token_type(TokenType::OpenParenthesis)
 			{
 				let mut parameters: Vec<Statement> = Vec::new();
 				while let Some(Ok(token)) = self.tokenizer.peek() {
@@ -205,7 +203,12 @@ impl Parser<'_> {
 			match self.next_if_specifier() {
 				Some(Ok(next)) => type_specification = Box::new(next),
 				Some(Err(next)) => return Err(next),
-				None => return self.create_statement_syntax_error("Expected type specification".to_string(), identifier)
+				None => {
+					return self.create_statement_syntax_error(
+						"Expected type specification".to_string(),
+						identifier,
+					)
+				}
 			}
 
 			if let Some(Ok(seperator)) = self.next_if_token_type(TokenType::Separator) {
@@ -215,11 +218,7 @@ impl Parser<'_> {
 					Some(seperator),
 				))
 			} else if self.peek_token_type(TokenType::CloseParenthesis) {
-				Ok(Statement::Parameter(
-					identifier,
-					type_specification,
-					None,
-				))
+				Ok(Statement::Parameter(identifier, type_specification, None))
 			} else {
 				self.create_statement_syntax_error("Expected seperator".to_string(), identifier)
 			}
@@ -308,7 +307,67 @@ impl Parser<'_> {
 			return Ok(Expression::Unary(token, Box::new(self.unary()?)));
 		}
 
-		self.terms()
+		self.call()
+	}
+
+	fn call(&mut self) -> Result<Expression> {
+		let mut expression = self.terms()?;
+
+		loop {
+			expression =
+				match self.next_if_in_token_types(&[TokenType::OpenParenthesis, TokenType::Dot]) {
+					Some(Err(error)) => return Err(error),
+					Some(Ok(token)) => match token.r#type {
+						TokenType::OpenParenthesis => self.finish_call(expression, token)?,
+						TokenType::Dot => {
+							if let Some(Ok(identifier)) =
+								self.next_if_token_type(TokenType::Identifier)
+							{
+								return Ok(Expression::Get(Box::new(expression), identifier));
+							} else {
+								return self.create_expression_syntax_error(
+									"expected identifier".to_string(),
+									token,
+								);
+							}
+						}
+						_ => unreachable!(),
+					},
+					None => break,
+				};
+		}
+
+		Ok(expression)
+	}
+
+	fn finish_call(&mut self, callee: Expression, open_parenthesis: Token) -> Result<Expression> {
+		let mut args: Vec<Expression> = Vec::new();
+
+		while !self.peek_token_type(TokenType::CloseParenthesis) {
+			args.push(self.expression_root()?);
+
+			match self.next_if_token_type(TokenType::Separator) {
+				Some(result) => match self.peek_token_type(TokenType::CloseParenthesis) {
+					true => break,
+					false => result?,
+				},
+				None => break,
+			};
+		}
+
+		if let Some(Ok(close_parenthesis)) = self.next_if_token_type(TokenType::CloseParenthesis) {
+			Ok(Expression::Call(
+				Box::new(callee),
+				open_parenthesis,
+				args,
+				close_parenthesis,
+			))
+		} else {
+			self.create_expression_syntax_error(
+				"Incorrectly formatted parameters".to_string(),
+				open_parenthesis,
+			)
+		}
 	}
 
 	fn terms(&mut self) -> Result<Expression> {
@@ -375,10 +434,9 @@ impl Parser<'_> {
 			if let Some(Ok(r#type)) = self.next_if_token_type(TokenType::Identifier) {
 				return Some(Ok(Statement::TypeSpecification(specifier, r#type)));
 			} else {
-				return Some(self.create_statement_syntax_error(
-					"Expected type".to_string(),
-					specifier,
-				));
+				return Some(
+					self.create_statement_syntax_error("Expected type".to_string(), specifier),
+				);
 			}
 		}
 		None
