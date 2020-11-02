@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 
+use tutara_interpreter::Error;
 use tutara_interpreter::Token;
 use tutara_interpreter::Tokenizer;
 use tutara_interpreter::{Parser, Statement};
@@ -7,40 +8,38 @@ use tutara_interpreter::{Parser, Statement};
 #[wasm_bindgen]
 pub struct Source {
     text: String,
-    tokens: Option<Vec<Token>>,
-    statements: Option<Vec<Statement>>,
+    tokens: Option<Result<Vec<Token>, Error>>,
+    statements: Option<Result<Vec<Statement>, Error>>,
 }
 
 #[wasm_bindgen]
 impl Source {
-    #[wasm_bindgen]
-    pub fn get_tokens(&mut self) -> JsValue {
+    #[wasm_bindgen(catch)]
+    pub fn get_tokens(&mut self) -> Result<JsValue, JsValue> {
         if self.tokens.is_none() {
             let tokenizer = Tokenizer::new(&self.text);
-            self.tokens = Some(
-                tokenizer
-                    .filter(|token| token.is_ok())
-                    .map(|token| token.unwrap())
-                    .collect(),
-            );
+            self.tokens = Some(tokenizer.collect());
         }
 
-        JsValue::from_serde(&self.tokens).unwrap()
+        match &self.tokens {
+            Some(Ok(tokens)) => Ok(JsValue::from_serde(&tokens).unwrap()),
+            Some(Err(err)) => Err(JsValue::from_serde(&err).unwrap()),
+            None => unreachable!(),
+        }
     }
 
-    #[wasm_bindgen]
-    pub fn get_statements(&mut self) -> JsValue {
+    #[wasm_bindgen(catch)]
+    pub fn get_statements(&mut self) -> Result<JsValue, JsValue> {
         if self.statements.is_none() {
-            let parser = Parser::new(Tokenizer::new(&self.text).peekable());
-            self.statements = Some(
-                parser
-                    .filter(|statement| statement.is_ok())
-                    .map(|statement| statement.unwrap())
-                    .collect(),
-            );
+			let parser = Parser::new(Tokenizer::new(&self.text).peekable());
+            self.statements = Some(parser.collect());
         }
 
-        JsValue::from_serde(&self.statements).unwrap()
+        match &self.statements {
+            Some(Ok(statements)) => Ok(JsValue::from_serde(&statements).unwrap()),
+            Some(Err(err)) => Err(JsValue::from_serde(&err).unwrap()),
+            None => unreachable!(),
+        }
     }
 }
 

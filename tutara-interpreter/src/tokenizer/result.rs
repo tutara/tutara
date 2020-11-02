@@ -1,16 +1,17 @@
 use super::token::Token;
 use std::fmt::{self, Debug};
 use std::result;
+use serde::{Serialize, Deserialize};
 
 pub type Result<T> = result::Result<T, Error>;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum ErrorType {
 	Lexical(u32, u32, u32), // Line, column, length
 	Parser(Token),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Error {
 	pub r#type: ErrorType,
 	pub message: String,
