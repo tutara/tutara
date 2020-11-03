@@ -41,6 +41,7 @@ impl Iterator for Tokenizer<'_> {
 					token = Some(self.string());
 				} else if current == '/' && self.chars.peek() == Some(&'/') {
 					self.chars.next();
+					self.length += 1;
 
 					token = Some(self.comment());
 				} else if let Some(r#type) = TokenType::get_reserved_token(&current.to_string()) {
