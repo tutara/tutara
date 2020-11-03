@@ -84,7 +84,7 @@ impl Parser<'_> {
 	fn expression(&mut self) -> Result<Statement> {
 		match self.expression_root() {
 			Ok(expression) => Ok(Statement::Expression(expression)),
-			Err(error) => Err(error)
+			Err(error) => Err(error),
 		}
 	}
 
@@ -307,45 +307,51 @@ impl Parser<'_> {
 			return Ok(Expression::Unary(token, Box::new(self.unary()?)));
 		}
 
-		self.call()
+		self.get()
 	}
 
-	fn call(&mut self) -> Result<Expression> {
+	fn get(&mut self) -> Result<Expression> {
 		let mut expression = self.terms()?;
 
 		loop {
-			expression =
-				match self.next_if_in_token_types(&[TokenType::OpenParenthesis, TokenType::Dot]) {
-					Some(Err(error)) => return Err(error),
-					Some(Ok(token)) => match token.r#type {
-						TokenType::OpenParenthesis => self.finish_call(expression, token)?,
-						TokenType::Dot => {
-							if let Some(Ok(identifier)) =
-								self.next_if_token_type(TokenType::Identifier)
+			expression = match self
+				.next_if_in_token_types(&[TokenType::OpenParenthesis, TokenType::Dot])
+			{
+				Some(Err(error)) => return Err(error),
+				Some(Ok(token)) => match token.r#type {
+					TokenType::OpenParenthesis => self.call(expression, token)?,
+					TokenType::Dot => {
+						if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier)
+						{
+							let get = Expression::Get(Box::new(expression), identifier);
+							if let Some(Ok(open_parenthesis)) =
+								self.next_if_token_type(TokenType::OpenParenthesis)
 							{
-								return Ok(Expression::Get(Box::new(expression), identifier));
+								self.call(get, open_parenthesis)?
 							} else {
-								return self.create_expression_syntax_error(
-									"expected identifier".to_string(),
-									token,
-								);
+								return Ok(get);
 							}
+						} else {
+							return self.create_expression_syntax_error(
+								"expected identifier".to_string(),
+								token,
+							);
 						}
-						_ => unreachable!(),
-					},
-					None => break,
-				};
+					}
+					_ => unreachable!(),
+				},
+				None => break,
+			};
 		}
 
 		Ok(expression)
 	}
 
-	fn finish_call(&mut self, callee: Expression, open_parenthesis: Token) -> Result<Expression> {
-		let mut args: Vec<Expression> = Vec::new();
+	fn call(&mut self, function: Expression, open_parenthesis: Token) -> Result<Expression> {
+		let mut parameters: Vec<Expression> = Vec::new();
 
 		while !self.peek_token_type(TokenType::CloseParenthesis) {
-			args.push(self.expression_root()?);
-
+			parameters.push(self.expression_root()?);
 			match self.next_if_token_type(TokenType::Separator) {
 				Some(result) => match self.peek_token_type(TokenType::CloseParenthesis) {
 					true => break,
@@ -357,9 +363,9 @@ impl Parser<'_> {
 
 		if let Some(Ok(close_parenthesis)) = self.next_if_token_type(TokenType::CloseParenthesis) {
 			Ok(Expression::Call(
-				Box::new(callee),
+				Box::new(function),
 				open_parenthesis,
-				args,
+				parameters,
 				close_parenthesis,
 			))
 		} else {
