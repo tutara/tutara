@@ -2,10 +2,11 @@
 <h1 align="center">Tutara</h1>
 
 <p align="center">
-	<a href="https://tutara.dev/"><img src="https://img.shields.io/badge/Website-tutara.dev-orange" alt="Website" /></a>
+	<a href="https://tutara.dev/"><img src="https://img.shields.io/badge/website-tutara.dev-orange" alt="Website" /></a>
+	<a href="https://github.com/orgs/tutara/projects/1"><img src="https://img.shields.io/badge/tutara-Roadmap-darkgreen" alt="Roadmap" /></a>
 	<a href="LICENSE"><img src="https://img.shields.io/github/license/tutara/tutara" alt="License" /></a>
 	<a href="https://github.com/tutara/tutara/graphs/contributors"><img src="https://img.shields.io/github/contributors/tutara/tutara" alt="Contributers" /></a>
-	<a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
+	<a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/contributor%20covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a>
 </p>
 
 ---
