@@ -67,3 +67,5 @@ cd tutara-cli
 cargo run -- "val foo = 1 + 2"
 cargo run -- "val bar = 'Hello world'"
 ```
+
+<!-- Deez Nuts -->
