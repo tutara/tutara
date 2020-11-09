@@ -1,5 +1,5 @@
+use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
-use serde::{Serialize, Deserialize};
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum TokenType {
@@ -33,6 +33,12 @@ pub enum TokenType {
 	Function,  // fun
 	Return,    // return
 	Separator, // ,
+	// Loops
+	Break,
+	While,
+	Loop,
+	For,
+	In,
 	// Braces
 	OpenParenthesis,   // (
 	CloseParenthesis,  // )
@@ -77,6 +83,12 @@ impl TokenType {
 			"fun" => Some(Function),
 			"return" => Some(Return),
 			"," => Some(Separator),
+
+			"break" => Some(Break),
+			"while" => Some(While),
+			"loop" => Some(Loop),
+			"for" => Some(For),
+			"in" => Some(In),
 
 			"(" => Some(OpenParenthesis),
 			")" => Some(CloseParenthesis),
