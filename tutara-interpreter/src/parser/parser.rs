@@ -58,6 +58,10 @@ impl Parser<'_> {
 			TokenType::Comment,
 			TokenType::Function,
 			TokenType::Return,
+			TokenType::Loop,
+			TokenType::While,
+			TokenType::For,
+			TokenType::Break,
 		]) {
 			if let Ok(token) = token {
 				match token.r#type {
@@ -65,6 +69,10 @@ impl Parser<'_> {
 					TokenType::Comment => Ok(Statement::Comment(token)),
 					TokenType::Function => self.function(token),
 					TokenType::Return => self.r#return(token),
+					TokenType::Loop => self.r#loop(token),
+					TokenType::While => self.r#while(token),
+					TokenType::For => self.r#for(token),
+					TokenType::Break => self.r#break(token),
 					_ => self.create_statement_syntax_error(
 						"statement not implemented please report issue".to_string(),
 						token,
@@ -190,10 +198,7 @@ impl Parser<'_> {
 			}
 		}
 
-		self.create_statement_syntax_error(
-			"Expected end of function".to_string(),
-			open_curly_bracket,
-		)
+		self.create_statement_syntax_error("Expected end of body".to_string(), open_curly_bracket)
 	}
 
 	fn parameter(&mut self) -> Result<Statement> {
@@ -230,6 +235,112 @@ impl Parser<'_> {
 
 	fn r#return(&mut self, token: Token) -> Result<Statement> {
 		Ok(Statement::Return(token, self.expression_root().ok()))
+	}
+
+	fn r#loop(&mut self, token: Token) -> Result<Statement> {
+		if let Some(Ok(open_curly_bracket)) = self.next_if_token_type(TokenType::OpenCurlyBracket) {
+			match self.body(open_curly_bracket) {
+				Ok(body) => Ok(Statement::Loop(token, Box::new(body))),
+				Err(error) => Err(error),
+			}
+		} else {
+			self.create_statement_syntax_error("Expected loop body".to_string(), token)
+		}
+	}
+
+	fn r#while(&mut self, token: Token) -> Result<Statement> {
+		if let Some(Ok(open_parenthesis)) = self.next_if_token_type(TokenType::OpenParenthesis) {
+			match self.expression_root() {
+				Ok(expression) => {
+					if let Some(Ok(close_parenthesis)) =
+						self.next_if_token_type(TokenType::CloseParenthesis)
+					{
+						if let Some(Ok(open_curly_bracket)) =
+							self.next_if_token_type(TokenType::OpenCurlyBracket)
+						{
+							match self.body(open_curly_bracket) {
+								Ok(body) => Ok(Statement::While(
+									token,
+									open_parenthesis,
+									expression,
+									close_parenthesis,
+									Box::new(body),
+								)),
+								Err(error) => Err(error),
+							}
+						} else {
+							self.create_statement_syntax_error(
+								"Expected loop body".to_string(),
+								token,
+							)
+						}
+					} else {
+						self.create_statement_syntax_error(
+							"Expected close parenthesis".to_string(),
+							token,
+						)
+					}
+				}
+				Err(error) => Err(error),
+			}
+		} else {
+			self.create_statement_syntax_error("Expected open parenthesis".to_string(), token)
+		}
+	}
+
+	fn r#for(&mut self, token: Token) -> Result<Statement> {
+		if let Some(Ok(open_parenthesis)) = self.next_if_token_type(TokenType::OpenParenthesis) {
+			match self.terms() {
+				Ok(term) => {
+					if let Some(Ok(r#in)) = self.next_if_token_type(TokenType::In) {
+						match self.expression_root() {
+							Ok(expression) => {
+								if let Some(Ok(close_parenthesis)) =
+									self.next_if_token_type(TokenType::CloseParenthesis)
+								{
+									if let Some(Ok(open_curly_bracket)) =
+										self.next_if_token_type(TokenType::OpenCurlyBracket)
+									{
+										match self.body(open_curly_bracket) {
+											Ok(body) => Ok(Statement::For(
+												token,
+												open_parenthesis,
+												term,
+												r#in,
+												expression,
+												close_parenthesis,
+												Box::new(body),
+											)),
+											Err(error) => Err(error),
+										}
+									} else {
+										self.create_statement_syntax_error(
+											"Expected loop body".to_string(),
+											token,
+										)
+									}
+								} else {
+									self.create_statement_syntax_error(
+										"Expected close parenthesis".to_string(),
+										token,
+									)
+								}
+							}
+							Err(error) => Err(error),
+						}
+					} else {
+						self.create_statement_syntax_error("Expected in".to_string(), token)
+					}
+				}
+				Err(error) => Err(error),
+			}
+		} else {
+			self.create_statement_syntax_error("Expected open parenthesis".to_string(), token)
+		}
+	}
+
+	fn r#break(&mut self, token: Token) -> Result<Statement> {
+		Ok(Statement::Break(token))
 	}
 }
 

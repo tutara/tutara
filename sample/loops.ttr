@@ -1,0 +1,16 @@
+var foo = 1
+
+loop {
+    foo += 4
+    break
+}
+
+while (true) {
+    foo -= 2
+    break
+}
+
+for (a in b){
+    foo *= 6
+    break
+}
