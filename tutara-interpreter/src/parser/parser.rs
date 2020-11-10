@@ -351,7 +351,7 @@ impl Parser<'_> {
 	}
 
 	fn assignment(&mut self) -> Result<Expression> {
-		let expression: Expression = self.addition_and_subtraction()?;
+		let expression: Expression = self.or()?;
 
 		if let Some(Ok(token)) = self.next_if_in_token_types(&[
 			TokenType::Assign,
@@ -370,6 +370,48 @@ impl Parser<'_> {
 				)),
 				_ => self.create_expression_syntax_error("Failed on assignment".to_string(), token),
 			};
+		}
+
+		Ok(expression)
+	}
+
+	fn or(&mut self) -> Result<Expression> {
+		let mut expression: Expression = self.and()?;
+
+		while let Some(Ok(token)) = self.next_if_token_type(TokenType::Or) {
+			expression = Expression::Binary(Box::new(expression), token, Box::new(self.and()?));
+		}
+
+		Ok(expression)
+	}
+
+	fn and(&mut self) -> Result<Expression> {
+		let mut expression: Expression = self.comparison()?;
+
+		while let Some(Ok(token)) = self.next_if_token_type(TokenType::And) {
+			expression =
+				Expression::Binary(Box::new(expression), token, Box::new(self.comparison()?));
+		}
+
+		Ok(expression)
+	}
+
+	fn comparison(&mut self) -> Result<Expression> {
+		let mut expression: Expression = self.addition_and_subtraction()?;
+
+		while let Some(Ok(token)) = self.next_if_in_token_types(&[
+			TokenType::Equal,
+			TokenType::NotEqual,
+			TokenType::Greater,
+			TokenType::GreaterOrEqual,
+			TokenType::Lesser,
+			TokenType::LesserOrEqual,
+		]) {
+			expression = Expression::Binary(
+				Box::new(expression),
+				token,
+				Box::new(self.addition_and_subtraction()?),
+			);
 		}
 
 		Ok(expression)
@@ -414,7 +456,9 @@ impl Parser<'_> {
 	}
 
 	fn unary(&mut self) -> Result<Expression> {
-		if let Some(Ok(token)) = self.next_if_token_type(TokenType::Minus) {
+		if let Some(Ok(token)) =
+			self.next_if_in_token_types(&[TokenType::Minus, TokenType::Plus, TokenType::Not])
+		{
 			return Ok(Expression::Unary(token, Box::new(self.unary()?)));
 		}
 
