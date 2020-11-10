@@ -21,6 +21,16 @@ pub enum TokenType {
 	Division, // /
 	Pow,      // ^
 	Modulo,   // %
+	// Logic
+	Not,
+	And,
+	Or,
+	Equal,
+	NotEqual,
+	GreaterOrEqual,
+	LesserOrEqual,
+	Greater,
+	Lesser,
 	// Assignment operator
 	Assign,         // =
 	AssignPlus,     // +=
@@ -73,6 +83,11 @@ impl TokenType {
 
 			"val" => Some(Val),
 			"var" => Some(Var),
+
+			"!" => Some(Not),
+			"<" => Some(Lesser),
+			">" => Some(Greater),
+
 			"+" => Some(Plus),
 			"-" => Some(Minus),
 			"*" => Some(Multiply),

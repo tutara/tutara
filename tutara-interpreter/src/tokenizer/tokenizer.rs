@@ -44,9 +44,14 @@ impl Iterator for Tokenizer<'_> {
 					self.length += 1;
 
 					token = Some(self.comment());
+				} else if current == '&' {
+					token = Some(self.token_if_char('&', TokenType::And, "expected &"))
+				} else if current == '|' {
+					token = Some(self.token_if_char('|', TokenType::And, "expected |"))
 				} else if let Some(r#type) = TokenType::get_reserved_token(&current.to_string()) {
 					token = Some(self.create_token(r#type));
 					token = Some(self.assignment_operation(token.unwrap().unwrap()));
+					token = Some(self.comparison(token.unwrap().unwrap()))
 				} else {
 					token = Some(self.create_error(
 						ErrorType::Lexical(self.line, self.column, self.length),
@@ -237,26 +242,87 @@ impl Tokenizer<'_> {
 		let r#type = &token.r#type;
 
 		if TokenType::is_operation(&r#type) {
-			if let Some(next) = self.chars.peek() {
-				if next == &'=' {
-					self.chars.next(); 
-					self.length += 1;
-					return match r#type {
-						TokenType::Plus => self.create_token(TokenType::AssignPlus),
-						TokenType::Minus => self.create_token(TokenType::AssignMinus),
-						TokenType::Multiply => self.create_token(TokenType::AssignMultiply),
-						TokenType::Division => self.create_token(TokenType::AssignDivision),
-						TokenType::Pow => self.create_token(TokenType::AssignPow),
-						TokenType::Modulo => self.create_token(TokenType::AssignModulo),
-						_ => self.create_error(
-							ErrorType::Lexical(self.line, self.column, self.length),
-							"Invalid assignment operation".to_string(),
-						),
-					};
-				}
+			if let Some(_next) = self.next_if_char('=') {
+				self.chars.next();
+				self.length += 1;
+				return match r#type {
+					TokenType::Plus => self.create_token(TokenType::AssignPlus),
+					TokenType::Minus => self.create_token(TokenType::AssignMinus),
+					TokenType::Multiply => self.create_token(TokenType::AssignMultiply),
+					TokenType::Division => self.create_token(TokenType::AssignDivision),
+					TokenType::Pow => self.create_token(TokenType::AssignPow),
+					TokenType::Modulo => self.create_token(TokenType::AssignModulo),
+					_ => self.create_error(
+						ErrorType::Lexical(self.line, self.column, self.length),
+						"Invalid assignment operation".to_string(),
+					),
+				};
 			}
 		}
 
 		Ok(token)
+	}
+
+	fn comparison(&mut self, token: Token) -> Result<Token> {
+		if vec![
+			TokenType::Not,
+			TokenType::Assign,
+			TokenType::Greater,
+			TokenType::Lesser,
+		]
+		.contains(&token.r#type)
+		{
+			if let Some(_next) = self.next_if_char('=') {
+				self.chars.next();
+				self.length += 1;
+				return match token.r#type {
+					TokenType::Not => self.create_token(TokenType::NotEqual),
+					TokenType::Assign => self.create_token(TokenType::Equal),
+					TokenType::Greater => self.create_token(TokenType::GreaterOrEqual),
+					TokenType::Lesser => self.create_token(TokenType::LesserOrEqual),
+					_ => self.create_error(
+						ErrorType::Lexical(self.line, self.column, self.length),
+						"Invalid assignment operation".to_string(),
+					),
+				};
+			}
+		}
+
+		Ok(token)
+	}
+}
+
+impl Tokenizer<'_> {
+	fn peek_char(&mut self, next: char) -> bool {
+		match self.chars.peek() {
+			Some(peek) => *peek == next,
+			_ => false,
+		}
+	}
+
+	fn next_if_char(&mut self, next: char) -> Option<char> {
+		if self.peek_char(next) {
+			self.chars.next()
+		} else {
+			None
+		}
+	}
+
+	fn token_if_char(
+		&mut self,
+		next: char,
+		token_type: TokenType,
+		error_message: &str,
+	) -> Result<Token> {
+		if let Some(_next) = self.next_if_char(next) {
+			self.chars.next();
+			self.length += 1;
+			return self.create_token(token_type);
+		}
+
+		self.create_error(
+			ErrorType::Lexical(self.line, self.column, self.length),
+			error_message.to_string(),
+		)
 	}
 }
