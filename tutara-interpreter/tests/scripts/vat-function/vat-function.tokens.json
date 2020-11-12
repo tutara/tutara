@@ -1,0 +1,185 @@
+[
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 1,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "price"
+        },
+        "line": 1,
+        "column": 4,
+        "length": 5
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 1,
+        "column": 10,
+        "length": 1
+    },
+    {
+        "type": "Integer",
+        "literal": {
+            "Number": 20
+        },
+        "line": 1,
+        "column": 12,
+        "length": 2
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 2,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "discount"
+        },
+        "line": 2,
+        "column": 4,
+        "length": 8
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 2,
+        "column": 13,
+        "length": 1
+    },
+    {
+        "type": "Integer",
+        "literal": {
+            "Number": 2
+        },
+        "line": 2,
+        "column": 15,
+        "length": 1
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 3,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "vat"
+        },
+        "line": 3,
+        "column": 4,
+        "length": 3
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 3,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Integer",
+        "literal": {
+            "Number": 21
+        },
+        "line": 3,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "price"
+        },
+        "line": 5,
+        "column": 0,
+        "length": 5
+    },
+    {
+        "type": "AssignPlus",
+        "literal": null,
+        "line": 5,
+        "column": 6,
+        "length": 2
+    },
+    {
+        "type": "OpenParenthesis",
+        "literal": null,
+        "line": 5,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "price"
+        },
+        "line": 5,
+        "column": 9,
+        "length": 5
+    },
+    {
+        "type": "Division",
+        "literal": null,
+        "line": 5,
+        "column": 15,
+        "length": 1
+    },
+    {
+        "type": "Integer",
+        "literal": {
+            "Number": 100
+        },
+        "line": 5,
+        "column": 17,
+        "length": 3
+    },
+    {
+        "type": "Multiply",
+        "literal": null,
+        "line": 5,
+        "column": 21,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "vat"
+        },
+        "line": 5,
+        "column": 23,
+        "length": 3
+    },
+    {
+        "type": "CloseParenthesis",
+        "literal": null,
+        "line": 5,
+        "column": 26,
+        "length": 1
+    },
+    {
+        "type": "Minus",
+        "literal": null,
+        "line": 5,
+        "column": 28,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "discount"
+        },
+        "line": 5,
+        "column": 30,
+        "length": 8
+    }
+]

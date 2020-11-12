@@ -1,0 +1,5 @@
+val foo
+var foo
+val: String foo
+var: Integer foo
+val foo = 12

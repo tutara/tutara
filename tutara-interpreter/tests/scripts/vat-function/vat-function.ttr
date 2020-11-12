@@ -1,0 +1,5 @@
+var price = 20
+val discount = 2
+val vat = 21
+
+price += (price / 100 * vat) - discount
