@@ -1,15 +1,13 @@
 extern crate tutara_interpreter;
 
-use std::env;
-use std::fs;
+use std::{env, fs};
 use std::io;
 use std::io::Result;
 use std::io::Write;
-use tutara_interpreter::Parser;
+use tutara_interpreter::{Evaluator, Parser, Token, TokenType, Tokenizer};
 
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 
-use tutara_interpreter::{Token, TokenType, Tokenizer};
 
 fn color_for_token(token: &Token) -> Option<Color> {
 	// Colors based on Nord color palette
@@ -118,8 +116,20 @@ fn run(src: String) -> Result<()> {
 			writeln!(&mut stdout, "Statement: \n {}", statement)?;
 		}
 	}
+	
+	writeln!(&mut stdout)?;
 
-	writeln!(&mut stdout)
+	match Evaluator::evaluate(Parser::new(Tokenizer::new(&src).peekable())) {
+		Ok(output) => {
+			write!(&mut stdout, "Output: ")?;
+			writeln!(&mut stdout, "{}", output)?;
+		},
+		Err(err) => {
+			writeln!(&mut stdout, "{}", err)?;
+		}
+	};
+	
+	writeln!(&mut stdout, "")
 }
 
 fn interactive_mode() {
