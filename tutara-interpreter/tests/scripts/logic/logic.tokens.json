@@ -1,0 +1,653 @@
+[
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 1,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 1,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 1,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "True",
+        "literal": null,
+        "line": 1,
+        "column": 8,
+        "length": 4
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 2,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 2,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 2,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Not",
+        "literal": null,
+        "line": 2,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 2,
+        "column": 9,
+        "length": 1
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 4,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "c"
+        },
+        "line": 4,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 4,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "True",
+        "literal": null,
+        "line": 4,
+        "column": 8,
+        "length": 4
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 5,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "d"
+        },
+        "line": 5,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 5,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "True",
+        "literal": null,
+        "line": 5,
+        "column": 8,
+        "length": 4
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 7,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "e"
+        },
+        "line": 7,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 7,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "c"
+        },
+        "line": 7,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "And",
+        "literal": null,
+        "line": 7,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "d"
+        },
+        "line": 7,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "e"
+        },
+        "line": 8,
+        "column": 0,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 8,
+        "column": 2,
+        "length": 1
+    },
+    {
+        "type": "False",
+        "literal": null,
+        "line": 8,
+        "column": 4,
+        "length": 5
+    },
+    {
+        "type": "And",
+        "literal": null,
+        "line": 8,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "d"
+        },
+        "line": 8,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 10,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "f"
+        },
+        "line": 10,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 10,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "True",
+        "literal": null,
+        "line": 10,
+        "column": 8,
+        "length": 4
+    },
+    {
+        "type": "Val",
+        "literal": null,
+        "line": 11,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "g"
+        },
+        "line": 11,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 11,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "True",
+        "literal": null,
+        "line": 11,
+        "column": 8,
+        "length": 4
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 13,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "h"
+        },
+        "line": 13,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 13,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "f"
+        },
+        "line": 13,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Or",
+        "literal": null,
+        "line": 13,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "g"
+        },
+        "line": 13,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "h"
+        },
+        "line": 14,
+        "column": 0,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 14,
+        "column": 2,
+        "length": 1
+    },
+    {
+        "type": "False",
+        "literal": null,
+        "line": 14,
+        "column": 4,
+        "length": 5
+    },
+    {
+        "type": "And",
+        "literal": null,
+        "line": 14,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "g"
+        },
+        "line": 14,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 16,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "i"
+        },
+        "line": 16,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 16,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 16,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Equal",
+        "literal": null,
+        "line": 16,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 16,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 17,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "j"
+        },
+        "line": 17,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 17,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 17,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "NotEqual",
+        "literal": null,
+        "line": 17,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 17,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 18,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "k"
+        },
+        "line": 18,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 18,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 18,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "GreaterOrEqual",
+        "literal": null,
+        "line": 18,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 18,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 19,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "l"
+        },
+        "line": 19,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 19,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 19,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "LesserOrEqual",
+        "literal": null,
+        "line": 19,
+        "column": 10,
+        "length": 2
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 19,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 20,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "m"
+        },
+        "line": 20,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 20,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 20,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Lesser",
+        "literal": null,
+        "line": 20,
+        "column": 10,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 20,
+        "column": 12,
+        "length": 1
+    },
+    {
+        "type": "Var",
+        "literal": null,
+        "line": 21,
+        "column": 0,
+        "length": 3
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "n"
+        },
+        "line": 21,
+        "column": 4,
+        "length": 1
+    },
+    {
+        "type": "Assign",
+        "literal": null,
+        "line": 21,
+        "column": 6,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "a"
+        },
+        "line": 21,
+        "column": 8,
+        "length": 1
+    },
+    {
+        "type": "Greater",
+        "literal": null,
+        "line": 21,
+        "column": 10,
+        "length": 1
+    },
+    {
+        "type": "Identifier",
+        "literal": {
+            "String": "b"
+        },
+        "line": 21,
+        "column": 12,
+        "length": 1
+    }
+]

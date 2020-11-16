@@ -1,0 +1,21 @@
+val a = true
+val b = !a
+
+val c = true
+val d = true
+
+var e = c && d
+e = false && d
+
+val f = true
+val g = true
+
+var h = f || g
+h = false && g
+
+var i = a == b
+var j = a != b
+var k = a >= b
+var l = a <= b
+var m = a < b
+var n = a > b

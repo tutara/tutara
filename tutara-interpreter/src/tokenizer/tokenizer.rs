@@ -47,7 +47,7 @@ impl Iterator for Tokenizer<'_> {
 				} else if current == '&' {
 					token = Some(self.token_if_char('&', TokenType::And, "expected &"))
 				} else if current == '|' {
-					token = Some(self.token_if_char('|', TokenType::And, "expected |"))
+					token = Some(self.token_if_char('|', TokenType::Or, "expected |"))
 				} else if let Some(r#type) = TokenType::get_reserved_token(&current.to_string()) {
 					token = Some(self.create_token(r#type));
 					token = Some(self.assignment_operation(token.unwrap().unwrap()));
