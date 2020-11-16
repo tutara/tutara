@@ -1,4 +1,5 @@
-use super::token::Token;
+
+use crate::Token;
 use std::fmt::{self, Debug};
 use std::result;
 use serde::{Serialize, Deserialize};
@@ -9,6 +10,7 @@ pub type Result<T> = result::Result<T, Error>;
 pub enum ErrorType {
 	Lexical(u32, u32, u32), // Line, column, length
 	Parser(Token),
+	Compiler
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -35,6 +37,13 @@ impl Error {
 			message,
 		}
 	}
+
+	pub fn new_compiler_error(message: String) -> Error {
+		Error {
+			r#type: ErrorType::Compiler,
+			message,
+		}
+	}
 }
 
 impl fmt::Display for Error {
@@ -50,6 +59,11 @@ impl fmt::Display for Error {
 				"Syntax error on {}: at line: {} on column: {}, message: {}",
 				token.r#type, token.line, token.column, self.message
 			),
+		    ErrorType::Compiler => write!(
+				f,
+				"Compiler error: {}",
+				self.message
+			)
 		}
 	}
 }

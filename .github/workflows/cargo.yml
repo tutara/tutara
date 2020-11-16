@@ -16,17 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install LLVM
+        run: sudo apt install llvm-10-dev
       - name: cargo build
         run: cargo build --verbose
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install LLVM
+        run: sudo apt install llvm-10-dev
       - name: cargo test
         run: cargo test --verbose
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install LLVM
+        run: sudo apt install llvm-10-dev
       - name: cargo clippy
         run: cargo clippy --verbose
