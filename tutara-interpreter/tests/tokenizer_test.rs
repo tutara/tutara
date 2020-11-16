@@ -27,36 +27,36 @@ fn test_tokens(name: &str) {
 }
 
 #[test]
-fn test_vat_function() {
+fn test_vat_function_tokens() {
 	test_tokens("vat-function")
 }
 
 #[test]
-fn test_primitives() {
+fn test_primitives_tokens() {
 	test_tokens("primitives")
 }
 
 #[test]
-fn test_variables() {
+fn test_variables_tokens() {
 	test_tokens("variables")
 }
 
 #[test]
-fn test_operators() {
+fn test_operators_tokens() {
 	test_tokens("operators")
 }
 
 #[test]
-fn test_logic() {
+fn test_logic_tokens() {
 	test_tokens("logic")
 }
 
 #[test]
-fn test_assignment() {
+fn test_assignment_tokens() {
 	test_tokens("assignment")
 }
 
 #[test]
-fn test_functions() {
+fn test_functions_tokens() {
 	test_tokens("functions")
 }

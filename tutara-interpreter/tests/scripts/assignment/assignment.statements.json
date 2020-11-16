@@ -1,0 +1,501 @@
+[
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 1,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "a"
+                        },
+                        "line": 1,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 1,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 0
+                            },
+                            "line": 1,
+                            "column": 8,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 3,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "b"
+                        },
+                        "line": 3,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 3,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 1
+                            },
+                            "line": 3,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "b"
+                    },
+                    "line": 4,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignPlus",
+                    "literal": null,
+                    "line": 4,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 1
+                        },
+                        "line": 4,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 6,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "c"
+                        },
+                        "line": 6,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 6,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 2
+                            },
+                            "line": 6,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "c"
+                    },
+                    "line": 7,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignMinus",
+                    "literal": null,
+                    "line": 7,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 2
+                        },
+                        "line": 7,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 9,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "d"
+                        },
+                        "line": 9,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 9,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 3
+                            },
+                            "line": 9,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "d"
+                    },
+                    "line": 10,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignMultiply",
+                    "literal": null,
+                    "line": 10,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 3
+                        },
+                        "line": 10,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 12,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "e"
+                        },
+                        "line": 12,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 12,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 4
+                            },
+                            "line": 12,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "e"
+                    },
+                    "line": 13,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignDivision",
+                    "literal": null,
+                    "line": 13,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 4
+                        },
+                        "line": 13,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 15,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "f"
+                        },
+                        "line": 15,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 15,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 5
+                            },
+                            "line": 15,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "f"
+                    },
+                    "line": 16,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignPow",
+                    "literal": null,
+                    "line": 16,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 5
+                        },
+                        "line": 16,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Val",
+                "literal": null,
+                "line": 18,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "g"
+                        },
+                        "line": 18,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 18,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 6
+                            },
+                            "line": 18,
+                            "column": 9,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Expression": {
+            "Assignment": [
+                {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "g"
+                    },
+                    "line": 19,
+                    "column": 4,
+                    "length": 1
+                },
+                {
+                    "type": "AssignModulo",
+                    "literal": null,
+                    "line": 19,
+                    "column": 6,
+                    "length": 2
+                },
+                {
+                    "Literal": {
+                        "type": "Integer",
+                        "literal": {
+                            "Number": 6
+                        },
+                        "line": 19,
+                        "column": 8,
+                        "length": 1
+                    }
+                }
+            ]
+        }
+    }
+]
