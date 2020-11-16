@@ -1,13 +1,13 @@
 fun foo {
-    // Do something
+
 }
 
 fun bar(parameter: string) {
-    // Do something
+
 }
 
 fun baz(firstName: string, lastName: string) {
-   // Do something
+
 }
 
 fun: string qux {
