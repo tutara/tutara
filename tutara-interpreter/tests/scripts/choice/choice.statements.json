@@ -1,0 +1,578 @@
+[
+    {
+        "Declaration": [
+            {
+                "type": "Var",
+                "literal": null,
+                "line": 1,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "a"
+                        },
+                        "line": 1,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 1,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "True",
+                            "literal": null,
+                            "line": 1,
+                            "column": 8,
+                            "length": 4
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Var",
+                "literal": null,
+                "line": 2,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "b"
+                        },
+                        "line": 2,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 2,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "Integer",
+                            "literal": {
+                                "Number": 1
+                            },
+                            "line": 2,
+                            "column": 8,
+                            "length": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "If": [
+            {
+                "type": "If",
+                "literal": null,
+                "line": 4,
+                "column": 0,
+                "length": 2
+            },
+            {
+                "type": "OpenParenthesis",
+                "literal": null,
+                "line": 4,
+                "column": 3,
+                "length": 1
+            },
+            {
+                "Identifier": {
+                    "type": "Identifier",
+                    "literal": {
+                        "String": "a"
+                    },
+                    "line": 4,
+                    "column": 5,
+                    "length": 1
+                }
+            },
+            {
+                "type": "CloseParenthesis",
+                "literal": null,
+                "line": 4,
+                "column": 7,
+                "length": 1
+            },
+            {
+                "Body": [
+                    {
+                        "type": "OpenCurlyBracket",
+                        "literal": null,
+                        "line": 4,
+                        "column": 9,
+                        "length": 1
+                    },
+                    [
+                        {
+                            "Expression": {
+                                "Assignment": [
+                                    {
+                                        "type": "Identifier",
+                                        "literal": {
+                                            "String": "a"
+                                        },
+                                        "line": 5,
+                                        "column": 4,
+                                        "length": 1
+                                    },
+                                    {
+                                        "type": "Assign",
+                                        "literal": null,
+                                        "line": 5,
+                                        "column": 6,
+                                        "length": 1
+                                    },
+                                    {
+                                        "Unary": [
+                                            {
+                                                "type": "Not",
+                                                "literal": null,
+                                                "line": 5,
+                                                "column": 8,
+                                                "length": 1
+                                            },
+                                            {
+                                                "Identifier": {
+                                                    "type": "Identifier",
+                                                    "literal": {
+                                                        "String": "a"
+                                                    },
+                                                    "line": 5,
+                                                    "column": 9,
+                                                    "length": 1
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    {
+                        "type": "CloseCurlyBracket",
+                        "literal": null,
+                        "line": 6,
+                        "column": 0,
+                        "length": 1
+                    }
+                ]
+            },
+            {
+                "Else": [
+                    {
+                        "type": "Else",
+                        "literal": null,
+                        "line": 6,
+                        "column": 2,
+                        "length": 4
+                    },
+                    {
+                        "Body": [
+                            {
+                                "type": "OpenCurlyBracket",
+                                "literal": null,
+                                "line": 6,
+                                "column": 7,
+                                "length": 1
+                            },
+                            [
+                                {
+                                    "If": [
+                                        {
+                                            "type": "If",
+                                            "literal": null,
+                                            "line": 7,
+                                            "column": 4,
+                                            "length": 2
+                                        },
+                                        {
+                                            "type": "OpenParenthesis",
+                                            "literal": null,
+                                            "line": 7,
+                                            "column": 7,
+                                            "length": 1
+                                        },
+                                        {
+                                            "Binary": [
+                                                {
+                                                    "Identifier": {
+                                                        "type": "Identifier",
+                                                        "literal": {
+                                                            "String": "b"
+                                                        },
+                                                        "line": 7,
+                                                        "column": 8,
+                                                        "length": 1
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Equal",
+                                                    "literal": null,
+                                                    "line": 7,
+                                                    "column": 10,
+                                                    "length": 2
+                                                },
+                                                {
+                                                    "Literal": {
+                                                        "type": "Integer",
+                                                        "literal": {
+                                                            "Number": 1
+                                                        },
+                                                        "line": 7,
+                                                        "column": 13,
+                                                        "length": 1
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "CloseParenthesis",
+                                            "literal": null,
+                                            "line": 7,
+                                            "column": 14,
+                                            "length": 1
+                                        },
+                                        {
+                                            "Body": [
+                                                {
+                                                    "type": "OpenCurlyBracket",
+                                                    "literal": null,
+                                                    "line": 7,
+                                                    "column": 15,
+                                                    "length": 1
+                                                },
+                                                [
+                                                    {
+                                                        "Expression": {
+                                                            "Assignment": [
+                                                                {
+                                                                    "type": "Identifier",
+                                                                    "literal": {
+                                                                        "String": "a"
+                                                                    },
+                                                                    "line": 8,
+                                                                    "column": 8,
+                                                                    "length": 1
+                                                                },
+                                                                {
+                                                                    "type": "Assign",
+                                                                    "literal": null,
+                                                                    "line": 8,
+                                                                    "column": 10,
+                                                                    "length": 1
+                                                                },
+                                                                {
+                                                                    "Unary": [
+                                                                        {
+                                                                            "type": "Not",
+                                                                            "literal": null,
+                                                                            "line": 8,
+                                                                            "column": 12,
+                                                                            "length": 1
+                                                                        },
+                                                                        {
+                                                                            "Identifier": {
+                                                                                "type": "Identifier",
+                                                                                "literal": {
+                                                                                    "String": "a"
+                                                                                },
+                                                                                "line": 8,
+                                                                                "column": 13,
+                                                                                "length": 1
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                {
+                                                    "type": "CloseCurlyBracket",
+                                                    "literal": null,
+                                                    "line": 9,
+                                                    "column": 4,
+                                                    "length": 1
+                                                }
+                                            ]
+                                        },
+                                        null
+                                    ]
+                                }
+                            ],
+                            {
+                                "type": "CloseCurlyBracket",
+                                "literal": null,
+                                "line": 10,
+                                "column": 0,
+                                "length": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Declaration": [
+            {
+                "type": "Var",
+                "literal": null,
+                "line": 12,
+                "column": 0,
+                "length": 3
+            },
+            null,
+            {
+                "Assignment": [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "b"
+                        },
+                        "line": 12,
+                        "column": 4,
+                        "length": 1
+                    },
+                    {
+                        "type": "Assign",
+                        "literal": null,
+                        "line": 12,
+                        "column": 6,
+                        "length": 1
+                    },
+                    {
+                        "Literal": {
+                            "type": "False",
+                            "literal": null,
+                            "line": 12,
+                            "column": 8,
+                            "length": 5
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "If": [
+            {
+                "type": "If",
+                "literal": null,
+                "line": 14,
+                "column": 0,
+                "length": 2
+            },
+            {
+                "type": "OpenParenthesis",
+                "literal": null,
+                "line": 14,
+                "column": 3,
+                "length": 1
+            },
+            {
+                "Binary": [
+                    {
+                        "Identifier": {
+                            "type": "Identifier",
+                            "literal": {
+                                "String": "a"
+                            },
+                            "line": 14,
+                            "column": 5,
+                            "length": 1
+                        }
+                    },
+                    {
+                        "type": "And",
+                        "literal": null,
+                        "line": 14,
+                        "column": 7,
+                        "length": 2
+                    },
+                    {
+                        "Identifier": {
+                            "type": "Identifier",
+                            "literal": {
+                                "String": "b"
+                            },
+                            "line": 14,
+                            "column": 10,
+                            "length": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "CloseParenthesis",
+                "literal": null,
+                "line": 14,
+                "column": 12,
+                "length": 1
+            },
+            {
+                "Body": [
+                    {
+                        "type": "OpenCurlyBracket",
+                        "literal": null,
+                        "line": 14,
+                        "column": 14,
+                        "length": 1
+                    },
+                    [
+                        {
+                            "Expression": {
+                                "Assignment": [
+                                    {
+                                        "type": "Identifier",
+                                        "literal": {
+                                            "String": "b"
+                                        },
+                                        "line": 15,
+                                        "column": 4,
+                                        "length": 1
+                                    },
+                                    {
+                                        "type": "Assign",
+                                        "literal": null,
+                                        "line": 15,
+                                        "column": 6,
+                                        "length": 1
+                                    },
+                                    {
+                                        "Unary": [
+                                            {
+                                                "type": "Not",
+                                                "literal": null,
+                                                "line": 15,
+                                                "column": 8,
+                                                "length": 1
+                                            },
+                                            {
+                                                "Identifier": {
+                                                    "type": "Identifier",
+                                                    "literal": {
+                                                        "String": "a"
+                                                    },
+                                                    "line": 15,
+                                                    "column": 9,
+                                                    "length": 1
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    {
+                        "type": "CloseCurlyBracket",
+                        "literal": null,
+                        "line": 16,
+                        "column": 0,
+                        "length": 1
+                    }
+                ]
+            },
+            {
+                "Else": [
+                    {
+                        "type": "Else",
+                        "literal": null,
+                        "line": 16,
+                        "column": 2,
+                        "length": 4
+                    },
+                    {
+                        "Body": [
+                            {
+                                "type": "OpenCurlyBracket",
+                                "literal": null,
+                                "line": 16,
+                                "column": 7,
+                                "length": 1
+                            },
+                            [
+                                {
+                                    "Expression": {
+                                        "Assignment": [
+                                            {
+                                                "type": "Identifier",
+                                                "literal": {
+                                                    "String": "a"
+                                                },
+                                                "line": 17,
+                                                "column": 4,
+                                                "length": 1
+                                            },
+                                            {
+                                                "type": "Assign",
+                                                "literal": null,
+                                                "line": 17,
+                                                "column": 6,
+                                                "length": 1
+                                            },
+                                            {
+                                                "Unary": [
+                                                    {
+                                                        "type": "Not",
+                                                        "literal": null,
+                                                        "line": 17,
+                                                        "column": 8,
+                                                        "length": 1
+                                                    },
+                                                    {
+                                                        "Identifier": {
+                                                            "type": "Identifier",
+                                                            "literal": {
+                                                                "String": "a"
+                                                            },
+                                                            "line": 17,
+                                                            "column": 9,
+                                                            "length": 1
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            {
+                                "type": "CloseCurlyBracket",
+                                "literal": null,
+                                "line": 18,
+                                "column": 0,
+                                "length": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

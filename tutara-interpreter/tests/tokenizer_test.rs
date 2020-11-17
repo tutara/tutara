@@ -60,3 +60,8 @@ fn test_assignment_tokens() {
 fn test_functions_tokens() {
 	test_tokens("functions")
 }
+
+#[test]
+fn test_choice_tokens() {
+	test_tokens("choice")
+}

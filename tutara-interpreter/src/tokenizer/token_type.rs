@@ -43,6 +43,10 @@ pub enum TokenType {
 	Function,  // fun
 	Return,    // return
 	Separator, // ,
+	// Choice
+	If,
+	Else,
+	Match,
 	// Loops
 	Break,
 	While,
@@ -50,13 +54,14 @@ pub enum TokenType {
 	For,
 	In,
 	// Braces
-	OpenParenthesis,   // (
-	CloseParenthesis,  // )
-	OpenCurlyBracket,  // {
-	CloseCurlyBracket, // }
+	OpenParenthesis,   	// (
+	CloseParenthesis,  	// )
+	OpenCurlyBracket,  	// {
+	CloseCurlyBracket, 	// }
 	// Uncategorized
-	Specifier, // :
+	Specifier, 			// :
 	Dot,
+	Arrow,				// ->
 	// System
 	Comment,
 }
@@ -98,6 +103,10 @@ impl TokenType {
 			"fun" => Some(Function),
 			"return" => Some(Return),
 			"," => Some(Separator),
+
+			"if" => Some(If),
+			"else" => Some(Else),
+			"match" => Some(Match),
 
 			"break" => Some(Break),
 			"while" => Some(While),

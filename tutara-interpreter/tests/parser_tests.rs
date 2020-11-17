@@ -60,3 +60,8 @@ fn test_assignment_statements() {
 fn test_functions_statements() {
 	test_statements("functions")
 }
+
+#[test]
+fn test_choice_statements() {
+	test_statements("choice")
+}

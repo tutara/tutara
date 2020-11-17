@@ -34,6 +34,9 @@ fn color_for_token(token: &Token) -> Option<Color> {
 		TokenType::LesserOrEqual => Some(Color::Rgb(180, 142, 173)),
 		TokenType::And => Some(Color::Rgb(180, 142, 173)),
 		TokenType::Or => Some(Color::Rgb(180, 142, 173)),
+		TokenType::If => Some(Color::Rgb(208, 135, 1)),
+		TokenType::Else => Some(Color::Rgb(208, 135, 1)),
+		TokenType::Match => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Function => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Return => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Separator => Some(Color::Rgb(236, 239, 244)),
@@ -56,6 +59,7 @@ fn color_for_token(token: &Token) -> Option<Color> {
 		TokenType::Specifier => Some(Color::Rgb(236, 239, 244)),
 		TokenType::Comment => Some(Color::Rgb(216, 222, 233)),
 		TokenType::Dot => Some(Color::Rgb(236, 239, 244)),
+		TokenType::Arrow => Some(Color::Rgb(236, 239, 244)),
 	}
 }
 

@@ -161,7 +161,7 @@
                                                         "String": "price"
                                                     },
                                                     "line": 5,
-                                                    "column": 9,
+                                                    "column": 10,
                                                     "length": 5
                                                 }
                                             },
@@ -169,7 +169,7 @@
                                                 "type": "Division",
                                                 "literal": null,
                                                 "line": 5,
-                                                "column": 15,
+                                                "column": 16,
                                                 "length": 1
                                             },
                                             {
@@ -179,7 +179,7 @@
                                                         "Number": 100
                                                     },
                                                     "line": 5,
-                                                    "column": 17,
+                                                    "column": 18,
                                                     "length": 3
                                                 }
                                             }
@@ -189,7 +189,7 @@
                                         "type": "Multiply",
                                         "literal": null,
                                         "line": 5,
-                                        "column": 21,
+                                        "column": 22,
                                         "length": 1
                                     },
                                     {
@@ -199,7 +199,7 @@
                                                 "String": "vat"
                                             },
                                             "line": 5,
-                                            "column": 23,
+                                            "column": 24,
                                             "length": 3
                                         }
                                     }
@@ -210,7 +210,7 @@
                             "type": "Minus",
                             "literal": null,
                             "line": 5,
-                            "column": 28,
+                            "column": 29,
                             "length": 1
                         },
                         {
@@ -220,7 +220,7 @@
                                     "String": "discount"
                                 },
                                 "line": 5,
-                                "column": 30,
+                                "column": 31,
                                 "length": 8
                             }
                         }

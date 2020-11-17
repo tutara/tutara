@@ -33,6 +33,8 @@ pub enum Statement {
 	),
 	Break(Token),
 	Return(Token, Option<Expression>), // Return, Option<Expression>
+	If(Token, Token, Expression, Token, Box<Statement>, Option<Box<Statement>>), // If , ( , Expression , ) , body, if | else
+	Else(Token, Box<Statement>), // Else , body
 }
 
 impl fmt::Display for Statement {
@@ -162,6 +164,18 @@ impl PartialEq for Statement {
 				}
 				_ => false,
 			},
+			If(ref a_if, ref a_open, ref a_expression, ref a_close, ref a_body, ref a_else) => match *other {
+				If(ref b_if, ref b_open, ref b_expression, ref b_close, ref b_body, ref b_else) => {
+					a_if.eq(b_if)
+						&& a_open.eq(b_open) && a_expression.eq(b_expression)
+						&& a_close.eq(b_close) && a_body.eq(b_body) && a_else.eq(b_else)
+				}
+				_ => false,
+			},
+			Else(ref a_else, ref a_body) => match *other {
+				Else(ref b_else, ref b_body) => a_else.eq(b_else) && a_body.eq(b_body),
+				_ => false,
+			}
 		}
 	}
 }
