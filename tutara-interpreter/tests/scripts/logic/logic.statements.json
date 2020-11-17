@@ -231,7 +231,7 @@
                                         "String": "d"
                                     },
                                     "line": 7,
-                                    "column": 12,
+                                    "column": 13,
                                     "length": 1
                                 }
                             }
@@ -285,7 +285,7 @@
                                     "String": "d"
                                 },
                                 "line": 8,
-                                "column": 12,
+                                "column": 13,
                                 "length": 1
                             }
                         }
@@ -431,7 +431,7 @@
                                         "String": "g"
                                     },
                                     "line": 13,
-                                    "column": 12,
+                                    "column": 13,
                                     "length": 1
                                 }
                             }
@@ -485,7 +485,7 @@
                                     "String": "g"
                                 },
                                 "line": 14,
-                                "column": 12,
+                                "column": 13,
                                 "length": 1
                             }
                         }

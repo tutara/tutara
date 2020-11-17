@@ -15,12 +15,12 @@ pub enum TokenType {
 	// Reference
 	Identifier, // NAME
 	// Operations
-	Plus,     // +
-	Minus,    // -
-	Multiply, // *
-	Division, // /
-	Pow,      // ^
-	Modulo,   // %
+	Plus,     			// +
+	Minus,    			// -
+	Multiply, 			// *
+	Division, 			// /
+	Exponentiation ,    // **
+	Modulo,   			// %
 	// Logic
 	Not,
 	And,
@@ -32,13 +32,13 @@ pub enum TokenType {
 	Greater,
 	Lesser,
 	// Assignment operator
-	Assign,         // =
-	AssignPlus,     // +=
-	AssignMinus,    // -=
-	AssignMultiply, // *=
-	AssignDivision, // /=
-	AssignPow,      // ^=
-	AssignModulo,   // %=
+	Assign,         		// =
+	AssignPlus,     		// +=
+	AssignMinus,    		// -=
+	AssignMultiply, 		// *=
+	AssignDivision, 		// /=
+	AssignExponentiation,   // **=
+	AssignModulo,   		// %=
 	// Function
 	Function,  // fun
 	Return,    // return
@@ -68,7 +68,7 @@ impl TokenType {
 			TokenType::Minus,
 			TokenType::Multiply,
 			TokenType::Division,
-			TokenType::Pow,
+			TokenType::Exponentiation,
 			TokenType::Modulo,
 		]
 		.contains(&token)
@@ -92,7 +92,7 @@ impl TokenType {
 			"-" => Some(Minus),
 			"*" => Some(Multiply),
 			"/" => Some(Division),
-			"^" => Some(Pow),
+			"**" => Some(Exponentiation),
 			"%" => Some(Modulo),
 
 			"fun" => Some(Function),

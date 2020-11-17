@@ -402,11 +402,11 @@
                     "length": 1
                 },
                 {
-                    "type": "AssignPow",
+                    "type": "AssignExponentiation",
                     "literal": null,
                     "line": 16,
                     "column": 6,
-                    "length": 2
+                    "length": 3
                 },
                 {
                     "Literal": {
@@ -415,7 +415,7 @@
                             "Number": 5
                         },
                         "line": 16,
-                        "column": 8,
+                        "column": 9,
                         "length": 1
                     }
                 }

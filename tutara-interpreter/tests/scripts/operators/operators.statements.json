@@ -404,11 +404,11 @@
                     }
                 },
                 {
-                    "type": "Pow",
+                    "type": "Exponentiation",
                     "literal": null,
                     "line": 9,
                     "column": 2,
-                    "length": 1
+                    "length": 2
                 },
                 {
                     "Literal": {
@@ -417,7 +417,7 @@
                             "Number": 8
                         },
                         "line": 9,
-                        "column": 4,
+                        "column": 5,
                         "length": 1
                     }
                 }
