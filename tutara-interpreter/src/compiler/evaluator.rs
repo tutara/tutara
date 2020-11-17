@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use inkwell::context::Context;
 
@@ -14,15 +14,16 @@ impl Evaluator {
 		let module = context.create_module("init");
 		let builder = context.create_builder();
 
-		let compiler = Compiler {
+		let mut compiler = Compiler {
 			context: &context,
 			module,
 			builder,
+			variables: HashMap::new()
 		};
 
+		let engine = compiler.module.create_jit_execution_engine(inkwell::OptimizationLevel::None).unwrap();
 		match compiler.compile(parser) {
 			Ok(fun) => {
-				let engine = compiler.module.create_jit_execution_engine(inkwell::OptimizationLevel::None).unwrap();
 				
 				return unsafe {
 					Ok(engine.run_function(fun, &[]).as_float(&context.f64_type()))
@@ -37,10 +38,11 @@ impl Evaluator {
 		let module = context.create_module("init");
 		let builder = context.create_builder();
 
-		let compiler = Compiler {
+		let mut compiler = Compiler {
 			context: &context,
 			module,
 			builder,
+			variables: HashMap::new()
 		};
 
 		match compiler.compile(parser) {
