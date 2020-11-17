@@ -129,7 +129,7 @@ fn run(src: String) -> Result<()> {
 		}
 	};
 	
-	writeln!(&mut stdout, "")
+	writeln!(&mut stdout)
 }
 
 fn interactive_mode() {
