@@ -13,8 +13,8 @@ pub struct Compiler<'a> {
 }
 pub enum Operation<'a> {
 	FloatValue(FloatValue<'a>),
-	Declaration(),
 	Return(InstructionValue<'a>),
+	NoOp(),
 }
 
 impl Compiler<'_> {
@@ -26,23 +26,25 @@ impl Compiler<'_> {
 
 		for result in parser {
 			match result {
-				Ok(statement) => self.evaluate_statement(statement)?,
+				Ok(statement) => if let Operation::Return(_) = self.evaluate_statement(statement)? {
+					return Ok(fun)
+				},
 				Err(error) => return Err(error),
 			};
 		}
 
-		return Ok(fun);
+		Err(Error::new_compiler_error("No return statement found in script".to_string()))
 	}
 
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
 		match statement {
 			Statement::Expression(expression) => self.evaluate_expression(expression),
-			Statement::Declaration(mutability, type_specification, expression) => {
+			Statement::Declaration(_mutability, _type_specification, expression) => {
 				self.evaluate_declaration(expression)?;
-				Ok(Operation::Declaration())
+				Ok(Operation::NoOp())
 			},
 			Statement::Return(_, expression) => self.evaluate_return(expression),
-			Statement::Comment(_) => Ok(Operation::Declaration()),
+			Statement::Comment(_) => Ok(Operation::NoOp()),
 			_ => Err(Error::new_compiler_error("Unsupported statement".to_string())),
 		}
 	}
@@ -60,7 +62,7 @@ impl Compiler<'_> {
 
 	pub fn evaluate_declaration(&mut self, expression: Expression) -> Result<Operation, Error> {
 		match expression {
-			Expression::Assignment(identifier, operator, inner_expression) => {
+			Expression::Assignment(identifier, _operator, inner_expression) => {
 				match identifier.literal {
 					Some(Literal::String(name)) => {
 						let pointer = self.builder.build_alloca(self.context.f64_type(), &name);
@@ -69,7 +71,7 @@ impl Compiler<'_> {
 						match self.evaluate_expression(*inner_expression)? {
 							Operation::FloatValue(value) => {
 								self.builder.build_store(pointer, value);
-								Ok(Operation::Declaration())
+								Ok(Operation::NoOp())
 							},
 							_ => Err(Error::new_compiler_error("Unsupported assignment operation".to_string())),
 						}
@@ -93,7 +95,7 @@ impl Compiler<'_> {
 			_ => return Err(Error::new_compiler_error("Unsupported right hand expression".to_string()))
 		};
 
-		return match operator.r#type {
+		match operator.r#type {
 			TokenType::Plus => Ok(Operation::FloatValue(self.builder.build_float_add(lhs, rhs, "tmpadd"))),
 			TokenType::Minus => Ok(Operation::FloatValue(self.builder.build_float_sub(lhs, rhs, "tmpsub"))),
 			TokenType::Multiply => Ok(Operation::FloatValue(self.builder.build_float_mul(lhs, rhs, "tmpmul"))),
@@ -117,10 +119,10 @@ impl Compiler<'_> {
 			}
 			TokenType::Modulo => Ok(Operation::FloatValue(self.builder.build_float_rem(lhs, rhs, "tmprem"))),
 			_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
-		};
+		}
 	}
 
-	pub fn evaluate_expression<'ctx>(&self, expression: Expression) -> Result<Operation, Error> {
+	pub fn evaluate_expression(&self, expression: Expression) -> Result<Operation, Error> {
 		match expression {
 			Expression::Literal(token) => match token.literal {
 				Some(Literal::Number(number)) => {
@@ -162,7 +164,7 @@ impl Compiler<'_> {
 						match value {
 							Operation::FloatValue(value) => {
 								self.builder.build_store(*pointer, value);
-								Ok(Operation::Declaration())
+								Ok(Operation::NoOp())
 							},
 							_ => Err(Error::new_compiler_error("Unsupported assignment operation".to_string())),
 						}
