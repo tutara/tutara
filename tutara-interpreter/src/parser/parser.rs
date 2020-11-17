@@ -359,7 +359,7 @@ impl Parser<'_> {
 			TokenType::AssignMinus,
 			TokenType::AssignMultiply,
 			TokenType::AssignDivision,
-			TokenType::AssignPow,
+			TokenType::AssignExponentiation,
 			TokenType::AssignModulo,
 		]) {
 			return match expression {
@@ -449,7 +449,7 @@ impl Parser<'_> {
 	fn involution(&mut self) -> Result<Expression> {
 		let mut expression = self.unary()?;
 
-		while let Some(Ok(token)) = self.next_if_token_type(TokenType::Pow) {
+		while let Some(Ok(token)) = self.next_if_token_type(TokenType::Exponentiation) {
 			expression = Expression::Binary(Box::new(expression), token, Box::new(self.unary()?));
 		}
 		Ok(expression)

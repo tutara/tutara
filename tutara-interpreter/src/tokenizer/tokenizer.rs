@@ -45,11 +45,16 @@ impl Iterator for Tokenizer<'_> {
 
 					token = Some(self.comment());
 				} else if current == '&' {
-					token = Some(self.token_if_char('&', TokenType::And, "expected &"))
+					token = Some(self.token_if_char('&', TokenType::And, "expected &"));
 				} else if current == '|' {
-					token = Some(self.token_if_char('|', TokenType::Or, "expected |"))
+					token = Some(self.token_if_char('|', TokenType::Or, "expected |"));
 				} else if let Some(r#type) = TokenType::get_reserved_token(&current.to_string()) {
 					token = Some(self.create_token(r#type));
+					if self.peek_char('*') {
+						token =
+							Some(self.token_if_char('*', TokenType::Exponentiation, "expected *"));
+					}
+
 					token = Some(self.assignment_operation(token.unwrap().unwrap()));
 					token = Some(self.comparison(token.unwrap().unwrap()))
 				} else {
@@ -250,7 +255,7 @@ impl Tokenizer<'_> {
 					TokenType::Minus => self.create_token(TokenType::AssignMinus),
 					TokenType::Multiply => self.create_token(TokenType::AssignMultiply),
 					TokenType::Division => self.create_token(TokenType::AssignDivision),
-					TokenType::Pow => self.create_token(TokenType::AssignPow),
+					TokenType::Exponentiation => self.create_token(TokenType::AssignExponentiation),
 					TokenType::Modulo => self.create_token(TokenType::AssignModulo),
 					_ => self.create_error(
 						ErrorType::Lexical(self.line, self.column, self.length),
@@ -315,7 +320,6 @@ impl Tokenizer<'_> {
 		error_message: &str,
 	) -> Result<Token> {
 		if let Some(_next) = self.next_if_char(next) {
-			self.chars.next();
 			self.length += 1;
 			return self.create_token(token_type);
 		}

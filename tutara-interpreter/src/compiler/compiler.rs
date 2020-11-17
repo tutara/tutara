@@ -100,7 +100,7 @@ impl Compiler<'_> {
 			TokenType::Minus => Ok(Operation::FloatValue(self.builder.build_float_sub(lhs, rhs, "tmpsub"))),
 			TokenType::Multiply => Ok(Operation::FloatValue(self.builder.build_float_mul(lhs, rhs, "tmpmul"))),
 			TokenType::Division => Ok(Operation::FloatValue(self.builder.build_float_div(lhs, rhs, "tmpdiv"))),
-			TokenType::Pow => {
+			TokenType::Exponentiation => {
 				let f64_type = self.context.f64_type();
 				let pow_fun = self.module.add_function(
 					"llvm.pow.f64",
@@ -155,7 +155,7 @@ impl Compiler<'_> {
 							TokenType::AssignMinus => Token::new(TokenType::Minus, None, operator.line, operator.column, operator.length),
 							TokenType::AssignMultiply => Token::new(TokenType::Multiply, None, operator.line, operator.column, operator.length),
 							TokenType::AssignDivision => Token::new(TokenType::Division, None, operator.line, operator.column, operator.length),
-							TokenType::AssignPow => Token::new(TokenType::Pow, None, operator.line, operator.column, operator.length),
+							TokenType::AssignExponentiation => Token::new(TokenType::Exponentiation, None, operator.line, operator.column, operator.length),
 							TokenType::AssignModulo => Token::new(TokenType::Modulo, None, operator.line, operator.column, operator.length),
 							_ => return Err(Error::new_compiler_error("Unsupported assignment operator".to_string())),
 						})?;

@@ -13,7 +13,7 @@ val e =  4
     e /= 4
 
 val f =  5
-    f ^= 5
+    f **= 5
 
 val g =  6
     g %= 6
