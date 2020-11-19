@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use inkwell::{builder::Builder, context::Context, values::InstructionValue, module::Module, values::FloatValue, values::{FunctionValue, PointerValue}};
+use inkwell::{builder::Builder, context::Context, module::Module, values::FloatValue, values::InstructionValue, values::{FunctionValue, PointerValue}};
 
 use crate::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
 
@@ -20,14 +20,18 @@ pub enum Operation<'a> {
 impl Compiler<'_> {
 	pub fn compile<'b>(&mut self, parser: Parser<'b>) -> Result<FunctionValue, Error> {
 		let fun_type = self.context.f64_type().fn_type(&[], false);
-		let fun = self.module.add_function("entry", fun_type, None);
-		let body = self.context.append_basic_block(fun, "body");
+		let fun = self.module.add_function("main", fun_type, None);
+		let body = self.context.append_basic_block(fun, "entry");
 		self.builder.position_at_end(body);
 
 		for result in parser {
 			match result {
 				Ok(statement) => if let Operation::Return(_) = self.evaluate_statement(statement)? {
-					return Ok(fun)
+					match self.module.verify() {
+						Ok(_) => return Ok(fun),
+						Err(err) => return Err(Error::new_compiler_error(err.to_string())),
+					}
+					
 				},
 				Err(error) => return Err(error),
 			};
