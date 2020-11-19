@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use inkwell::{builder::Builder, context::Context, module::Module, values::FloatValue, values::InstructionValue, values::{FunctionValue, PointerValue}};
+use inkwell::{builder::Builder, context::Context, module::Module, values::FloatValue, values::InstructionValue, values::{BasicValueEnum, FunctionValue, PointerValue}};
 
 use crate::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
 
@@ -177,6 +177,37 @@ impl Compiler<'_> {
 				}
 			},
 			Expression::Binary(left, operator, right) => self.evaluate_operator(*left, *right, operator),
+			Expression::Call(function, _, parameters, _) => {
+				let name = match *function {
+					Expression::Identifier(identifier) => match identifier.literal {
+						Some(Literal::String(name)) => name,
+						_ => return Err(Error::new_compiler_error("Unsupported call".to_string()))
+					},
+					_ => return Err(Error::new_compiler_error("Unsupported call".to_string()))
+				};
+
+				let fun = match self.module.get_function(&name) {
+					Some(fun) => fun,
+					None => return Err(Error::new_compiler_error(format!("Unknown function {}", name))),
+				};
+				let mut args: Vec<_> = Vec::new();
+				for expression in parameters.into_iter() {
+					match self.evaluate_expression(expression)? {
+					    Operation::FloatValue(value) => args.push(value.into()),
+						_ => return Err(Error::new_compiler_error("Unsupported return operation".to_string()))
+					}
+				}
+				
+				let result = self.builder.build_call(fun, &args, &name)
+					.try_as_basic_value()
+					.left()
+					.unwrap();
+				
+				match result {
+					BasicValueEnum::FloatValue(value) => Ok(Operation::FloatValue(value)),
+					_ => Err(Error::new_compiler_error("Unsupported result".to_string())),
+				}
+			},
 			_ => Err(Error::new_compiler_error("Unsupported expression".to_string())),
 		}
 	}
