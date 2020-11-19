@@ -56,7 +56,7 @@ impl Iterator for Tokenizer<'_> {
 					}
 
 					token = Some(self.assignment_operation(token.unwrap().unwrap()));
-					token = Some(self.comparison(token.unwrap().unwrap()))
+					token = Some(self.comparison(token.unwrap().unwrap()));
 				} else {
 					token = Some(self.create_error(
 						ErrorType::Lexical(self.line, self.column, self.length),
