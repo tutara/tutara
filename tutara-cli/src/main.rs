@@ -103,22 +103,8 @@ fn run(src: String) -> Result<()> {
 	// Reset colors
 	stdout.set_color(&ColorSpec::new())?;
 	writeln!(&mut stdout)?;
-	writeln!(&mut stdout)?;
-	writeln!(&mut stdout, "# Abstract syntax tree")?;
-	writeln!(&mut stdout)?;
 
-	let parser = Parser::new(Tokenizer::new(&src).peekable());
-	for result in parser {
-		if let Err(err) = result {
-			writeln!(&mut stdout, "{}", err)?;
-			break;
-		} else if let Ok(statement) = result {
-			writeln!(&mut stdout, "Statement: \n {}", statement)?;
-		}
-	}
-	
-	writeln!(&mut stdout)?;
-
+	// Evaluate
 	match Evaluator::evaluate(Parser::new(Tokenizer::new(&src).peekable())) {
 		Ok(output) => {
 			write!(&mut stdout, "Output: ")?;
@@ -135,6 +121,9 @@ fn run(src: String) -> Result<()> {
 fn interactive_mode() {
 	println!("Initialized Tutara interactive mode. Use \".file [path]\" to read files or \".exit\" to leave.");
 	println!();
+
+	let mut buffer = Vec::new();
+
 	loop {
 		let mut input = String::new();
 		print!("> ");
@@ -151,7 +140,13 @@ fn interactive_mode() {
 				println!("Invalid path. Syntax: .file [path]");
 			}
 		} else {
-			run(input).expect("Could not write the desired output");
+			buffer.push(input.clone());
+
+			if input.starts_with("return") {
+				run(buffer.join("")).expect("Could not write the desired output");
+
+				buffer.clear();
+			}
 		}
 	}
 }
