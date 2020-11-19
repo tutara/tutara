@@ -249,7 +249,7 @@ impl Tokenizer<'_> {
 		if TokenType::is_operation(&r#type) {
 			if let Some(_next) = self.next_if_char('=') {
 				self.chars.next();
-				self.length += 1;
+				self.length += 2;
 				return match r#type {
 					TokenType::Plus => self.create_token(TokenType::AssignPlus),
 					TokenType::Minus => self.create_token(TokenType::AssignMinus),
