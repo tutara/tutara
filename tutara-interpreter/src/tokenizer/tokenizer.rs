@@ -56,7 +56,7 @@ impl Iterator for Tokenizer<'_> {
 					}
 
 					token = Some(self.assignment_operation(token.unwrap().unwrap()));
-					token = Some(self.comparison(token.unwrap().unwrap()))
+					token = Some(self.comparison(token.unwrap().unwrap()));
 				} else {
 					token = Some(self.create_error(
 						ErrorType::Lexical(self.line, self.column, self.length),
@@ -249,7 +249,7 @@ impl Tokenizer<'_> {
 		if TokenType::is_operation(&r#type) {
 			if let Some(_next) = self.next_if_char('=') {
 				self.chars.next();
-				self.length += 2;
+				self.length += 1;
 				return match r#type {
 					TokenType::Plus => self.create_token(TokenType::AssignPlus),
 					TokenType::Minus => self.create_token(TokenType::AssignMinus),
