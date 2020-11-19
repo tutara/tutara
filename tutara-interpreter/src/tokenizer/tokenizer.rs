@@ -145,7 +145,7 @@ impl Tokenizer<'_> {
 		let mut value = current.to_string();
 
 		while let Some(next) = self.chars.peek() {
-			if next.is_alphanumeric() {
+			if next.is_alphanumeric() || next == &'_' {
 				value.push(*next);
 				self.chars.next();
 				self.length += 1;
