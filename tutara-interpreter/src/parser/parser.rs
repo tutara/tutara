@@ -62,6 +62,7 @@ impl Parser<'_> {
 			TokenType::While,
 			TokenType::For,
 			TokenType::Break,
+			TokenType::If,
 		]) {
 			if let Ok(token) = token {
 				match token.r#type {
@@ -73,6 +74,7 @@ impl Parser<'_> {
 					TokenType::While => self.r#while(token),
 					TokenType::For => self.r#for(token),
 					TokenType::Break => self.r#break(token),
+					TokenType::If => self.r#if(token),
 					_ => self.create_statement_syntax_error(
 						"statement not implemented please report issue".to_string(),
 						token,
@@ -342,6 +344,63 @@ impl Parser<'_> {
 	fn r#break(&mut self, token: Token) -> Result<Statement> {
 		Ok(Statement::Break(token))
 	}
+
+	fn r#if(&mut self, token: Token) -> Result<Statement> {
+		if let Some(Ok(open_parenthesis)) = self.next_if_token_type(TokenType::OpenParenthesis) {
+			let expression = self.expression_root()?;
+
+			if let Some(Ok(close_parenthesis)) =
+				self.next_if_token_type(TokenType::CloseParenthesis)
+			{
+				if let Some(Ok(open_curly_bracket)) =
+					self.next_if_token_type(TokenType::OpenCurlyBracket)
+				{
+					match self.body(open_curly_bracket) {
+						Ok(body) => {
+							if let Some(Ok(next_else)) = self.next_if_token_type(TokenType::Else) {
+								match self.r#else(next_else) {
+									Ok(statement) => Ok(Statement::If(
+										token,
+										open_parenthesis,
+										expression,
+										close_parenthesis,
+										Box::new(body),
+										Some(Box::new(statement)),
+									)),
+									Err(error) => return Err(error),
+								}
+							} else {
+								Ok(Statement::If(
+									token,
+									open_parenthesis,
+									expression,
+									close_parenthesis,
+									Box::new(body),
+									None,
+								))
+							}
+						}
+						Err(error) => Err(error),
+					}
+				} else {
+					self.create_statement_syntax_error("Expected body".to_string(), token)
+				}
+			} else {
+				self.create_statement_syntax_error("Expected close parenthesis".to_string(), token)
+			}
+		} else {
+			self.create_statement_syntax_error("Expected open parenthesis".to_string(), token)
+		}
+	}
+
+	fn r#else(&mut self, token: Token) -> Result<Statement> {
+		if let Some(Ok(open_curly_bracket)) = self.next_if_token_type(TokenType::OpenCurlyBracket) {
+		  let body = self.body(open_curly_bracket)?;
+		  Ok(Statement::Else(token, Box::new(body)))
+		} else {
+		  self.create_statement_syntax_error("Expected body".to_string(), token)
+		}
+	  }
 }
 
 // Expression parsing

@@ -85,7 +85,7 @@
             "Number": 1
         },
         "line": 4,
-        "column": 8,
+        "column": 9,
         "length": 1
     },
     {
@@ -142,7 +142,7 @@
             "Number": 2
         },
         "line": 7,
-        "column": 8,
+        "column": 9,
         "length": 1
     },
     {
@@ -199,7 +199,7 @@
             "Number": 3
         },
         "line": 10,
-        "column": 8,
+        "column": 9,
         "length": 1
     },
     {
@@ -256,7 +256,7 @@
             "Number": 4
         },
         "line": 13,
-        "column": 8,
+        "column": 9,
         "length": 1
     },
     {
@@ -313,7 +313,7 @@
             "Number": 5
         },
         "line": 16,
-        "column": 9,
+        "column": 10,
         "length": 1
     },
     {
@@ -370,7 +370,7 @@
             "Number": 6
         },
         "line": 19,
-        "column": 8,
+        "column": 9,
         "length": 1
     }
 ]

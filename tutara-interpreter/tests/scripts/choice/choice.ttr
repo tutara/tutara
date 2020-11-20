@@ -1,0 +1,18 @@
+var a = true
+var b = 1
+
+if ( a ) {
+    a = !a
+} else {
+    if (b == 1){
+        a = !a
+    }
+}
+
+var b = false
+
+if ( a && b ) {
+    b = !a
+} else {
+    a = !a
+}
