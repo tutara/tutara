@@ -8,6 +8,7 @@ use serde::{Serialize, Deserialize};
 pub enum Literal {
 	Number(u32),
 	String(String),
+	Boolean(bool)
 }
 
 impl fmt::Display for Literal {
@@ -25,6 +26,10 @@ impl PartialEq for Literal {
 			},
 			String(ref a) => match *other {
 				String(ref b) => a.eq(b),
+				_ => false,
+			},
+			Boolean(ref a) => match *other {
+				Boolean(ref b) => a.eq(b),
 				_ => false,
 			},
 		}

@@ -14,8 +14,7 @@ fn color_for_token(token: &Token) -> Option<Color> {
 	match token.r#type {
 		TokenType::Integer => Some(Color::Rgb(94, 129, 172)),
 		TokenType::String => Some(Color::Rgb(163, 190, 140)),
-		TokenType::True => Some(Color::Rgb(208, 135, 1)),
-		TokenType::False => Some(Color::Rgb(208, 135, 1)),
+		TokenType::Boolean => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Val => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Var => Some(Color::Rgb(208, 135, 1)),
 		TokenType::Identifier => Some(Color::Rgb(235, 203, 1)),

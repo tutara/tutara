@@ -155,7 +155,11 @@ impl Tokenizer<'_> {
 			}
 		}
 
-		if let Some(r#type) = TokenType::get_reserved_token(&value) {
+		if value == "true" {
+			self.create_literal_token(TokenType::Boolean, Some(Literal::Boolean(true)))
+		} else if value == "false" {
+			self.create_literal_token(TokenType::Boolean, Some(Literal::Boolean(false)))
+		} else if let Some(r#type) = TokenType::get_reserved_token(&value) {
 			self.create_token(r#type)
 		} else {
 			self.create_literal_token(TokenType::Identifier, Some(Literal::String(value)))
