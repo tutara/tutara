@@ -47,7 +47,7 @@ impl Compiler<'_> {
 				self.evaluate_declaration(expression)?;
 				Ok(Operation::NoOp())
 			},
-			Statement::Return(_, expression) => self.evaluate_return(expression),
+			Statement::Return(expression) => self.evaluate_return(expression),
 			Statement::Comment(_) => Ok(Operation::NoOp()),
 			_ => Err(Error::new_compiler_error("Unsupported statement".to_string())),
 		}

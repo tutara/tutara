@@ -55,24 +55,13 @@
                 "length": 3
             },
             {
-                "TypeSpecification": [
-                    {
-                        "type": "Specifier",
-                        "literal": null,
-                        "line": 3,
-                        "column": 3,
-                        "length": 1
-                    },
-                    {
-                        "type": "Identifier",
-                        "literal": {
-                            "String": "String"
-                        },
-                        "line": 3,
-                        "column": 5,
-                        "length": 6
-                    }
-                ]
+                "type": "Identifier",
+                "literal": {
+                    "String": "String"
+                },
+                "line": 3,
+                "column": 5,
+                "length": 6
             },
             {
                 "Identifier": {
@@ -97,24 +86,13 @@
                 "length": 3
             },
             {
-                "TypeSpecification": [
-                    {
-                        "type": "Specifier",
-                        "literal": null,
-                        "line": 4,
-                        "column": 3,
-                        "length": 1
-                    },
-                    {
-                        "type": "Identifier",
-                        "literal": {
-                            "String": "Integer"
-                        },
-                        "line": 4,
-                        "column": 5,
-                        "length": 7
-                    }
-                ]
+                "type": "Identifier",
+                "literal": {
+                    "String": "Integer"
+                },
+                "line": 4,
+                "column": 5,
+                "length": 7
             },
             {
                 "Identifier": {
