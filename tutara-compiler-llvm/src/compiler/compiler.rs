@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use inkwell::{builder::Builder, context::Context, module::Module, values::FloatValue, values::InstructionValue, values::{BasicValueEnum, FunctionValue, PointerValue}};
 
-use crate::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
+use tutara_interpreter::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
 
 pub struct Compiler<'a> {
 	pub(super) context: &'a Context,

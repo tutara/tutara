@@ -4,7 +4,8 @@ use std::{env, fs};
 use std::io;
 use std::io::Result;
 use std::io::Write;
-use tutara_interpreter::{Evaluator, Parser, Token, TokenType, Tokenizer};
+use tutara_interpreter::{Parser, Token, TokenType, Tokenizer};
+use tutara_compiler_llvm::Evaluator;
 
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 

@@ -314,6 +314,15 @@ name = "tutara-cli"
 version = "0.0.0"
 dependencies = [
  "termcolor",
+ "tutara-compiler-llvm",
+ "tutara-interpreter",
+]
+
+[[package]]
+name = "tutara-compiler-llvm"
+version = "0.0.0"
+dependencies = [
+ "inkwell",
  "tutara-interpreter",
 ]
 
@@ -321,7 +330,6 @@ dependencies = [
 name = "tutara-interpreter"
 version = "0.0.0"
 dependencies = [
- "inkwell",
  "serde",
  "serde_json",
 ]

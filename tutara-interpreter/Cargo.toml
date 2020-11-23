@@ -5,7 +5,6 @@ authors = ["Niels van Velzen <git@ndat.nl>", "Marnix Wieffering <git@marnixwieff
 edition = "2018"
 
 [dependencies]
-inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm10-0"] }
 serde = { version = "1.0", features = ["derive"] }
 
 [dev-dependencies]
