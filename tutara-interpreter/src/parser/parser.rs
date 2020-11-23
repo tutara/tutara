@@ -598,8 +598,7 @@ impl Parser<'_> {
 		if let Some(Ok(token)) = self.next_if_in_token_types(&[
 			TokenType::String,
 			TokenType::Integer,
-			TokenType::True,
-			TokenType::False,
+			TokenType::Boolean
 		]) {
 			return Ok(Expression::Literal(token));
 		}

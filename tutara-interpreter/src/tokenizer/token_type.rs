@@ -6,9 +6,7 @@ pub enum TokenType {
 	// Primitives
 	Integer, // 12
 	String,  // "foo"
-	// Booleans
-	True,  // true
-	False, // false
+	Boolean, // true / false
 	// Variables
 	Val, // Immutable
 	Var, // Mutable
@@ -83,9 +81,6 @@ impl TokenType {
 		use TokenType::*;
 
 		match ident {
-			"true" => Some(True),
-			"false" => Some(False),
-
 			"val" => Some(Val),
 			"var" => Some(Var),
 
