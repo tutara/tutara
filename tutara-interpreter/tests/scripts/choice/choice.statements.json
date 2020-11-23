@@ -88,20 +88,6 @@
     {
         "If": [
             {
-                "type": "If",
-                "literal": null,
-                "line": 4,
-                "column": 0,
-                "length": 2
-            },
-            {
-                "type": "OpenParenthesis",
-                "literal": null,
-                "line": 4,
-                "column": 3,
-                "length": 1
-            },
-            {
                 "Identifier": {
                     "type": "Identifier",
                     "literal": {
@@ -113,226 +99,139 @@
                 }
             },
             {
-                "type": "CloseParenthesis",
-                "literal": null,
-                "line": 4,
-                "column": 7,
-                "length": 1
-            },
-            {
                 "Body": [
                     {
-                        "type": "OpenCurlyBracket",
-                        "literal": null,
-                        "line": 4,
-                        "column": 9,
-                        "length": 1
-                    },
-                    [
-                        {
-                            "Expression": {
-                                "Assignment": [
-                                    {
-                                        "type": "Identifier",
-                                        "literal": {
-                                            "String": "a"
+                        "Expression": {
+                            "Assignment": [
+                                {
+                                    "type": "Identifier",
+                                    "literal": {
+                                        "String": "a"
+                                    },
+                                    "line": 5,
+                                    "column": 4,
+                                    "length": 1
+                                },
+                                {
+                                    "type": "Assign",
+                                    "literal": null,
+                                    "line": 5,
+                                    "column": 6,
+                                    "length": 1
+                                },
+                                {
+                                    "Unary": [
+                                        {
+                                            "type": "Not",
+                                            "literal": null,
+                                            "line": 5,
+                                            "column": 8,
+                                            "length": 1
                                         },
-                                        "line": 5,
-                                        "column": 4,
-                                        "length": 1
-                                    },
-                                    {
-                                        "type": "Assign",
-                                        "literal": null,
-                                        "line": 5,
-                                        "column": 6,
-                                        "length": 1
-                                    },
-                                    {
-                                        "Unary": [
-                                            {
-                                                "type": "Not",
-                                                "literal": null,
+                                        {
+                                            "Identifier": {
+                                                "type": "Identifier",
+                                                "literal": {
+                                                    "String": "a"
+                                                },
                                                 "line": 5,
-                                                "column": 8,
+                                                "column": 9,
                                                 "length": 1
-                                            },
-                                            {
-                                                "Identifier": {
-                                                    "type": "Identifier",
-                                                    "literal": {
-                                                        "String": "a"
-                                                    },
-                                                    "line": 5,
-                                                    "column": 9,
-                                                    "length": 1
-                                                }
                                             }
-                                        ]
-                                    }
-                                ]
-                            }
+                                        }
+                                    ]
+                                }
+                            ]
                         }
-                    ],
-                    {
-                        "type": "CloseCurlyBracket",
-                        "literal": null,
-                        "line": 6,
-                        "column": 0,
-                        "length": 1
                     }
                 ]
             },
             {
-                "Else": [
+                "Body": [
                     {
-                        "type": "Else",
-                        "literal": null,
-                        "line": 6,
-                        "column": 2,
-                        "length": 4
-                    },
-                    {
-                        "Body": [
+                        "If": [
                             {
-                                "type": "OpenCurlyBracket",
-                                "literal": null,
-                                "line": 6,
-                                "column": 7,
-                                "length": 1
+                                "Binary": [
+                                    {
+                                        "Identifier": {
+                                            "type": "Identifier",
+                                            "literal": {
+                                                "String": "b"
+                                            },
+                                            "line": 7,
+                                            "column": 8,
+                                            "length": 1
+                                        }
+                                    },
+                                    {
+                                        "type": "Equal",
+                                        "literal": null,
+                                        "line": 7,
+                                        "column": 10,
+                                        "length": 2
+                                    },
+                                    {
+                                        "Literal": {
+                                            "type": "Integer",
+                                            "literal": {
+                                                "Number": 1
+                                            },
+                                            "line": 7,
+                                            "column": 13,
+                                            "length": 1
+                                        }
+                                    }
+                                ]
                             },
-                            [
-                                {
-                                    "If": [
-                                        {
-                                            "type": "If",
-                                            "literal": null,
-                                            "line": 7,
-                                            "column": 4,
-                                            "length": 2
-                                        },
-                                        {
-                                            "type": "OpenParenthesis",
-                                            "literal": null,
-                                            "line": 7,
-                                            "column": 7,
-                                            "length": 1
-                                        },
-                                        {
-                                            "Binary": [
-                                                {
-                                                    "Identifier": {
-                                                        "type": "Identifier",
-                                                        "literal": {
-                                                            "String": "b"
-                                                        },
-                                                        "line": 7,
-                                                        "column": 8,
-                                                        "length": 1
-                                                    }
-                                                },
-                                                {
-                                                    "type": "Equal",
-                                                    "literal": null,
-                                                    "line": 7,
-                                                    "column": 10,
-                                                    "length": 2
-                                                },
-                                                {
-                                                    "Literal": {
-                                                        "type": "Integer",
-                                                        "literal": {
-                                                            "Number": 1
-                                                        },
-                                                        "line": 7,
-                                                        "column": 13,
-                                                        "length": 1
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "CloseParenthesis",
-                                            "literal": null,
-                                            "line": 7,
-                                            "column": 14,
-                                            "length": 1
-                                        },
-                                        {
-                                            "Body": [
-                                                {
-                                                    "type": "OpenCurlyBracket",
-                                                    "literal": null,
-                                                    "line": 7,
-                                                    "column": 15,
-                                                    "length": 1
-                                                },
-                                                [
-                                                    {
-                                                        "Expression": {
-                                                            "Assignment": [
-                                                                {
-                                                                    "type": "Identifier",
-                                                                    "literal": {
-                                                                        "String": "a"
-                                                                    },
-                                                                    "line": 8,
-                                                                    "column": 8,
-                                                                    "length": 1
-                                                                },
-                                                                {
-                                                                    "type": "Assign",
-                                                                    "literal": null,
-                                                                    "line": 8,
-                                                                    "column": 10,
-                                                                    "length": 1
-                                                                },
-                                                                {
-                                                                    "Unary": [
-                                                                        {
-                                                                            "type": "Not",
-                                                                            "literal": null,
-                                                                            "line": 8,
-                                                                            "column": 12,
-                                                                            "length": 1
-                                                                        },
-                                                                        {
-                                                                            "Identifier": {
-                                                                                "type": "Identifier",
-                                                                                "literal": {
-                                                                                    "String": "a"
-                                                                                },
-                                                                                "line": 8,
-                                                                                "column": 13,
-                                                                                "length": 1
-                                                                            }
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    }
-                                                ],
-                                                {
-                                                    "type": "CloseCurlyBracket",
-                                                    "literal": null,
-                                                    "line": 9,
-                                                    "column": 4,
-                                                    "length": 1
-                                                }
-                                            ]
-                                        },
-                                        null
-                                    ]
-                                }
-                            ],
                             {
-                                "type": "CloseCurlyBracket",
-                                "literal": null,
-                                "line": 10,
-                                "column": 0,
-                                "length": 1
-                            }
+                                "Body": [
+                                    {
+                                        "Expression": {
+                                            "Assignment": [
+                                                {
+                                                    "type": "Identifier",
+                                                    "literal": {
+                                                        "String": "a"
+                                                    },
+                                                    "line": 8,
+                                                    "column": 8,
+                                                    "length": 1
+                                                },
+                                                {
+                                                    "type": "Assign",
+                                                    "literal": null,
+                                                    "line": 8,
+                                                    "column": 10,
+                                                    "length": 1
+                                                },
+                                                {
+                                                    "Unary": [
+                                                        {
+                                                            "type": "Not",
+                                                            "literal": null,
+                                                            "line": 8,
+                                                            "column": 12,
+                                                            "length": 1
+                                                        },
+                                                        {
+                                                            "Identifier": {
+                                                                "type": "Identifier",
+                                                                "literal": {
+                                                                    "String": "a"
+                                                                },
+                                                                "line": 8,
+                                                                "column": 13,
+                                                                "length": 1
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            null
                         ]
                     }
                 ]
@@ -385,20 +284,6 @@
     {
         "If": [
             {
-                "type": "If",
-                "literal": null,
-                "line": 14,
-                "column": 0,
-                "length": 2
-            },
-            {
-                "type": "OpenParenthesis",
-                "literal": null,
-                "line": 14,
-                "column": 3,
-                "length": 1
-            },
-            {
                 "Binary": [
                     {
                         "Identifier": {
@@ -432,148 +317,98 @@
                 ]
             },
             {
-                "type": "CloseParenthesis",
-                "literal": null,
-                "line": 14,
-                "column": 12,
-                "length": 1
-            },
-            {
                 "Body": [
                     {
-                        "type": "OpenCurlyBracket",
-                        "literal": null,
-                        "line": 14,
-                        "column": 14,
-                        "length": 1
-                    },
-                    [
-                        {
-                            "Expression": {
-                                "Assignment": [
-                                    {
-                                        "type": "Identifier",
-                                        "literal": {
-                                            "String": "b"
+                        "Expression": {
+                            "Assignment": [
+                                {
+                                    "type": "Identifier",
+                                    "literal": {
+                                        "String": "b"
+                                    },
+                                    "line": 15,
+                                    "column": 4,
+                                    "length": 1
+                                },
+                                {
+                                    "type": "Assign",
+                                    "literal": null,
+                                    "line": 15,
+                                    "column": 6,
+                                    "length": 1
+                                },
+                                {
+                                    "Unary": [
+                                        {
+                                            "type": "Not",
+                                            "literal": null,
+                                            "line": 15,
+                                            "column": 8,
+                                            "length": 1
                                         },
-                                        "line": 15,
-                                        "column": 4,
-                                        "length": 1
-                                    },
-                                    {
-                                        "type": "Assign",
-                                        "literal": null,
-                                        "line": 15,
-                                        "column": 6,
-                                        "length": 1
-                                    },
-                                    {
-                                        "Unary": [
-                                            {
-                                                "type": "Not",
-                                                "literal": null,
+                                        {
+                                            "Identifier": {
+                                                "type": "Identifier",
+                                                "literal": {
+                                                    "String": "a"
+                                                },
                                                 "line": 15,
-                                                "column": 8,
+                                                "column": 9,
                                                 "length": 1
-                                            },
-                                            {
-                                                "Identifier": {
-                                                    "type": "Identifier",
-                                                    "literal": {
-                                                        "String": "a"
-                                                    },
-                                                    "line": 15,
-                                                    "column": 9,
-                                                    "length": 1
-                                                }
                                             }
-                                        ]
-                                    }
-                                ]
-                            }
+                                        }
+                                    ]
+                                }
+                            ]
                         }
-                    ],
-                    {
-                        "type": "CloseCurlyBracket",
-                        "literal": null,
-                        "line": 16,
-                        "column": 0,
-                        "length": 1
                     }
                 ]
             },
             {
-                "Else": [
+                "Body": [
                     {
-                        "type": "Else",
-                        "literal": null,
-                        "line": 16,
-                        "column": 2,
-                        "length": 4
-                    },
-                    {
-                        "Body": [
-                            {
-                                "type": "OpenCurlyBracket",
-                                "literal": null,
-                                "line": 16,
-                                "column": 7,
-                                "length": 1
-                            },
-                            [
+                        "Expression": {
+                            "Assignment": [
                                 {
-                                    "Expression": {
-                                        "Assignment": [
-                                            {
+                                    "type": "Identifier",
+                                    "literal": {
+                                        "String": "a"
+                                    },
+                                    "line": 17,
+                                    "column": 4,
+                                    "length": 1
+                                },
+                                {
+                                    "type": "Assign",
+                                    "literal": null,
+                                    "line": 17,
+                                    "column": 6,
+                                    "length": 1
+                                },
+                                {
+                                    "Unary": [
+                                        {
+                                            "type": "Not",
+                                            "literal": null,
+                                            "line": 17,
+                                            "column": 8,
+                                            "length": 1
+                                        },
+                                        {
+                                            "Identifier": {
                                                 "type": "Identifier",
                                                 "literal": {
                                                     "String": "a"
                                                 },
                                                 "line": 17,
-                                                "column": 4,
+                                                "column": 9,
                                                 "length": 1
-                                            },
-                                            {
-                                                "type": "Assign",
-                                                "literal": null,
-                                                "line": 17,
-                                                "column": 6,
-                                                "length": 1
-                                            },
-                                            {
-                                                "Unary": [
-                                                    {
-                                                        "type": "Not",
-                                                        "literal": null,
-                                                        "line": 17,
-                                                        "column": 8,
-                                                        "length": 1
-                                                    },
-                                                    {
-                                                        "Identifier": {
-                                                            "type": "Identifier",
-                                                            "literal": {
-                                                                "String": "a"
-                                                            },
-                                                            "line": 17,
-                                                            "column": 9,
-                                                            "length": 1
-                                                        }
-                                                    }
-                                                ]
                                             }
-                                        ]
-                                    }
+                                        }
+                                    ]
                                 }
-                            ],
-                            {
-                                "type": "CloseCurlyBracket",
-                                "literal": null,
-                                "line": 18,
-                                "column": 0,
-                                "length": 1
-                            }
-                        ]
+                            ]
+                        }
                     }
                 ]
             }
