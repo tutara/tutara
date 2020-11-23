@@ -23,8 +23,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 1,
         "column": 8,
         "length": 4
@@ -274,8 +276,10 @@
         "length": 1
     },
     {
-        "type": "False",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": false
+        },
         "line": 12,
         "column": 8,
         "length": 5

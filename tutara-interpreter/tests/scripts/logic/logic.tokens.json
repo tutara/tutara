@@ -23,8 +23,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 1,
         "column": 8,
         "length": 4
@@ -92,8 +94,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 4,
         "column": 8,
         "length": 4
@@ -122,8 +126,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 5,
         "column": 8,
         "length": 4
@@ -193,8 +199,10 @@
         "length": 1
     },
     {
-        "type": "False",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": false
+        },
         "line": 8,
         "column": 4,
         "length": 5
@@ -239,8 +247,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 10,
         "column": 8,
         "length": 4
@@ -269,8 +279,10 @@
         "length": 1
     },
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 11,
         "column": 8,
         "length": 4
@@ -340,8 +352,10 @@
         "length": 1
     },
     {
-        "type": "False",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": false
+        },
         "line": 14,
         "column": 4,
         "length": 5

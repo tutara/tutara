@@ -1,14 +1,18 @@
 [
     {
-        "type": "True",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": true
+        },
         "line": 1,
         "column": 0,
         "length": 4
     },
     {
-        "type": "False",
-        "literal": null,
+        "type": "Boolean",
+        "literal": {
+            "Boolean": false
+        },
         "line": 2,
         "column": 0,
         "length": 5
