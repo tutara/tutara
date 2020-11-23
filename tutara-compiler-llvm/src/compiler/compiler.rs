@@ -153,16 +153,20 @@ impl Compiler<'_> {
 			Expression::Assignment(identifier, operator, expression) => {
 				match identifier.literal {
 					Some(Literal::String(name)) => {
-						let expr = Expression::Identifier(Token::new(TokenType::Identifier, Some(Literal::String(name.clone())), identifier.line, identifier.column, identifier.length));
-						let value = self.evaluate_operator(expr, *expression, match operator.r#type {
-							TokenType::AssignPlus => Token::new(TokenType::Plus, None, operator.line, operator.column, operator.length),
-							TokenType::AssignMinus => Token::new(TokenType::Minus, None, operator.line, operator.column, operator.length),
-							TokenType::AssignMultiply => Token::new(TokenType::Multiply, None, operator.line, operator.column, operator.length),
-							TokenType::AssignDivision => Token::new(TokenType::Division, None, operator.line, operator.column, operator.length),
-							TokenType::AssignExponentiation => Token::new(TokenType::Exponentiation, None, operator.line, operator.column, operator.length),
-							TokenType::AssignModulo => Token::new(TokenType::Modulo, None, operator.line, operator.column, operator.length),
-							_ => return Err(Error::new_compiler_error("Unsupported assignment operator".to_string())),
-						})?;
+						let value = if operator.r#type == TokenType::Assign {
+							self.evaluate_expression(*expression)?
+						} else {
+							let expr = Expression::Identifier(Token::new(TokenType::Identifier, Some(Literal::String(name.clone())), identifier.line, identifier.column, identifier.length));
+							self.evaluate_operator(expr, *expression, match operator.r#type {
+								TokenType::AssignPlus => Token::new(TokenType::Plus, None, operator.line, operator.column, operator.length),
+								TokenType::AssignMinus => Token::new(TokenType::Minus, None, operator.line, operator.column, operator.length),
+								TokenType::AssignMultiply => Token::new(TokenType::Multiply, None, operator.line, operator.column, operator.length),
+								TokenType::AssignDivision => Token::new(TokenType::Division, None, operator.line, operator.column, operator.length),
+								TokenType::AssignExponentiation => Token::new(TokenType::Exponentiation, None, operator.line, operator.column, operator.length),
+								TokenType::AssignModulo => Token::new(TokenType::Modulo, None, operator.line, operator.column, operator.length),
+								_ => return Err(Error::new_compiler_error("Unsupported assignment operator".to_string())),
+							})?
+						};
 						let pointer = self.variables.get(&name).unwrap();
 						
 						match value {
