@@ -4,7 +4,8 @@
         "literal": null,
         "line": 1,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 0
     },
     {
         "type": "Identifier",
@@ -13,14 +14,16 @@
         },
         "line": 1,
         "column": 4,
-        "length": 5
+        "length": 5,
+        "offset": 4
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 1,
         "column": 10,
-        "length": 1
+        "length": 1,
+        "offset": 10
     },
     {
         "type": "Integer",
@@ -29,14 +32,16 @@
         },
         "line": 1,
         "column": 12,
-        "length": 2
+        "length": 2,
+        "offset": 12
     },
     {
         "type": "Val",
         "literal": null,
         "line": 2,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 15
     },
     {
         "type": "Identifier",
@@ -45,14 +50,16 @@
         },
         "line": 2,
         "column": 4,
-        "length": 8
+        "length": 8,
+        "offset": 19
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 2,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 28
     },
     {
         "type": "Integer",
@@ -61,14 +68,16 @@
         },
         "line": 2,
         "column": 15,
-        "length": 1
+        "length": 1,
+        "offset": 30
     },
     {
         "type": "Val",
         "literal": null,
         "line": 3,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 32
     },
     {
         "type": "Identifier",
@@ -77,14 +86,16 @@
         },
         "line": 3,
         "column": 4,
-        "length": 3
+        "length": 3,
+        "offset": 36
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 3,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 40
     },
     {
         "type": "Integer",
@@ -93,7 +104,8 @@
         },
         "line": 3,
         "column": 10,
-        "length": 2
+        "length": 2,
+        "offset": 42
     },
     {
         "type": "Identifier",
@@ -102,21 +114,24 @@
         },
         "line": 5,
         "column": 0,
-        "length": 5
+        "length": 5,
+        "offset": 46
     },
     {
         "type": "AssignPlus",
         "literal": null,
         "line": 5,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 52
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 5,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 55
     },
     {
         "type": "Identifier",
@@ -125,14 +140,16 @@
         },
         "line": 5,
         "column": 10,
-        "length": 5
+        "length": 5,
+        "offset": 56
     },
     {
         "type": "Division",
         "literal": null,
         "line": 5,
         "column": 16,
-        "length": 1
+        "length": 1,
+        "offset": 62
     },
     {
         "type": "Integer",
@@ -141,14 +158,16 @@
         },
         "line": 5,
         "column": 18,
-        "length": 3
+        "length": 3,
+        "offset": 64
     },
     {
         "type": "Multiply",
         "literal": null,
         "line": 5,
         "column": 22,
-        "length": 1
+        "length": 1,
+        "offset": 68
     },
     {
         "type": "Identifier",
@@ -157,21 +176,24 @@
         },
         "line": 5,
         "column": 24,
-        "length": 3
+        "length": 3,
+        "offset": 70
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 5,
         "column": 27,
-        "length": 1
+        "length": 1,
+        "offset": 73
     },
     {
         "type": "Minus",
         "literal": null,
         "line": 5,
         "column": 29,
-        "length": 1
+        "length": 1,
+        "offset": 75
     },
     {
         "type": "Identifier",
@@ -180,6 +202,7 @@
         },
         "line": 5,
         "column": 31,
-        "length": 8
+        "length": 8,
+        "offset": 77
     }
 ]

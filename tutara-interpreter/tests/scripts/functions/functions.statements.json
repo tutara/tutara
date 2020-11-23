@@ -6,7 +6,8 @@
                 "literal": null,
                 "line": 1,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 0
             },
             null,
             {
@@ -16,7 +17,8 @@
                 },
                 "line": 1,
                 "column": 4,
-                "length": 3
+                "length": 3,
+                "offset": 4
             },
             null,
             {
@@ -26,7 +28,8 @@
                         "literal": null,
                         "line": 1,
                         "column": 8,
-                        "length": 1
+                        "length": 1,
+                        "offset": 8
                     },
                     [],
                     {
@@ -34,7 +37,8 @@
                         "literal": null,
                         "line": 3,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 11
                     }
                 ]
             }
@@ -47,7 +51,8 @@
                 "literal": null,
                 "line": 5,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 14
             },
             null,
             {
@@ -57,7 +62,8 @@
                 },
                 "line": 5,
                 "column": 4,
-                "length": 3
+                "length": 3,
+                "offset": 18
             },
             {
                 "Parameters": [
@@ -66,7 +72,8 @@
                         "literal": null,
                         "line": 5,
                         "column": 7,
-                        "length": 1
+                        "length": 1,
+                        "offset": 21
                     },
                     [
                         {
@@ -78,7 +85,8 @@
                                     },
                                     "line": 5,
                                     "column": 8,
-                                    "length": 9
+                                    "length": 9,
+                                    "offset": 22
                                 },
                                 {
                                     "TypeSpecification": [
@@ -87,7 +95,8 @@
                                             "literal": null,
                                             "line": 5,
                                             "column": 17,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 31
                                         },
                                         {
                                             "type": "Identifier",
@@ -96,7 +105,8 @@
                                             },
                                             "line": 5,
                                             "column": 19,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 33
                                         }
                                     ]
                                 },
@@ -109,7 +119,8 @@
                         "literal": null,
                         "line": 5,
                         "column": 25,
-                        "length": 1
+                        "length": 1,
+                        "offset": 39
                     }
                 ]
             },
@@ -120,7 +131,8 @@
                         "literal": null,
                         "line": 5,
                         "column": 27,
-                        "length": 1
+                        "length": 1,
+                        "offset": 41
                     },
                     [],
                     {
@@ -128,7 +140,8 @@
                         "literal": null,
                         "line": 7,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 44
                     }
                 ]
             }
@@ -141,7 +154,8 @@
                 "literal": null,
                 "line": 9,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 47
             },
             null,
             {
@@ -151,7 +165,8 @@
                 },
                 "line": 9,
                 "column": 4,
-                "length": 3
+                "length": 3,
+                "offset": 51
             },
             {
                 "Parameters": [
@@ -160,7 +175,8 @@
                         "literal": null,
                         "line": 9,
                         "column": 7,
-                        "length": 1
+                        "length": 1,
+                        "offset": 54
                     },
                     [
                         {
@@ -172,7 +188,8 @@
                                     },
                                     "line": 9,
                                     "column": 8,
-                                    "length": 9
+                                    "length": 9,
+                                    "offset": 55
                                 },
                                 {
                                     "TypeSpecification": [
@@ -181,7 +198,8 @@
                                             "literal": null,
                                             "line": 9,
                                             "column": 17,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 64
                                         },
                                         {
                                             "type": "Identifier",
@@ -190,7 +208,8 @@
                                             },
                                             "line": 9,
                                             "column": 19,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 66
                                         }
                                     ]
                                 },
@@ -199,7 +218,8 @@
                                     "literal": null,
                                     "line": 9,
                                     "column": 25,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 72
                                 }
                             ]
                         },
@@ -212,7 +232,8 @@
                                     },
                                     "line": 9,
                                     "column": 27,
-                                    "length": 8
+                                    "length": 8,
+                                    "offset": 74
                                 },
                                 {
                                     "TypeSpecification": [
@@ -221,7 +242,8 @@
                                             "literal": null,
                                             "line": 9,
                                             "column": 35,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 82
                                         },
                                         {
                                             "type": "Identifier",
@@ -230,7 +252,8 @@
                                             },
                                             "line": 9,
                                             "column": 37,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 84
                                         }
                                     ]
                                 },
@@ -243,7 +266,8 @@
                         "literal": null,
                         "line": 9,
                         "column": 43,
-                        "length": 1
+                        "length": 1,
+                        "offset": 90
                     }
                 ]
             },
@@ -254,7 +278,8 @@
                         "literal": null,
                         "line": 9,
                         "column": 45,
-                        "length": 1
+                        "length": 1,
+                        "offset": 92
                     },
                     [],
                     {
@@ -262,7 +287,8 @@
                         "literal": null,
                         "line": 11,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 95
                     }
                 ]
             }
@@ -275,7 +301,8 @@
                 "literal": null,
                 "line": 13,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 98
             },
             {
                 "TypeSpecification": [
@@ -284,7 +311,8 @@
                         "literal": null,
                         "line": 13,
                         "column": 3,
-                        "length": 1
+                        "length": 1,
+                        "offset": 101
                     },
                     {
                         "type": "Identifier",
@@ -293,7 +321,8 @@
                         },
                         "line": 13,
                         "column": 5,
-                        "length": 6
+                        "length": 6,
+                        "offset": 103
                     }
                 ]
             },
@@ -304,7 +333,8 @@
                 },
                 "line": 13,
                 "column": 12,
-                "length": 3
+                "length": 3,
+                "offset": 110
             },
             null,
             {
@@ -314,7 +344,8 @@
                         "literal": null,
                         "line": 13,
                         "column": 16,
-                        "length": 1
+                        "length": 1,
+                        "offset": 114
                     },
                     [
                         {
@@ -324,7 +355,8 @@
                                     "literal": null,
                                     "line": 14,
                                     "column": 3,
-                                    "length": 6
+                                    "length": 6,
+                                    "offset": 119
                                 },
                                 {
                                     "Literal": {
@@ -334,7 +366,8 @@
                                         },
                                         "line": 14,
                                         "column": 10,
-                                        "length": 7
+                                        "length": 7,
+                                        "offset": 126
                                     }
                                 }
                             ]
@@ -345,7 +378,8 @@
                         "literal": null,
                         "line": 15,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 134
                     }
                 ]
             }
@@ -358,7 +392,8 @@
                 "literal": null,
                 "line": 17,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 137
             },
             {
                 "TypeSpecification": [
@@ -367,7 +402,8 @@
                         "literal": null,
                         "line": 17,
                         "column": 3,
-                        "length": 1
+                        "length": 1,
+                        "offset": 140
                     },
                     {
                         "type": "Identifier",
@@ -376,7 +412,8 @@
                         },
                         "line": 17,
                         "column": 5,
-                        "length": 6
+                        "length": 6,
+                        "offset": 142
                     }
                 ]
             },
@@ -387,7 +424,8 @@
                 },
                 "line": 17,
                 "column": 12,
-                "length": 4
+                "length": 4,
+                "offset": 149
             },
             {
                 "Parameters": [
@@ -396,7 +434,8 @@
                         "literal": null,
                         "line": 17,
                         "column": 16,
-                        "length": 1
+                        "length": 1,
+                        "offset": 153
                     },
                     [
                         {
@@ -408,7 +447,8 @@
                                     },
                                     "line": 17,
                                     "column": 17,
-                                    "length": 9
+                                    "length": 9,
+                                    "offset": 154
                                 },
                                 {
                                     "TypeSpecification": [
@@ -417,7 +457,8 @@
                                             "literal": null,
                                             "line": 17,
                                             "column": 26,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 163
                                         },
                                         {
                                             "type": "Identifier",
@@ -426,7 +467,8 @@
                                             },
                                             "line": 17,
                                             "column": 28,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 165
                                         }
                                     ]
                                 },
@@ -439,7 +481,8 @@
                         "literal": null,
                         "line": 17,
                         "column": 34,
-                        "length": 1
+                        "length": 1,
+                        "offset": 171
                     }
                 ]
             },
@@ -450,7 +493,8 @@
                         "literal": null,
                         "line": 17,
                         "column": 36,
-                        "length": 1
+                        "length": 1,
+                        "offset": 173
                     },
                     [
                         {
@@ -463,14 +507,16 @@
                                         },
                                         "line": 18,
                                         "column": 3,
-                                        "length": 9
+                                        "length": 9,
+                                        "offset": 178
                                     },
                                     {
                                         "type": "Assign",
                                         "literal": null,
                                         "line": 18,
                                         "column": 13,
-                                        "length": 1
+                                        "length": 1,
+                                        "offset": 188
                                     },
                                     {
                                         "Binary": [
@@ -482,7 +528,8 @@
                                                     },
                                                     "line": 18,
                                                     "column": 15,
-                                                    "length": 7
+                                                    "length": 7,
+                                                    "offset": 190
                                                 }
                                             },
                                             {
@@ -490,7 +537,8 @@
                                                 "literal": null,
                                                 "line": 18,
                                                 "column": 23,
-                                                "length": 1
+                                                "length": 1,
+                                                "offset": 198
                                             },
                                             {
                                                 "Identifier": {
@@ -500,7 +548,8 @@
                                                     },
                                                     "line": 18,
                                                     "column": 25,
-                                                    "length": 9
+                                                    "length": 9,
+                                                    "offset": 200
                                                 }
                                             }
                                         ]
@@ -515,7 +564,8 @@
                                     "literal": null,
                                     "line": 19,
                                     "column": 3,
-                                    "length": 6
+                                    "length": 6,
+                                    "offset": 213
                                 },
                                 {
                                     "Identifier": {
@@ -525,7 +575,8 @@
                                         },
                                         "line": 19,
                                         "column": 10,
-                                        "length": 9
+                                        "length": 9,
+                                        "offset": 220
                                     }
                                 }
                             ]
@@ -536,7 +587,8 @@
                         "literal": null,
                         "line": 20,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 230
                     }
                 ]
             }
@@ -549,7 +601,8 @@
                 "literal": null,
                 "line": 22,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 233
             },
             {
                 "TypeSpecification": [
@@ -558,7 +611,8 @@
                         "literal": null,
                         "line": 22,
                         "column": 3,
-                        "length": 1
+                        "length": 1,
+                        "offset": 236
                     },
                     {
                         "type": "Identifier",
@@ -567,7 +621,8 @@
                         },
                         "line": 22,
                         "column": 5,
-                        "length": 6
+                        "length": 6,
+                        "offset": 238
                     }
                 ]
             },
@@ -578,7 +633,8 @@
                 },
                 "line": 22,
                 "column": 12,
-                "length": 5
+                "length": 5,
+                "offset": 245
             },
             {
                 "Parameters": [
@@ -587,7 +643,8 @@
                         "literal": null,
                         "line": 22,
                         "column": 17,
-                        "length": 1
+                        "length": 1,
+                        "offset": 250
                     },
                     [
                         {
@@ -599,7 +656,8 @@
                                     },
                                     "line": 22,
                                     "column": 18,
-                                    "length": 9
+                                    "length": 9,
+                                    "offset": 251
                                 },
                                 {
                                     "TypeSpecification": [
@@ -608,7 +666,8 @@
                                             "literal": null,
                                             "line": 22,
                                             "column": 27,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 260
                                         },
                                         {
                                             "type": "Identifier",
@@ -617,7 +676,8 @@
                                             },
                                             "line": 22,
                                             "column": 29,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 262
                                         }
                                     ]
                                 },
@@ -626,7 +686,8 @@
                                     "literal": null,
                                     "line": 22,
                                     "column": 35,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 268
                                 }
                             ]
                         },
@@ -639,7 +700,8 @@
                                     },
                                     "line": 22,
                                     "column": 37,
-                                    "length": 8
+                                    "length": 8,
+                                    "offset": 270
                                 },
                                 {
                                     "TypeSpecification": [
@@ -648,7 +710,8 @@
                                             "literal": null,
                                             "line": 22,
                                             "column": 45,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 278
                                         },
                                         {
                                             "type": "Identifier",
@@ -657,7 +720,8 @@
                                             },
                                             "line": 22,
                                             "column": 47,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 280
                                         }
                                     ]
                                 },
@@ -670,7 +734,8 @@
                         "literal": null,
                         "line": 22,
                         "column": 53,
-                        "length": 1
+                        "length": 1,
+                        "offset": 286
                     }
                 ]
             },
@@ -681,7 +746,8 @@
                         "literal": null,
                         "line": 22,
                         "column": 55,
-                        "length": 1
+                        "length": 1,
+                        "offset": 288
                     },
                     [
                         {
@@ -691,7 +757,8 @@
                                     "literal": null,
                                     "line": 23,
                                     "column": 3,
-                                    "length": 3
+                                    "length": 3,
+                                    "offset": 293
                                 },
                                 null,
                                 {
@@ -703,14 +770,16 @@
                                             },
                                             "line": 23,
                                             "column": 7,
-                                            "length": 5
+                                            "length": 5,
+                                            "offset": 297
                                         },
                                         {
                                             "type": "Assign",
                                             "literal": null,
                                             "line": 23,
                                             "column": 13,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 303
                                         },
                                         {
                                             "Binary": [
@@ -724,7 +793,8 @@
                                                                 },
                                                                 "line": 23,
                                                                 "column": 15,
-                                                                "length": 7
+                                                                "length": 7,
+                                                                "offset": 305
                                                             }
                                                         },
                                                         {
@@ -732,7 +802,8 @@
                                                             "literal": null,
                                                             "line": 23,
                                                             "column": 23,
-                                                            "length": 1
+                                                            "length": 1,
+                                                            "offset": 313
                                                         },
                                                         {
                                                             "Identifier": {
@@ -742,7 +813,8 @@
                                                                 },
                                                                 "line": 23,
                                                                 "column": 25,
-                                                                "length": 9
+                                                                "length": 9,
+                                                                "offset": 315
                                                             }
                                                         }
                                                     ]
@@ -752,7 +824,8 @@
                                                     "literal": null,
                                                     "line": 23,
                                                     "column": 35,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 325
                                                 },
                                                 {
                                                     "Identifier": {
@@ -762,7 +835,8 @@
                                                         },
                                                         "line": 23,
                                                         "column": 37,
-                                                        "length": 8
+                                                        "length": 8,
+                                                        "offset": 327
                                                     }
                                                 }
                                             ]
@@ -778,7 +852,8 @@
                                     "literal": null,
                                     "line": 24,
                                     "column": 3,
-                                    "length": 6
+                                    "length": 6,
+                                    "offset": 339
                                 },
                                 {
                                     "Identifier": {
@@ -788,7 +863,8 @@
                                         },
                                         "line": 24,
                                         "column": 10,
-                                        "length": 5
+                                        "length": 5,
+                                        "offset": 346
                                     }
                                 }
                             ]
@@ -799,7 +875,8 @@
                         "literal": null,
                         "line": 25,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 352
                     }
                 ]
             }
@@ -812,7 +889,8 @@
                 "literal": null,
                 "line": 27,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 355
             },
             {
                 "TypeSpecification": [
@@ -821,7 +899,8 @@
                         "literal": null,
                         "line": 27,
                         "column": 3,
-                        "length": 1
+                        "length": 1,
+                        "offset": 358
                     },
                     {
                         "type": "Identifier",
@@ -830,7 +909,8 @@
                         },
                         "line": 27,
                         "column": 5,
-                        "length": 6
+                        "length": 6,
+                        "offset": 360
                     }
                 ]
             },
@@ -841,7 +921,8 @@
                 },
                 "line": 27,
                 "column": 12,
-                "length": 6
+                "length": 6,
+                "offset": 367
             },
             {
                 "Parameters": [
@@ -850,7 +931,8 @@
                         "literal": null,
                         "line": 27,
                         "column": 18,
-                        "length": 1
+                        "length": 1,
+                        "offset": 373
                     },
                     [
                         {
@@ -862,7 +944,8 @@
                                     },
                                     "line": 27,
                                     "column": 19,
-                                    "length": 9
+                                    "length": 9,
+                                    "offset": 374
                                 },
                                 {
                                     "TypeSpecification": [
@@ -871,7 +954,8 @@
                                             "literal": null,
                                             "line": 27,
                                             "column": 28,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 383
                                         },
                                         {
                                             "type": "Identifier",
@@ -880,7 +964,8 @@
                                             },
                                             "line": 27,
                                             "column": 30,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 385
                                         }
                                     ]
                                 },
@@ -889,7 +974,8 @@
                                     "literal": null,
                                     "line": 27,
                                     "column": 36,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 391
                                 }
                             ]
                         },
@@ -902,7 +988,8 @@
                                     },
                                     "line": 27,
                                     "column": 38,
-                                    "length": 8
+                                    "length": 8,
+                                    "offset": 393
                                 },
                                 {
                                     "TypeSpecification": [
@@ -911,7 +998,8 @@
                                             "literal": null,
                                             "line": 27,
                                             "column": 46,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 401
                                         },
                                         {
                                             "type": "Identifier",
@@ -920,7 +1008,8 @@
                                             },
                                             "line": 27,
                                             "column": 48,
-                                            "length": 6
+                                            "length": 6,
+                                            "offset": 403
                                         }
                                     ]
                                 },
@@ -929,7 +1018,8 @@
                                     "literal": null,
                                     "line": 27,
                                     "column": 54,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 409
                                 }
                             ]
                         }
@@ -939,7 +1029,8 @@
                         "literal": null,
                         "line": 27,
                         "column": 55,
-                        "length": 1
+                        "length": 1,
+                        "offset": 410
                     }
                 ]
             },
@@ -950,7 +1041,8 @@
                         "literal": null,
                         "line": 27,
                         "column": 57,
-                        "length": 1
+                        "length": 1,
+                        "offset": 412
                     },
                     [
                         {
@@ -960,7 +1052,8 @@
                                     "literal": null,
                                     "line": 28,
                                     "column": 3,
-                                    "length": 3
+                                    "length": 3,
+                                    "offset": 417
                                 },
                                 null,
                                 {
@@ -972,14 +1065,16 @@
                                             },
                                             "line": 28,
                                             "column": 7,
-                                            "length": 5
+                                            "length": 5,
+                                            "offset": 421
                                         },
                                         {
                                             "type": "Assign",
                                             "literal": null,
                                             "line": 28,
                                             "column": 13,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 427
                                         },
                                         {
                                             "Binary": [
@@ -993,7 +1088,8 @@
                                                                 },
                                                                 "line": 28,
                                                                 "column": 15,
-                                                                "length": 7
+                                                                "length": 7,
+                                                                "offset": 429
                                                             }
                                                         },
                                                         {
@@ -1001,7 +1097,8 @@
                                                             "literal": null,
                                                             "line": 28,
                                                             "column": 23,
-                                                            "length": 1
+                                                            "length": 1,
+                                                            "offset": 437
                                                         },
                                                         {
                                                             "Identifier": {
@@ -1011,7 +1108,8 @@
                                                                 },
                                                                 "line": 28,
                                                                 "column": 25,
-                                                                "length": 9
+                                                                "length": 9,
+                                                                "offset": 439
                                                             }
                                                         }
                                                     ]
@@ -1021,7 +1119,8 @@
                                                     "literal": null,
                                                     "line": 28,
                                                     "column": 35,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 449
                                                 },
                                                 {
                                                     "Identifier": {
@@ -1031,7 +1130,8 @@
                                                         },
                                                         "line": 28,
                                                         "column": 37,
-                                                        "length": 8
+                                                        "length": 8,
+                                                        "offset": 451
                                                     }
                                                 }
                                             ]
@@ -1047,7 +1147,8 @@
                                     "literal": null,
                                     "line": 29,
                                     "column": 3,
-                                    "length": 6
+                                    "length": 6,
+                                    "offset": 463
                                 },
                                 {
                                     "Identifier": {
@@ -1057,7 +1158,8 @@
                                         },
                                         "line": 29,
                                         "column": 10,
-                                        "length": 5
+                                        "length": 5,
+                                        "offset": 470
                                     }
                                 }
                             ]
@@ -1068,7 +1170,8 @@
                         "literal": null,
                         "line": 30,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 476
                     }
                 ]
             }

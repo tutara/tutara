@@ -4,7 +4,8 @@
         "literal": null,
         "line": 1,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 0
     },
     {
         "type": "Identifier",
@@ -13,28 +14,32 @@
         },
         "line": 1,
         "column": 4,
-        "length": 3
+        "length": 3,
+        "offset": 4
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 1,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 8
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 3,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 11
     },
     {
         "type": "Function",
         "literal": null,
         "line": 5,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 14
     },
     {
         "type": "Identifier",
@@ -43,14 +48,16 @@
         },
         "line": 5,
         "column": 4,
-        "length": 3
+        "length": 3,
+        "offset": 18
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 5,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 21
     },
     {
         "type": "Identifier",
@@ -59,14 +66,16 @@
         },
         "line": 5,
         "column": 8,
-        "length": 9
+        "length": 9,
+        "offset": 22
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 5,
         "column": 17,
-        "length": 1
+        "length": 1,
+        "offset": 31
     },
     {
         "type": "Identifier",
@@ -75,35 +84,40 @@
         },
         "line": 5,
         "column": 19,
-        "length": 6
+        "length": 6,
+        "offset": 33
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 5,
         "column": 25,
-        "length": 1
+        "length": 1,
+        "offset": 39
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 5,
         "column": 27,
-        "length": 1
+        "length": 1,
+        "offset": 41
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 7,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 44
     },
     {
         "type": "Function",
         "literal": null,
         "line": 9,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 47
     },
     {
         "type": "Identifier",
@@ -112,14 +126,16 @@
         },
         "line": 9,
         "column": 4,
-        "length": 3
+        "length": 3,
+        "offset": 51
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 9,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 54
     },
     {
         "type": "Identifier",
@@ -128,14 +144,16 @@
         },
         "line": 9,
         "column": 8,
-        "length": 9
+        "length": 9,
+        "offset": 55
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 9,
         "column": 17,
-        "length": 1
+        "length": 1,
+        "offset": 64
     },
     {
         "type": "Identifier",
@@ -144,14 +162,16 @@
         },
         "line": 9,
         "column": 19,
-        "length": 6
+        "length": 6,
+        "offset": 66
     },
     {
         "type": "Separator",
         "literal": null,
         "line": 9,
         "column": 25,
-        "length": 1
+        "length": 1,
+        "offset": 72
     },
     {
         "type": "Identifier",
@@ -160,14 +180,16 @@
         },
         "line": 9,
         "column": 27,
-        "length": 8
+        "length": 8,
+        "offset": 74
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 9,
         "column": 35,
-        "length": 1
+        "length": 1,
+        "offset": 82
     },
     {
         "type": "Identifier",
@@ -176,42 +198,48 @@
         },
         "line": 9,
         "column": 37,
-        "length": 6
+        "length": 6,
+        "offset": 84
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 9,
         "column": 43,
-        "length": 1
+        "length": 1,
+        "offset": 90
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 9,
         "column": 45,
-        "length": 1
+        "length": 1,
+        "offset": 92
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 11,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 95
     },
     {
         "type": "Function",
         "literal": null,
         "line": 13,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 98
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 13,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 101
     },
     {
         "type": "Identifier",
@@ -220,7 +248,8 @@
         },
         "line": 13,
         "column": 5,
-        "length": 6
+        "length": 6,
+        "offset": 103
     },
     {
         "type": "Identifier",
@@ -229,21 +258,24 @@
         },
         "line": 13,
         "column": 12,
-        "length": 3
+        "length": 3,
+        "offset": 110
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 13,
         "column": 16,
-        "length": 1
+        "length": 1,
+        "offset": 114
     },
     {
         "type": "Return",
         "literal": null,
         "line": 14,
         "column": 3,
-        "length": 6
+        "length": 6,
+        "offset": 119
     },
     {
         "type": "String",
@@ -252,28 +284,32 @@
         },
         "line": 14,
         "column": 10,
-        "length": 7
+        "length": 7,
+        "offset": 126
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 15,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 134
     },
     {
         "type": "Function",
         "literal": null,
         "line": 17,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 137
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 17,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 140
     },
     {
         "type": "Identifier",
@@ -282,7 +318,8 @@
         },
         "line": 17,
         "column": 5,
-        "length": 6
+        "length": 6,
+        "offset": 142
     },
     {
         "type": "Identifier",
@@ -291,14 +328,16 @@
         },
         "line": 17,
         "column": 12,
-        "length": 4
+        "length": 4,
+        "offset": 149
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 17,
         "column": 16,
-        "length": 1
+        "length": 1,
+        "offset": 153
     },
     {
         "type": "Identifier",
@@ -307,14 +346,16 @@
         },
         "line": 17,
         "column": 17,
-        "length": 9
+        "length": 9,
+        "offset": 154
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 17,
         "column": 26,
-        "length": 1
+        "length": 1,
+        "offset": 163
     },
     {
         "type": "Identifier",
@@ -323,21 +364,24 @@
         },
         "line": 17,
         "column": 28,
-        "length": 6
+        "length": 6,
+        "offset": 165
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 17,
         "column": 34,
-        "length": 1
+        "length": 1,
+        "offset": 171
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 17,
         "column": 36,
-        "length": 1
+        "length": 1,
+        "offset": 173
     },
     {
         "type": "Identifier",
@@ -346,14 +390,16 @@
         },
         "line": 18,
         "column": 3,
-        "length": 9
+        "length": 9,
+        "offset": 178
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 18,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 188
     },
     {
         "type": "String",
@@ -362,14 +408,16 @@
         },
         "line": 18,
         "column": 15,
-        "length": 7
+        "length": 7,
+        "offset": 190
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 18,
         "column": 23,
-        "length": 1
+        "length": 1,
+        "offset": 198
     },
     {
         "type": "Identifier",
@@ -378,14 +426,16 @@
         },
         "line": 18,
         "column": 25,
-        "length": 9
+        "length": 9,
+        "offset": 200
     },
     {
         "type": "Return",
         "literal": null,
         "line": 19,
         "column": 3,
-        "length": 6
+        "length": 6,
+        "offset": 213
     },
     {
         "type": "Identifier",
@@ -394,28 +444,32 @@
         },
         "line": 19,
         "column": 10,
-        "length": 9
+        "length": 9,
+        "offset": 220
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 20,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 230
     },
     {
         "type": "Function",
         "literal": null,
         "line": 22,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 233
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 22,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 236
     },
     {
         "type": "Identifier",
@@ -424,7 +478,8 @@
         },
         "line": 22,
         "column": 5,
-        "length": 6
+        "length": 6,
+        "offset": 238
     },
     {
         "type": "Identifier",
@@ -433,14 +488,16 @@
         },
         "line": 22,
         "column": 12,
-        "length": 5
+        "length": 5,
+        "offset": 245
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 22,
         "column": 17,
-        "length": 1
+        "length": 1,
+        "offset": 250
     },
     {
         "type": "Identifier",
@@ -449,14 +506,16 @@
         },
         "line": 22,
         "column": 18,
-        "length": 9
+        "length": 9,
+        "offset": 251
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 22,
         "column": 27,
-        "length": 1
+        "length": 1,
+        "offset": 260
     },
     {
         "type": "Identifier",
@@ -465,14 +524,16 @@
         },
         "line": 22,
         "column": 29,
-        "length": 6
+        "length": 6,
+        "offset": 262
     },
     {
         "type": "Separator",
         "literal": null,
         "line": 22,
         "column": 35,
-        "length": 1
+        "length": 1,
+        "offset": 268
     },
     {
         "type": "Identifier",
@@ -481,14 +542,16 @@
         },
         "line": 22,
         "column": 37,
-        "length": 8
+        "length": 8,
+        "offset": 270
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 22,
         "column": 45,
-        "length": 1
+        "length": 1,
+        "offset": 278
     },
     {
         "type": "Identifier",
@@ -497,28 +560,32 @@
         },
         "line": 22,
         "column": 47,
-        "length": 6
+        "length": 6,
+        "offset": 280
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 22,
         "column": 53,
-        "length": 1
+        "length": 1,
+        "offset": 286
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 22,
         "column": 55,
-        "length": 1
+        "length": 1,
+        "offset": 288
     },
     {
         "type": "Val",
         "literal": null,
         "line": 23,
         "column": 3,
-        "length": 3
+        "length": 3,
+        "offset": 293
     },
     {
         "type": "Identifier",
@@ -527,14 +594,16 @@
         },
         "line": 23,
         "column": 7,
-        "length": 5
+        "length": 5,
+        "offset": 297
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 23,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 303
     },
     {
         "type": "String",
@@ -543,14 +612,16 @@
         },
         "line": 23,
         "column": 15,
-        "length": 7
+        "length": 7,
+        "offset": 305
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 23,
         "column": 23,
-        "length": 1
+        "length": 1,
+        "offset": 313
     },
     {
         "type": "Identifier",
@@ -559,14 +630,16 @@
         },
         "line": 23,
         "column": 25,
-        "length": 9
+        "length": 9,
+        "offset": 315
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 23,
         "column": 35,
-        "length": 1
+        "length": 1,
+        "offset": 325
     },
     {
         "type": "Identifier",
@@ -575,14 +648,16 @@
         },
         "line": 23,
         "column": 37,
-        "length": 8
+        "length": 8,
+        "offset": 327
     },
     {
         "type": "Return",
         "literal": null,
         "line": 24,
         "column": 3,
-        "length": 6
+        "length": 6,
+        "offset": 339
     },
     {
         "type": "Identifier",
@@ -591,28 +666,32 @@
         },
         "line": 24,
         "column": 10,
-        "length": 5
+        "length": 5,
+        "offset": 346
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 25,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 352
     },
     {
         "type": "Function",
         "literal": null,
         "line": 27,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 355
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 27,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 358
     },
     {
         "type": "Identifier",
@@ -621,7 +700,8 @@
         },
         "line": 27,
         "column": 5,
-        "length": 6
+        "length": 6,
+        "offset": 360
     },
     {
         "type": "Identifier",
@@ -630,14 +710,16 @@
         },
         "line": 27,
         "column": 12,
-        "length": 6
+        "length": 6,
+        "offset": 367
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 27,
         "column": 18,
-        "length": 1
+        "length": 1,
+        "offset": 373
     },
     {
         "type": "Identifier",
@@ -646,14 +728,16 @@
         },
         "line": 27,
         "column": 19,
-        "length": 9
+        "length": 9,
+        "offset": 374
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 27,
         "column": 28,
-        "length": 1
+        "length": 1,
+        "offset": 383
     },
     {
         "type": "Identifier",
@@ -662,14 +746,16 @@
         },
         "line": 27,
         "column": 30,
-        "length": 6
+        "length": 6,
+        "offset": 385
     },
     {
         "type": "Separator",
         "literal": null,
         "line": 27,
         "column": 36,
-        "length": 1
+        "length": 1,
+        "offset": 391
     },
     {
         "type": "Identifier",
@@ -678,14 +764,16 @@
         },
         "line": 27,
         "column": 38,
-        "length": 8
+        "length": 8,
+        "offset": 393
     },
     {
         "type": "Specifier",
         "literal": null,
         "line": 27,
         "column": 46,
-        "length": 1
+        "length": 1,
+        "offset": 401
     },
     {
         "type": "Identifier",
@@ -694,35 +782,40 @@
         },
         "line": 27,
         "column": 48,
-        "length": 6
+        "length": 6,
+        "offset": 403
     },
     {
         "type": "Separator",
         "literal": null,
         "line": 27,
         "column": 54,
-        "length": 1
+        "length": 1,
+        "offset": 409
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 27,
         "column": 55,
-        "length": 1
+        "length": 1,
+        "offset": 410
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 27,
         "column": 57,
-        "length": 1
+        "length": 1,
+        "offset": 412
     },
     {
         "type": "Val",
         "literal": null,
         "line": 28,
         "column": 3,
-        "length": 3
+        "length": 3,
+        "offset": 417
     },
     {
         "type": "Identifier",
@@ -731,14 +824,16 @@
         },
         "line": 28,
         "column": 7,
-        "length": 5
+        "length": 5,
+        "offset": 421
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 28,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 427
     },
     {
         "type": "String",
@@ -747,14 +842,16 @@
         },
         "line": 28,
         "column": 15,
-        "length": 7
+        "length": 7,
+        "offset": 429
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 28,
         "column": 23,
-        "length": 1
+        "length": 1,
+        "offset": 437
     },
     {
         "type": "Identifier",
@@ -763,14 +860,16 @@
         },
         "line": 28,
         "column": 25,
-        "length": 9
+        "length": 9,
+        "offset": 439
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 28,
         "column": 35,
-        "length": 1
+        "length": 1,
+        "offset": 449
     },
     {
         "type": "Identifier",
@@ -779,14 +878,16 @@
         },
         "line": 28,
         "column": 37,
-        "length": 8
+        "length": 8,
+        "offset": 451
     },
     {
         "type": "Return",
         "literal": null,
         "line": 29,
         "column": 3,
-        "length": 6
+        "length": 6,
+        "offset": 463
     },
     {
         "type": "Identifier",
@@ -795,13 +896,15 @@
         },
         "line": 29,
         "column": 10,
-        "length": 5
+        "length": 5,
+        "offset": 470
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 30,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 476
     }
 ]

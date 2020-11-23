@@ -11,6 +11,7 @@ pub struct Token {
 	pub line: u32,
 	pub column: u32,
 	pub length: u32,
+	pub offset: u32,
 }
 
 impl Token {
@@ -20,6 +21,7 @@ impl Token {
 		line: u32,
 		column: u32,
 		length: u32,
+		offset: u32,
 	) -> Token {
 		Token {
 			r#type,
@@ -27,6 +29,7 @@ impl Token {
 			line,
 			column,
 			length,
+			offset
 		}
 	}
 }

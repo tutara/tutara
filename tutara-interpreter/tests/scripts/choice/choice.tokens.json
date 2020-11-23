@@ -4,7 +4,8 @@
         "literal": null,
         "line": 1,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 0
     },
     {
         "type": "Identifier",
@@ -13,14 +14,16 @@
         },
         "line": 1,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 4
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 1,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 6
     },
     {
         "type": "Boolean",
@@ -29,14 +32,16 @@
         },
         "line": 1,
         "column": 8,
-        "length": 4
+        "length": 4,
+        "offset": 8
     },
     {
         "type": "Var",
         "literal": null,
         "line": 2,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 13
     },
     {
         "type": "Identifier",
@@ -45,14 +50,16 @@
         },
         "line": 2,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 17
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 2,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 19
     },
     {
         "type": "Integer",
@@ -61,21 +68,24 @@
         },
         "line": 2,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 21
     },
     {
         "type": "If",
         "literal": null,
         "line": 4,
         "column": 0,
-        "length": 2
+        "length": 2,
+        "offset": 24
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 4,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 27
     },
     {
         "type": "Identifier",
@@ -84,21 +94,24 @@
         },
         "line": 4,
         "column": 5,
-        "length": 1
+        "length": 1,
+        "offset": 29
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 4,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 31
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 4,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 33
     },
     {
         "type": "Identifier",
@@ -107,21 +120,24 @@
         },
         "line": 5,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 39
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 5,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 41
     },
     {
         "type": "Not",
         "literal": null,
         "line": 5,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 43
     },
     {
         "type": "Identifier",
@@ -130,42 +146,48 @@
         },
         "line": 5,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 44
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 6,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 46
     },
     {
         "type": "Else",
         "literal": null,
         "line": 6,
         "column": 2,
-        "length": 4
+        "length": 4,
+        "offset": 48
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 6,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 53
     },
     {
         "type": "If",
         "literal": null,
         "line": 7,
         "column": 4,
-        "length": 2
+        "length": 2,
+        "offset": 59
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 7,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 62
     },
     {
         "type": "Identifier",
@@ -174,14 +196,16 @@
         },
         "line": 7,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 63
     },
     {
         "type": "Equal",
         "literal": null,
         "line": 7,
         "column": 10,
-        "length": 2
+        "length": 2,
+        "offset": 65
     },
     {
         "type": "Integer",
@@ -190,21 +214,24 @@
         },
         "line": 7,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 68
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 7,
         "column": 14,
-        "length": 1
+        "length": 1,
+        "offset": 69
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 7,
         "column": 15,
-        "length": 1
+        "length": 1,
+        "offset": 70
     },
     {
         "type": "Identifier",
@@ -213,21 +240,24 @@
         },
         "line": 8,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 80
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 8,
         "column": 10,
-        "length": 1
+        "length": 1,
+        "offset": 82
     },
     {
         "type": "Not",
         "literal": null,
         "line": 8,
         "column": 12,
-        "length": 1
+        "length": 1,
+        "offset": 84
     },
     {
         "type": "Identifier",
@@ -236,28 +266,32 @@
         },
         "line": 8,
         "column": 13,
-        "length": 1
+        "length": 1,
+        "offset": 85
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 9,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 91
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 10,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 93
     },
     {
         "type": "Var",
         "literal": null,
         "line": 12,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 96
     },
     {
         "type": "Identifier",
@@ -266,14 +300,16 @@
         },
         "line": 12,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 100
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 12,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 102
     },
     {
         "type": "Boolean",
@@ -282,21 +318,24 @@
         },
         "line": 12,
         "column": 8,
-        "length": 5
+        "length": 5,
+        "offset": 104
     },
     {
         "type": "If",
         "literal": null,
         "line": 14,
         "column": 0,
-        "length": 2
+        "length": 2,
+        "offset": 111
     },
     {
         "type": "OpenParenthesis",
         "literal": null,
         "line": 14,
         "column": 3,
-        "length": 1
+        "length": 1,
+        "offset": 114
     },
     {
         "type": "Identifier",
@@ -305,14 +344,16 @@
         },
         "line": 14,
         "column": 5,
-        "length": 1
+        "length": 1,
+        "offset": 116
     },
     {
         "type": "And",
         "literal": null,
         "line": 14,
         "column": 7,
-        "length": 2
+        "length": 2,
+        "offset": 118
     },
     {
         "type": "Identifier",
@@ -321,21 +362,24 @@
         },
         "line": 14,
         "column": 10,
-        "length": 1
+        "length": 1,
+        "offset": 121
     },
     {
         "type": "CloseParenthesis",
         "literal": null,
         "line": 14,
         "column": 12,
-        "length": 1
+        "length": 1,
+        "offset": 123
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 14,
         "column": 14,
-        "length": 1
+        "length": 1,
+        "offset": 125
     },
     {
         "type": "Identifier",
@@ -344,21 +388,24 @@
         },
         "line": 15,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 131
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 15,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 133
     },
     {
         "type": "Not",
         "literal": null,
         "line": 15,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 135
     },
     {
         "type": "Identifier",
@@ -367,28 +414,32 @@
         },
         "line": 15,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 136
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 16,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 138
     },
     {
         "type": "Else",
         "literal": null,
         "line": 16,
         "column": 2,
-        "length": 4
+        "length": 4,
+        "offset": 140
     },
     {
         "type": "OpenCurlyBracket",
         "literal": null,
         "line": 16,
         "column": 7,
-        "length": 1
+        "length": 1,
+        "offset": 145
     },
     {
         "type": "Identifier",
@@ -397,21 +448,24 @@
         },
         "line": 17,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 151
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 17,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 153
     },
     {
         "type": "Not",
         "literal": null,
         "line": 17,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 155
     },
     {
         "type": "Identifier",
@@ -420,13 +474,15 @@
         },
         "line": 17,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 156
     },
     {
         "type": "CloseCurlyBracket",
         "literal": null,
         "line": 18,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 158
     }
 ]

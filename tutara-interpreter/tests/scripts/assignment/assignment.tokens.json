@@ -4,7 +4,8 @@
         "literal": null,
         "line": 1,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 0
     },
     {
         "type": "Identifier",
@@ -13,14 +14,16 @@
         },
         "line": 1,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 4
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 1,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 6
     },
     {
         "type": "Integer",
@@ -29,14 +32,16 @@
         },
         "line": 1,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 8
     },
     {
         "type": "Val",
         "literal": null,
         "line": 3,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 11
     },
     {
         "type": "Identifier",
@@ -45,14 +50,16 @@
         },
         "line": 3,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 15
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 3,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 17
     },
     {
         "type": "Integer",
@@ -61,7 +68,8 @@
         },
         "line": 3,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 20
     },
     {
         "type": "Identifier",
@@ -70,14 +78,16 @@
         },
         "line": 4,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 26
     },
     {
         "type": "AssignPlus",
         "literal": null,
         "line": 4,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 28
     },
     {
         "type": "Integer",
@@ -86,14 +96,16 @@
         },
         "line": 4,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 31
     },
     {
         "type": "Val",
         "literal": null,
         "line": 6,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 34
     },
     {
         "type": "Identifier",
@@ -102,14 +114,16 @@
         },
         "line": 6,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 38
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 6,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 40
     },
     {
         "type": "Integer",
@@ -118,7 +132,8 @@
         },
         "line": 6,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 43
     },
     {
         "type": "Identifier",
@@ -127,14 +142,16 @@
         },
         "line": 7,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 49
     },
     {
         "type": "AssignMinus",
         "literal": null,
         "line": 7,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 51
     },
     {
         "type": "Integer",
@@ -143,14 +160,16 @@
         },
         "line": 7,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 54
     },
     {
         "type": "Val",
         "literal": null,
         "line": 9,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 57
     },
     {
         "type": "Identifier",
@@ -159,14 +178,16 @@
         },
         "line": 9,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 61
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 9,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 63
     },
     {
         "type": "Integer",
@@ -175,7 +196,8 @@
         },
         "line": 9,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 66
     },
     {
         "type": "Identifier",
@@ -184,14 +206,16 @@
         },
         "line": 10,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 72
     },
     {
         "type": "AssignMultiply",
         "literal": null,
         "line": 10,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 74
     },
     {
         "type": "Integer",
@@ -200,14 +224,16 @@
         },
         "line": 10,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 77
     },
     {
         "type": "Val",
         "literal": null,
         "line": 12,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 80
     },
     {
         "type": "Identifier",
@@ -216,14 +242,16 @@
         },
         "line": 12,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 84
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 12,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 86
     },
     {
         "type": "Integer",
@@ -232,7 +260,8 @@
         },
         "line": 12,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 89
     },
     {
         "type": "Identifier",
@@ -241,14 +270,16 @@
         },
         "line": 13,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 95
     },
     {
         "type": "AssignDivision",
         "literal": null,
         "line": 13,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 97
     },
     {
         "type": "Integer",
@@ -257,14 +288,16 @@
         },
         "line": 13,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 100
     },
     {
         "type": "Val",
         "literal": null,
         "line": 15,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 103
     },
     {
         "type": "Identifier",
@@ -273,14 +306,16 @@
         },
         "line": 15,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 107
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 15,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 109
     },
     {
         "type": "Integer",
@@ -289,7 +324,8 @@
         },
         "line": 15,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 112
     },
     {
         "type": "Identifier",
@@ -298,14 +334,16 @@
         },
         "line": 16,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 118
     },
     {
         "type": "AssignExponentiation",
         "literal": null,
         "line": 16,
         "column": 6,
-        "length": 3
+        "length": 3,
+        "offset": 120
     },
     {
         "type": "Integer",
@@ -314,14 +352,16 @@
         },
         "line": 16,
         "column": 10,
-        "length": 1
+        "length": 1,
+        "offset": 124
     },
     {
         "type": "Val",
         "literal": null,
         "line": 18,
         "column": 0,
-        "length": 3
+        "length": 3,
+        "offset": 127
     },
     {
         "type": "Identifier",
@@ -330,14 +370,16 @@
         },
         "line": 18,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 131
     },
     {
         "type": "Assign",
         "literal": null,
         "line": 18,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 133
     },
     {
         "type": "Integer",
@@ -346,7 +388,8 @@
         },
         "line": 18,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 136
     },
     {
         "type": "Identifier",
@@ -355,14 +398,16 @@
         },
         "line": 19,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 142
     },
     {
         "type": "AssignModulo",
         "literal": null,
         "line": 19,
         "column": 6,
-        "length": 2
+        "length": 2,
+        "offset": 144
     },
     {
         "type": "Integer",
@@ -371,6 +416,7 @@
         },
         "line": 19,
         "column": 9,
-        "length": 1
+        "length": 1,
+        "offset": 147
     }
 ]

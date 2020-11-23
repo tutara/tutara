@@ -15,6 +15,8 @@ pub struct Tokenizer<'a> {
 	column: u32,
 	// Current block length
 	length: u32,
+	// Position from start
+	offset: u32,
 }
 
 impl Iterator for Tokenizer<'_> {
@@ -69,6 +71,7 @@ impl Iterator for Tokenizer<'_> {
 				}
 
 				self.column += self.length;
+				self.offset += self.length;
 
 				if token.is_some() {
 					return token;
@@ -88,6 +91,7 @@ impl Tokenizer<'_> {
 			line: 1,
 			column: 0,
 			length: 0,
+			offset: 0,
 		}
 	}
 }
@@ -109,6 +113,7 @@ impl Tokenizer<'_> {
 			self.line,
 			self.column,
 			self.length,
+			self.offset,
 		))
 	}
 	fn create_error(&mut self, r#type: ErrorType, message: String) -> Result<Token> {

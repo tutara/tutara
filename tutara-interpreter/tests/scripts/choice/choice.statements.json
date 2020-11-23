@@ -6,7 +6,8 @@
                 "literal": null,
                 "line": 1,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 0
             },
             null,
             {
@@ -18,14 +19,16 @@
                         },
                         "line": 1,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 4
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 1,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 6
                     },
                     {
                         "Literal": {
@@ -35,7 +38,8 @@
                             },
                             "line": 1,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 8
                         }
                     }
                 ]
@@ -49,7 +53,8 @@
                 "literal": null,
                 "line": 2,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 13
             },
             null,
             {
@@ -61,14 +66,16 @@
                         },
                         "line": 2,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 17
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 2,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 19
                     },
                     {
                         "Literal": {
@@ -78,7 +85,8 @@
                             },
                             "line": 2,
                             "column": 8,
-                            "length": 1
+                            "length": 1,
+                            "offset": 21
                         }
                     }
                 ]
@@ -92,14 +100,16 @@
                 "literal": null,
                 "line": 4,
                 "column": 0,
-                "length": 2
+                "length": 2,
+                "offset": 24
             },
             {
                 "type": "OpenParenthesis",
                 "literal": null,
                 "line": 4,
                 "column": 3,
-                "length": 1
+                "length": 1,
+                "offset": 27
             },
             {
                 "Identifier": {
@@ -109,7 +119,8 @@
                     },
                     "line": 4,
                     "column": 5,
-                    "length": 1
+                    "length": 1,
+                    "offset": 29
                 }
             },
             {
@@ -117,7 +128,8 @@
                 "literal": null,
                 "line": 4,
                 "column": 7,
-                "length": 1
+                "length": 1,
+                "offset": 31
             },
             {
                 "Body": [
@@ -126,7 +138,8 @@
                         "literal": null,
                         "line": 4,
                         "column": 9,
-                        "length": 1
+                        "length": 1,
+                        "offset": 33
                     },
                     [
                         {
@@ -139,14 +152,16 @@
                                         },
                                         "line": 5,
                                         "column": 4,
-                                        "length": 1
+                                        "length": 1,
+                                        "offset": 39
                                     },
                                     {
                                         "type": "Assign",
                                         "literal": null,
                                         "line": 5,
                                         "column": 6,
-                                        "length": 1
+                                        "length": 1,
+                                        "offset": 41
                                     },
                                     {
                                         "Unary": [
@@ -155,7 +170,8 @@
                                                 "literal": null,
                                                 "line": 5,
                                                 "column": 8,
-                                                "length": 1
+                                                "length": 1,
+                                                "offset": 43
                                             },
                                             {
                                                 "Identifier": {
@@ -165,7 +181,8 @@
                                                     },
                                                     "line": 5,
                                                     "column": 9,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 44
                                                 }
                                             }
                                         ]
@@ -179,7 +196,8 @@
                         "literal": null,
                         "line": 6,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 46
                     }
                 ]
             },
@@ -190,7 +208,8 @@
                         "literal": null,
                         "line": 6,
                         "column": 2,
-                        "length": 4
+                        "length": 4,
+                        "offset": 48
                     },
                     {
                         "Body": [
@@ -199,7 +218,8 @@
                                 "literal": null,
                                 "line": 6,
                                 "column": 7,
-                                "length": 1
+                                "length": 1,
+                                "offset": 53
                             },
                             [
                                 {
@@ -209,14 +229,16 @@
                                             "literal": null,
                                             "line": 7,
                                             "column": 4,
-                                            "length": 2
+                                            "length": 2,
+                                            "offset": 59
                                         },
                                         {
                                             "type": "OpenParenthesis",
                                             "literal": null,
                                             "line": 7,
                                             "column": 7,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 62
                                         },
                                         {
                                             "Binary": [
@@ -228,7 +250,8 @@
                                                         },
                                                         "line": 7,
                                                         "column": 8,
-                                                        "length": 1
+                                                        "length": 1,
+                                                        "offset": 63
                                                     }
                                                 },
                                                 {
@@ -236,7 +259,8 @@
                                                     "literal": null,
                                                     "line": 7,
                                                     "column": 10,
-                                                    "length": 2
+                                                    "length": 2,
+                                                    "offset": 65
                                                 },
                                                 {
                                                     "Literal": {
@@ -246,7 +270,8 @@
                                                         },
                                                         "line": 7,
                                                         "column": 13,
-                                                        "length": 1
+                                                        "length": 1,
+                                                        "offset": 68
                                                     }
                                                 }
                                             ]
@@ -256,7 +281,8 @@
                                             "literal": null,
                                             "line": 7,
                                             "column": 14,
-                                            "length": 1
+                                            "length": 1,
+                                            "offset": 69
                                         },
                                         {
                                             "Body": [
@@ -265,7 +291,8 @@
                                                     "literal": null,
                                                     "line": 7,
                                                     "column": 15,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 70
                                                 },
                                                 [
                                                     {
@@ -278,14 +305,16 @@
                                                                     },
                                                                     "line": 8,
                                                                     "column": 8,
-                                                                    "length": 1
+                                                                    "length": 1,
+                                                                    "offset": 80
                                                                 },
                                                                 {
                                                                     "type": "Assign",
                                                                     "literal": null,
                                                                     "line": 8,
                                                                     "column": 10,
-                                                                    "length": 1
+                                                                    "length": 1,
+                                                                    "offset": 82
                                                                 },
                                                                 {
                                                                     "Unary": [
@@ -294,7 +323,8 @@
                                                                             "literal": null,
                                                                             "line": 8,
                                                                             "column": 12,
-                                                                            "length": 1
+                                                                            "length": 1,
+                                                                            "offset": 84
                                                                         },
                                                                         {
                                                                             "Identifier": {
@@ -304,7 +334,8 @@
                                                                                 },
                                                                                 "line": 8,
                                                                                 "column": 13,
-                                                                                "length": 1
+                                                                                "length": 1,
+                                                                                "offset": 85
                                                                             }
                                                                         }
                                                                     ]
@@ -318,7 +349,8 @@
                                                     "literal": null,
                                                     "line": 9,
                                                     "column": 4,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 91
                                                 }
                                             ]
                                         },
@@ -331,7 +363,8 @@
                                 "literal": null,
                                 "line": 10,
                                 "column": 0,
-                                "length": 1
+                                "length": 1,
+                                "offset": 93
                             }
                         ]
                     }
@@ -346,7 +379,8 @@
                 "literal": null,
                 "line": 12,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 96
             },
             null,
             {
@@ -358,14 +392,16 @@
                         },
                         "line": 12,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 100
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 12,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 102
                     },
                     {
                         "Literal": {
@@ -375,7 +411,8 @@
                             },
                             "line": 12,
                             "column": 8,
-                            "length": 5
+                            "length": 5,
+                            "offset": 104
                         }
                     }
                 ]
@@ -389,14 +426,16 @@
                 "literal": null,
                 "line": 14,
                 "column": 0,
-                "length": 2
+                "length": 2,
+                "offset": 111
             },
             {
                 "type": "OpenParenthesis",
                 "literal": null,
                 "line": 14,
                 "column": 3,
-                "length": 1
+                "length": 1,
+                "offset": 114
             },
             {
                 "Binary": [
@@ -408,7 +447,8 @@
                             },
                             "line": 14,
                             "column": 5,
-                            "length": 1
+                            "length": 1,
+                            "offset": 116
                         }
                     },
                     {
@@ -416,7 +456,8 @@
                         "literal": null,
                         "line": 14,
                         "column": 7,
-                        "length": 2
+                        "length": 2,
+                        "offset": 118
                     },
                     {
                         "Identifier": {
@@ -426,7 +467,8 @@
                             },
                             "line": 14,
                             "column": 10,
-                            "length": 1
+                            "length": 1,
+                            "offset": 121
                         }
                     }
                 ]
@@ -436,7 +478,8 @@
                 "literal": null,
                 "line": 14,
                 "column": 12,
-                "length": 1
+                "length": 1,
+                "offset": 123
             },
             {
                 "Body": [
@@ -445,7 +488,8 @@
                         "literal": null,
                         "line": 14,
                         "column": 14,
-                        "length": 1
+                        "length": 1,
+                        "offset": 125
                     },
                     [
                         {
@@ -458,14 +502,16 @@
                                         },
                                         "line": 15,
                                         "column": 4,
-                                        "length": 1
+                                        "length": 1,
+                                        "offset": 131
                                     },
                                     {
                                         "type": "Assign",
                                         "literal": null,
                                         "line": 15,
                                         "column": 6,
-                                        "length": 1
+                                        "length": 1,
+                                        "offset": 133
                                     },
                                     {
                                         "Unary": [
@@ -474,7 +520,8 @@
                                                 "literal": null,
                                                 "line": 15,
                                                 "column": 8,
-                                                "length": 1
+                                                "length": 1,
+                                                "offset": 135
                                             },
                                             {
                                                 "Identifier": {
@@ -484,7 +531,8 @@
                                                     },
                                                     "line": 15,
                                                     "column": 9,
-                                                    "length": 1
+                                                    "length": 1,
+                                                    "offset": 136
                                                 }
                                             }
                                         ]
@@ -498,7 +546,8 @@
                         "literal": null,
                         "line": 16,
                         "column": 0,
-                        "length": 1
+                        "length": 1,
+                        "offset": 138
                     }
                 ]
             },
@@ -509,7 +558,8 @@
                         "literal": null,
                         "line": 16,
                         "column": 2,
-                        "length": 4
+                        "length": 4,
+                        "offset": 140
                     },
                     {
                         "Body": [
@@ -518,7 +568,8 @@
                                 "literal": null,
                                 "line": 16,
                                 "column": 7,
-                                "length": 1
+                                "length": 1,
+                                "offset": 145
                             },
                             [
                                 {
@@ -531,14 +582,16 @@
                                                 },
                                                 "line": 17,
                                                 "column": 4,
-                                                "length": 1
+                                                "length": 1,
+                                                "offset": 151
                                             },
                                             {
                                                 "type": "Assign",
                                                 "literal": null,
                                                 "line": 17,
                                                 "column": 6,
-                                                "length": 1
+                                                "length": 1,
+                                                "offset": 153
                                             },
                                             {
                                                 "Unary": [
@@ -547,7 +600,8 @@
                                                         "literal": null,
                                                         "line": 17,
                                                         "column": 8,
-                                                        "length": 1
+                                                        "length": 1,
+                                                        "offset": 155
                                                     },
                                                     {
                                                         "Identifier": {
@@ -557,7 +611,8 @@
                                                             },
                                                             "line": 17,
                                                             "column": 9,
-                                                            "length": 1
+                                                            "length": 1,
+                                                            "offset": 156
                                                         }
                                                     }
                                                 ]
@@ -571,7 +626,8 @@
                                 "literal": null,
                                 "line": 18,
                                 "column": 0,
-                                "length": 1
+                                "length": 1,
+                                "offset": 158
                             }
                         ]
                     }

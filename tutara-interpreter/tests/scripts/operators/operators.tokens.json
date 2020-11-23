@@ -6,14 +6,16 @@
         },
         "line": 1,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 0
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 1,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 2
     },
     {
         "type": "Integer",
@@ -22,7 +24,8 @@
         },
         "line": 1,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 4
     },
     {
         "type": "Integer",
@@ -31,14 +34,16 @@
         },
         "line": 2,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 6
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 2,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 8
     },
     {
         "type": "Integer",
@@ -47,14 +52,16 @@
         },
         "line": 2,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 10
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 2,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 12
     },
     {
         "type": "Integer",
@@ -63,7 +70,8 @@
         },
         "line": 2,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 14
     },
     {
         "type": "String",
@@ -72,14 +80,16 @@
         },
         "line": 3,
         "column": 0,
-        "length": 5
+        "length": 5,
+        "offset": 16
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 3,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 22
     },
     {
         "type": "String",
@@ -88,7 +98,8 @@
         },
         "line": 3,
         "column": 8,
-        "length": 5
+        "length": 5,
+        "offset": 24
     },
     {
         "type": "Integer",
@@ -97,14 +108,16 @@
         },
         "line": 4,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 30
     },
     {
         "type": "Minus",
         "literal": null,
         "line": 4,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 32
     },
     {
         "type": "Integer",
@@ -113,7 +126,8 @@
         },
         "line": 4,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 34
     },
     {
         "type": "Integer",
@@ -122,14 +136,16 @@
         },
         "line": 5,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 36
     },
     {
         "type": "Minus",
         "literal": null,
         "line": 5,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 38
     },
     {
         "type": "Integer",
@@ -138,14 +154,16 @@
         },
         "line": 5,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 40
     },
     {
         "type": "Plus",
         "literal": null,
         "line": 5,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 42
     },
     {
         "type": "Integer",
@@ -154,7 +172,8 @@
         },
         "line": 5,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 44
     },
     {
         "type": "Integer",
@@ -163,14 +182,16 @@
         },
         "line": 6,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 46
     },
     {
         "type": "Multiply",
         "literal": null,
         "line": 6,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 48
     },
     {
         "type": "Integer",
@@ -179,14 +200,16 @@
         },
         "line": 6,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 50
     },
     {
         "type": "Multiply",
         "literal": null,
         "line": 6,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 52
     },
     {
         "type": "Integer",
@@ -195,7 +218,8 @@
         },
         "line": 6,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 54
     },
     {
         "type": "Integer",
@@ -204,14 +228,16 @@
         },
         "line": 7,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 56
     },
     {
         "type": "Division",
         "literal": null,
         "line": 7,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 58
     },
     {
         "type": "Integer",
@@ -220,14 +246,16 @@
         },
         "line": 7,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 60
     },
     {
         "type": "Division",
         "literal": null,
         "line": 7,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 62
     },
     {
         "type": "Integer",
@@ -236,7 +264,8 @@
         },
         "line": 7,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 64
     },
     {
         "type": "Integer",
@@ -245,14 +274,16 @@
         },
         "line": 8,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 66
     },
     {
         "type": "Modulo",
         "literal": null,
         "line": 8,
         "column": 2,
-        "length": 1
+        "length": 1,
+        "offset": 68
     },
     {
         "type": "Integer",
@@ -261,14 +292,16 @@
         },
         "line": 8,
         "column": 4,
-        "length": 1
+        "length": 1,
+        "offset": 70
     },
     {
         "type": "Multiply",
         "literal": null,
         "line": 8,
         "column": 6,
-        "length": 1
+        "length": 1,
+        "offset": 72
     },
     {
         "type": "Integer",
@@ -277,7 +310,8 @@
         },
         "line": 8,
         "column": 8,
-        "length": 1
+        "length": 1,
+        "offset": 74
     },
     {
         "type": "Integer",
@@ -286,14 +320,16 @@
         },
         "line": 9,
         "column": 0,
-        "length": 1
+        "length": 1,
+        "offset": 76
     },
     {
         "type": "Exponentiation",
         "literal": null,
         "line": 9,
         "column": 2,
-        "length": 2
+        "length": 2,
+        "offset": 78
     },
     {
         "type": "Integer",
@@ -302,6 +338,7 @@
         },
         "line": 9,
         "column": 5,
-        "length": 1
+        "length": 1,
+        "offset": 81
     }
 ]

@@ -6,7 +6,8 @@
                 "literal": null,
                 "line": 1,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 0
             },
             null,
             {
@@ -18,14 +19,16 @@
                         },
                         "line": 1,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 4
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 1,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 6
                     },
                     {
                         "Literal": {
@@ -35,7 +38,8 @@
                             },
                             "line": 1,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 8
                         }
                     }
                 ]
@@ -49,7 +53,8 @@
                 "literal": null,
                 "line": 2,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 13
             },
             null,
             {
@@ -61,14 +66,16 @@
                         },
                         "line": 2,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 17
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 2,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 19
                     },
                     {
                         "Unary": [
@@ -77,7 +84,8 @@
                                 "literal": null,
                                 "line": 2,
                                 "column": 8,
-                                "length": 1
+                                "length": 1,
+                                "offset": 21
                             },
                             {
                                 "Identifier": {
@@ -87,7 +95,8 @@
                                     },
                                     "line": 2,
                                     "column": 9,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 22
                                 }
                             }
                         ]
@@ -103,7 +112,8 @@
                 "literal": null,
                 "line": 4,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 25
             },
             null,
             {
@@ -115,14 +125,16 @@
                         },
                         "line": 4,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 29
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 4,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 31
                     },
                     {
                         "Literal": {
@@ -132,7 +144,8 @@
                             },
                             "line": 4,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 33
                         }
                     }
                 ]
@@ -146,7 +159,8 @@
                 "literal": null,
                 "line": 5,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 38
             },
             null,
             {
@@ -158,14 +172,16 @@
                         },
                         "line": 5,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 42
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 5,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 44
                     },
                     {
                         "Literal": {
@@ -175,7 +191,8 @@
                             },
                             "line": 5,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 46
                         }
                     }
                 ]
@@ -189,7 +206,8 @@
                 "literal": null,
                 "line": 7,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 52
             },
             null,
             {
@@ -201,14 +219,16 @@
                         },
                         "line": 7,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 56
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 7,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 58
                     },
                     {
                         "Binary": [
@@ -220,7 +240,8 @@
                                     },
                                     "line": 7,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 60
                                 }
                             },
                             {
@@ -228,7 +249,8 @@
                                 "literal": null,
                                 "line": 7,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 62
                             },
                             {
                                 "Identifier": {
@@ -238,7 +260,8 @@
                                     },
                                     "line": 7,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 65
                                 }
                             }
                         ]
@@ -257,14 +280,16 @@
                     },
                     "line": 8,
                     "column": 0,
-                    "length": 1
+                    "length": 1,
+                    "offset": 67
                 },
                 {
                     "type": "Assign",
                     "literal": null,
                     "line": 8,
                     "column": 2,
-                    "length": 1
+                    "length": 1,
+                    "offset": 69
                 },
                 {
                     "Binary": [
@@ -276,7 +301,8 @@
                                 },
                                 "line": 8,
                                 "column": 4,
-                                "length": 5
+                                "length": 5,
+                                "offset": 71
                             }
                         },
                         {
@@ -284,7 +310,8 @@
                             "literal": null,
                             "line": 8,
                             "column": 10,
-                            "length": 2
+                            "length": 2,
+                            "offset": 77
                         },
                         {
                             "Identifier": {
@@ -294,7 +321,8 @@
                                 },
                                 "line": 8,
                                 "column": 13,
-                                "length": 1
+                                "length": 1,
+                                "offset": 80
                             }
                         }
                     ]
@@ -309,7 +337,8 @@
                 "literal": null,
                 "line": 10,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 83
             },
             null,
             {
@@ -321,14 +350,16 @@
                         },
                         "line": 10,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 87
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 10,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 89
                     },
                     {
                         "Literal": {
@@ -338,7 +369,8 @@
                             },
                             "line": 10,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 91
                         }
                     }
                 ]
@@ -352,7 +384,8 @@
                 "literal": null,
                 "line": 11,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 96
             },
             null,
             {
@@ -364,14 +397,16 @@
                         },
                         "line": 11,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 100
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 11,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 102
                     },
                     {
                         "Literal": {
@@ -381,7 +416,8 @@
                             },
                             "line": 11,
                             "column": 8,
-                            "length": 4
+                            "length": 4,
+                            "offset": 104
                         }
                     }
                 ]
@@ -395,7 +431,8 @@
                 "literal": null,
                 "line": 13,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 110
             },
             null,
             {
@@ -407,14 +444,16 @@
                         },
                         "line": 13,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 114
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 13,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 116
                     },
                     {
                         "Binary": [
@@ -426,7 +465,8 @@
                                     },
                                     "line": 13,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 118
                                 }
                             },
                             {
@@ -434,7 +474,8 @@
                                 "literal": null,
                                 "line": 13,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 120
                             },
                             {
                                 "Identifier": {
@@ -444,7 +485,8 @@
                                     },
                                     "line": 13,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 123
                                 }
                             }
                         ]
@@ -463,14 +505,16 @@
                     },
                     "line": 14,
                     "column": 0,
-                    "length": 1
+                    "length": 1,
+                    "offset": 125
                 },
                 {
                     "type": "Assign",
                     "literal": null,
                     "line": 14,
                     "column": 2,
-                    "length": 1
+                    "length": 1,
+                    "offset": 127
                 },
                 {
                     "Binary": [
@@ -482,7 +526,8 @@
                                 },
                                 "line": 14,
                                 "column": 4,
-                                "length": 5
+                                "length": 5,
+                                "offset": 129
                             }
                         },
                         {
@@ -490,7 +535,8 @@
                             "literal": null,
                             "line": 14,
                             "column": 10,
-                            "length": 2
+                            "length": 2,
+                            "offset": 135
                         },
                         {
                             "Identifier": {
@@ -500,7 +546,8 @@
                                 },
                                 "line": 14,
                                 "column": 13,
-                                "length": 1
+                                "length": 1,
+                                "offset": 138
                             }
                         }
                     ]
@@ -515,7 +562,8 @@
                 "literal": null,
                 "line": 16,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 141
             },
             null,
             {
@@ -527,14 +575,16 @@
                         },
                         "line": 16,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 145
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 16,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 147
                     },
                     {
                         "Binary": [
@@ -546,7 +596,8 @@
                                     },
                                     "line": 16,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 149
                                 }
                             },
                             {
@@ -554,7 +605,8 @@
                                 "literal": null,
                                 "line": 16,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 151
                             },
                             {
                                 "Identifier": {
@@ -564,7 +616,8 @@
                                     },
                                     "line": 16,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 154
                                 }
                             }
                         ]
@@ -580,7 +633,8 @@
                 "literal": null,
                 "line": 17,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 156
             },
             null,
             {
@@ -592,14 +646,16 @@
                         },
                         "line": 17,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 160
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 17,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 162
                     },
                     {
                         "Binary": [
@@ -611,7 +667,8 @@
                                     },
                                     "line": 17,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 164
                                 }
                             },
                             {
@@ -619,7 +676,8 @@
                                 "literal": null,
                                 "line": 17,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 166
                             },
                             {
                                 "Identifier": {
@@ -629,7 +687,8 @@
                                     },
                                     "line": 17,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 169
                                 }
                             }
                         ]
@@ -645,7 +704,8 @@
                 "literal": null,
                 "line": 18,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 171
             },
             null,
             {
@@ -657,14 +717,16 @@
                         },
                         "line": 18,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 175
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 18,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 177
                     },
                     {
                         "Binary": [
@@ -676,7 +738,8 @@
                                     },
                                     "line": 18,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 179
                                 }
                             },
                             {
@@ -684,7 +747,8 @@
                                 "literal": null,
                                 "line": 18,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 181
                             },
                             {
                                 "Identifier": {
@@ -694,7 +758,8 @@
                                     },
                                     "line": 18,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 184
                                 }
                             }
                         ]
@@ -710,7 +775,8 @@
                 "literal": null,
                 "line": 19,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 186
             },
             null,
             {
@@ -722,14 +788,16 @@
                         },
                         "line": 19,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 190
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 19,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 192
                     },
                     {
                         "Binary": [
@@ -741,7 +809,8 @@
                                     },
                                     "line": 19,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 194
                                 }
                             },
                             {
@@ -749,7 +818,8 @@
                                 "literal": null,
                                 "line": 19,
                                 "column": 10,
-                                "length": 2
+                                "length": 2,
+                                "offset": 196
                             },
                             {
                                 "Identifier": {
@@ -759,7 +829,8 @@
                                     },
                                     "line": 19,
                                     "column": 13,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 199
                                 }
                             }
                         ]
@@ -775,7 +846,8 @@
                 "literal": null,
                 "line": 20,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 201
             },
             null,
             {
@@ -787,14 +859,16 @@
                         },
                         "line": 20,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 205
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 20,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 207
                     },
                     {
                         "Binary": [
@@ -806,7 +880,8 @@
                                     },
                                     "line": 20,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 209
                                 }
                             },
                             {
@@ -814,7 +889,8 @@
                                 "literal": null,
                                 "line": 20,
                                 "column": 10,
-                                "length": 1
+                                "length": 1,
+                                "offset": 211
                             },
                             {
                                 "Identifier": {
@@ -824,7 +900,8 @@
                                     },
                                     "line": 20,
                                     "column": 12,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 213
                                 }
                             }
                         ]
@@ -840,7 +917,8 @@
                 "literal": null,
                 "line": 21,
                 "column": 0,
-                "length": 3
+                "length": 3,
+                "offset": 215
             },
             null,
             {
@@ -852,14 +930,16 @@
                         },
                         "line": 21,
                         "column": 4,
-                        "length": 1
+                        "length": 1,
+                        "offset": 219
                     },
                     {
                         "type": "Assign",
                         "literal": null,
                         "line": 21,
                         "column": 6,
-                        "length": 1
+                        "length": 1,
+                        "offset": 221
                     },
                     {
                         "Binary": [
@@ -871,7 +951,8 @@
                                     },
                                     "line": 21,
                                     "column": 8,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 223
                                 }
                             },
                             {
@@ -879,7 +960,8 @@
                                 "literal": null,
                                 "line": 21,
                                 "column": 10,
-                                "length": 1
+                                "length": 1,
+                                "offset": 225
                             },
                             {
                                 "Identifier": {
@@ -889,7 +971,8 @@
                                     },
                                     "line": 21,
                                     "column": 12,
-                                    "length": 1
+                                    "length": 1,
+                                    "offset": 227
                                 }
                             }
                         ]
