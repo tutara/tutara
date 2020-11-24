@@ -1,4 +1,5 @@
 use crate::Error;
+use crate::ErrorType;
 use crate::Expression;
 use crate::Result;
 use crate::Statement;
@@ -22,11 +23,11 @@ impl Iterator for Parser<'_> {
 	type Item = Result<Statement>;
 
 	fn next(&mut self) -> Option<Self::Item> {
-		if let Some(Ok(_current)) = self.tokenizer.peek() {
-			return Some(self.statement());
+		match self.tokenizer.peek() {
+			Some(Ok(_current)) => Some(self.statement()),
+			Some(Err(_)) => Some(Err(self.tokenizer.next().unwrap().unwrap_err())),
+			None => None,
 		}
-
-		None
 	}
 }
 
@@ -179,7 +180,16 @@ impl Parser<'_> {
 				self.tokenizer.next();
 				return Ok(Statement::Body(statements));
 			} else {
-				statements.push(self.statement()?);
+				match self.next() {
+					Some(Ok(next)) => statements.push(next),
+					Some(Err(err)) => return Err(err),
+					None => {
+						return self.create_statement_syntax_error(
+							"Expected end of body".to_string(),
+							open_curly_bracket,
+						)
+					}
+				}
 			}
 		}
 
@@ -527,8 +537,13 @@ impl Parser<'_> {
 			}
 		}
 
-		let token = self.tokenizer.next().unwrap().unwrap();
-		self.create_expression_syntax_error("Unexpected token".to_string(), token)
+		return match self.tokenizer.next() {
+			Some(Ok(next)) => {
+				self.create_expression_syntax_error("Unexpected token".to_string(), next)
+			}
+			Some(Err(err)) => Err(err),
+			None => Err(Error::new(ErrorType::Eof, "Unexpected end of file".to_string())),
+		};
 	}
 }
 
