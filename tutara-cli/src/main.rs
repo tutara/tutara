@@ -69,9 +69,11 @@ fn run(input: &str, output: &str, format: &str) -> Result<(), std::io::Error> {
 	} else {
 		match std::fs::File::open(&input) {
 			Ok(file) => Box::new(file),
-			Err(_) => {
-				// file not found
-				unimplemented!();
+			Err(err) => {
+				println!("File could not be read. Are you sure it exists?");
+				println!("{}", err);
+
+				return Ok(());
 			}
 		}
 	};
@@ -81,9 +83,9 @@ fn run(input: &str, output: &str, format: &str) -> Result<(), std::io::Error> {
 	} else {
 		match std::fs::File::create(&output) {
 			Ok(file) => Box::new(file),
-			Err(_) => {
-				// file not found?
-				unimplemented!();
+			Err(err) => {
+				println!("File could not be written to: {}", err);
+				return Ok(());
 			}
 		}
 	};
@@ -159,7 +161,7 @@ fn tokenize(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(),
 	let tokens: Result<Vec<Token>, tutara_interpreter::Error> = tokenizer.collect();
 
 	match tokens {
-		Ok(tokens) => writeln!(output, "{}", serde_json::to_string(&tokens).unwrap()),
+		Ok(tokens) => writeln!(output, "{}", serde_json::to_string_pretty(&tokens).unwrap()),
 		Err(err) => writeln!(output, "Error: {}", err),
 	}
 }
@@ -173,7 +175,7 @@ fn parse(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(), st
 	let statements: Result<Vec<Statement>, tutara_interpreter::Error> = parser.collect();
 
 	match statements {
-		Ok(statements) => writeln!(output, "{}", serde_json::to_string(&statements).unwrap()),
+		Ok(statements) => writeln!(output, "{}", serde_json::to_string_pretty(&statements).unwrap()),
 		Err(err) => writeln!(output, "Error: {}", err),
 	}
 }
