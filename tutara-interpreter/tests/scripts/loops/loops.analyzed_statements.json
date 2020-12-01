@@ -1,0 +1,235 @@
+[
+  {
+    "Declaration": [
+      {
+        "type": "Var",
+        "literal": null,
+        "line": 1,
+        "column": 0,
+        "length": 3
+      },
+      null,
+      {
+        "Assignment": [
+          {
+            "type": "Identifier",
+            "literal": {
+              "String": "a"
+            },
+            "line": 1,
+            "column": 4,
+            "length": 1
+          },
+          {
+            "type": "Assign",
+            "literal": null,
+            "line": 1,
+            "column": 6,
+            "length": 1
+          },
+          {
+            "Literal": {
+              "type": "Integer",
+              "literal": {
+                "Number": 1
+              },
+              "line": 1,
+              "column": 8,
+              "length": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "While": [
+      {
+        "Literal": {
+          "type": "Boolean",
+          "literal": {
+            "Boolean": true
+          },
+          "line": 0,
+          "column": 0,
+          "length": 0
+        }
+      },
+      {
+        "Body": [
+          {
+            "Expression": {
+              "Assignment": [
+                {
+                  "type": "Identifier",
+                  "literal": {
+                    "String": "a"
+                  },
+                  "line": 4,
+                  "column": 4,
+                  "length": 1
+                },
+                {
+                  "type": "AssignPlus",
+                  "literal": null,
+                  "line": 4,
+                  "column": 6,
+                  "length": 2
+                },
+                {
+                  "Literal": {
+                    "type": "Integer",
+                    "literal": {
+                      "Number": 1
+                    },
+                    "line": 4,
+                    "column": 9,
+                    "length": 1
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Declaration": [
+      {
+        "type": "Var",
+        "literal": null,
+        "line": 7,
+        "column": 0,
+        "length": 3
+      },
+      null,
+      {
+        "Assignment": [
+          {
+            "type": "Identifier",
+            "literal": {
+              "String": "b"
+            },
+            "line": 7,
+            "column": 4,
+            "length": 1
+          },
+          {
+            "type": "Assign",
+            "literal": null,
+            "line": 7,
+            "column": 6,
+            "length": 1
+          },
+          {
+            "Literal": {
+              "type": "Integer",
+              "literal": {
+                "Number": 1
+              },
+              "line": 7,
+              "column": 8,
+              "length": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "While": [
+      {
+        "Literal": {
+          "type": "Boolean",
+          "literal": {
+            "Boolean": true
+          },
+          "line": 9,
+          "column": 8,
+          "length": 4
+        }
+      },
+      {
+        "Body": [
+          {
+            "Expression": {
+              "Assignment": [
+                {
+                  "type": "Identifier",
+                  "literal": {
+                    "String": "b"
+                  },
+                  "line": 10,
+                  "column": 4,
+                  "length": 1
+                },
+                {
+                  "type": "AssignPlus",
+                  "literal": null,
+                  "line": 10,
+                  "column": 6,
+                  "length": 2
+                },
+                {
+                  "Literal": {
+                    "type": "Integer",
+                    "literal": {
+                      "Number": 1
+                    },
+                    "line": 10,
+                    "column": 9,
+                    "length": 1
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Declaration": [
+      {
+        "type": "Var",
+        "literal": null,
+        "line": 13,
+        "column": 0,
+        "length": 3
+      },
+      null,
+      {
+        "Assignment": [
+          {
+            "type": "Identifier",
+            "literal": {
+              "String": "b"
+            },
+            "line": 13,
+            "column": 4,
+            "length": 1
+          },
+          {
+            "type": "Assign",
+            "literal": null,
+            "line": 13,
+            "column": 6,
+            "length": 1
+          },
+          {
+            "Literal": {
+              "type": "Integer",
+              "literal": {
+                "Number": 12
+              },
+              "line": 13,
+              "column": 8,
+              "length": 2
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

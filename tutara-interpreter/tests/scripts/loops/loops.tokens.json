@@ -1,0 +1,213 @@
+[
+  {
+    "type": "Var",
+    "literal": null,
+    "line": 1,
+    "column": 0,
+    "length": 3
+  },
+  {
+    "type": "Identifier",
+    "literal": {
+      "String": "a"
+    },
+    "line": 1,
+    "column": 4,
+    "length": 1
+  },
+  {
+    "type": "Assign",
+    "literal": null,
+    "line": 1,
+    "column": 6,
+    "length": 1
+  },
+  {
+    "type": "Integer",
+    "literal": {
+      "Number": 1
+    },
+    "line": 1,
+    "column": 8,
+    "length": 1
+  },
+  {
+    "type": "Loop",
+    "literal": null,
+    "line": 3,
+    "column": 0,
+    "length": 4
+  },
+  {
+    "type": "OpenCurlyBracket",
+    "literal": null,
+    "line": 3,
+    "column": 5,
+    "length": 1
+  },
+  {
+    "type": "Identifier",
+    "literal": {
+      "String": "a"
+    },
+    "line": 4,
+    "column": 4,
+    "length": 1
+  },
+  {
+    "type": "AssignPlus",
+    "literal": null,
+    "line": 4,
+    "column": 6,
+    "length": 2
+  },
+  {
+    "type": "Integer",
+    "literal": {
+      "Number": 1
+    },
+    "line": 4,
+    "column": 9,
+    "length": 1
+  },
+  {
+    "type": "CloseCurlyBracket",
+    "literal": null,
+    "line": 5,
+    "column": 0,
+    "length": 1
+  },
+  {
+    "type": "Var",
+    "literal": null,
+    "line": 7,
+    "column": 0,
+    "length": 3
+  },
+  {
+    "type": "Identifier",
+    "literal": {
+      "String": "b"
+    },
+    "line": 7,
+    "column": 4,
+    "length": 1
+  },
+  {
+    "type": "Assign",
+    "literal": null,
+    "line": 7,
+    "column": 6,
+    "length": 1
+  },
+  {
+    "type": "Integer",
+    "literal": {
+      "Number": 1
+    },
+    "line": 7,
+    "column": 8,
+    "length": 1
+  },
+  {
+    "type": "While",
+    "literal": null,
+    "line": 9,
+    "column": 0,
+    "length": 5
+  },
+  {
+    "type": "OpenParenthesis",
+    "literal": null,
+    "line": 9,
+    "column": 6,
+    "length": 1
+  },
+  {
+    "type": "Boolean",
+    "literal": {
+      "Boolean": true
+    },
+    "line": 9,
+    "column": 8,
+    "length": 4
+  },
+  {
+    "type": "CloseParenthesis",
+    "literal": null,
+    "line": 9,
+    "column": 13,
+    "length": 1
+  },
+  {
+    "type": "OpenCurlyBracket",
+    "literal": null,
+    "line": 9,
+    "column": 15,
+    "length": 1
+  },
+  {
+    "type": "Identifier",
+    "literal": {
+      "String": "b"
+    },
+    "line": 10,
+    "column": 4,
+    "length": 1
+  },
+  {
+    "type": "AssignPlus",
+    "literal": null,
+    "line": 10,
+    "column": 6,
+    "length": 2
+  },
+  {
+    "type": "Integer",
+    "literal": {
+      "Number": 1
+    },
+    "line": 10,
+    "column": 9,
+    "length": 1
+  },
+  {
+    "type": "CloseCurlyBracket",
+    "literal": null,
+    "line": 11,
+    "column": 0,
+    "length": 1
+  },
+  {
+    "type": "Var",
+    "literal": null,
+    "line": 13,
+    "column": 0,
+    "length": 3
+  },
+  {
+    "type": "Identifier",
+    "literal": {
+      "String": "b"
+    },
+    "line": 13,
+    "column": 4,
+    "length": 1
+  },
+  {
+    "type": "Assign",
+    "literal": null,
+    "line": 13,
+    "column": 6,
+    "length": 1
+  },
+  {
+    "type": "Integer",
+    "literal": {
+      "Number": 12
+    },
+    "line": 13,
+    "column": 8,
+    "length": 2
+  }
+]

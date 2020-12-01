@@ -65,3 +65,8 @@ fn test_functions_tokens() {
 fn test_choice_tokens() {
 	test_tokens("choice")
 }
+
+#[test]
+fn test_loops_tokens() {
+	test_tokens("loops")
+}
