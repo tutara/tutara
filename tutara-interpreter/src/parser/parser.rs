@@ -236,12 +236,13 @@ impl Parser<'_> {
 
 	fn r#while(&mut self, token: Token) -> Result<Statement> {
 		if let Some(Ok(_)) = self.next_if_token_type(TokenType::OpenParenthesis) {
+			let condition = self.expression_root()?;
 			if let Some(Ok(_)) = self.next_if_token_type(TokenType::CloseParenthesis) {
 				if let Some(Ok(open_curly_bracket)) =
 					self.next_if_token_type(TokenType::OpenCurlyBracket)
 				{
 					match self.body(open_curly_bracket) {
-						Ok(body) => Ok(Statement::While(self.expression_root()?, Box::new(body))),
+						Ok(body) => Ok(Statement::While(condition, Box::new(body))),
 						Err(error) => Err(error),
 					}
 				} else {

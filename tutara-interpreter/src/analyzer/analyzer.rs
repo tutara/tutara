@@ -21,22 +21,22 @@ impl Iterator for Analyzer<'_> {
 
 	fn next(&mut self) -> Option<Self::Item> {
 		match self.parser.next() {
-			Some(Ok(current)) => Some(self.analyse(current)),
-			Some(Err(_)) => Some(Err(self.parser.next().unwrap().unwrap_err())),
+			Some(Ok(current)) => Some(self.analyze(current)),
+			Some(Err(err)) => Some(Err(err)),
 			None => None,
 		}
 	}
 }
 
 impl Analyzer<'_> {
-	fn analyse(&mut self, statement: Statement) -> Result<Statement> {
+	fn analyze(&mut self, statement: Statement) -> Result<Statement> {
 		use crate::Literal::*;
 
 		match statement {
 			Statement::Expression(expression) => self.expression(expression),
 			Statement::Loop(statement) => Ok(Statement::While(
 				Expression::Literal(Token::new(
-					TokenType::Identifier,
+					TokenType::Boolean,
 					Some(Boolean(true)),
 					0,
 					0,
