@@ -36,6 +36,11 @@ jobs:
         run: sudo apt install llvm-10-dev
       - name: cargo bench
         run: cargo bench --verbose
+      - name: Upload benchmarks
+        uses: actions/upload-artifact@v2
+        with:
+          name: Benchmarks
+          path: ./tutara-interpreter/target/criterion/
   lint:
     runs-on: ubuntu-latest
     steps:
