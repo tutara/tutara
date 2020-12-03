@@ -1,0 +1,35 @@
+fun: Integer Fibonacci(n: Integer){
+    if (n == 0){
+        return 1
+    }
+    if (n == 1)
+        return 1
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+fun: Float Calculate_Vat(price: Integer, vat: Integer){
+    return price + price / vat * 100
+}
+
+fun: Integer match_two(haystack: Collection, needle: Integer){
+    for (i in Collection){
+        for (j in Collection){
+            if(i + j == needle){
+                return i * j
+            }
+        }
+    }
+}
+
+fun: Integer match_three(haystack: Collection, needle: Integer){
+    for (i in Collection){
+        for (j in Collection){
+             for (k in Collection){
+                if(i + j + k == needle){
+                    return i * j * k
+                }
+            }
+        }
+    }
+}
