@@ -118,7 +118,7 @@ impl Tokenizer<'_> {
 
 // Token functions
 impl Tokenizer<'_> {
-	fn number(&mut self, current: char) -> Result<Token> {
+	pub fn number(&mut self, current: char) -> Result<Token> {
 		let mut value = current.to_string();
 
 		while let Some(next) = self.chars.peek() {
@@ -142,7 +142,7 @@ impl Tokenizer<'_> {
 		}
 	}
 
-	fn identifier(&mut self, current: char) -> Result<Token> {
+	pub fn identifier(&mut self, current: char) -> Result<Token> {
 		let mut value = current.to_string();
 
 		while let Some(next) = self.chars.peek() {
@@ -166,7 +166,7 @@ impl Tokenizer<'_> {
 		}
 	}
 
-	fn string(&mut self) -> Result<Token> {
+	pub fn string(&mut self) -> Result<Token> {
 		let mut value = String::new();
 
 		while let Some(next) = self.chars.peek() {
@@ -200,7 +200,7 @@ impl Tokenizer<'_> {
 		self.create_literal_token(TokenType::String, Some(Literal::String(value)))
 	}
 
-	fn comment(&mut self) -> Result<Token> {
+	pub fn comment(&mut self) -> Result<Token> {
 		let mut value = String::new();
 
 		loop {
@@ -222,7 +222,7 @@ impl Tokenizer<'_> {
 		self.create_literal_token(TokenType::Comment, Some(Literal::String(value)))
 	}
 
-	fn escape(&mut self) -> Option<&str> {
+	pub fn escape(&mut self) -> Option<&str> {
 		match self.chars.peek() {
 			Some('n') => {
 				self.chars.next();
@@ -248,7 +248,7 @@ impl Tokenizer<'_> {
 		}
 	}
 
-	fn arrow(&mut self, token: Token) -> Result<Token> {
+	pub fn arrow(&mut self, token: Token) -> Result<Token> {
 		let r#type = &token.r#type;
 
 		if r#type == &TokenType::Minus && self.peek_char('>') {
@@ -258,7 +258,7 @@ impl Tokenizer<'_> {
 		Ok(token)
 	}
 
-	fn assignment_operation(&mut self, token: Token) -> Result<Token> {
+	pub fn assignment_operation(&mut self, token: Token) -> Result<Token> {
 		let r#type = &token.r#type;
 
 		if TokenType::is_operation(&r#type) {
@@ -282,7 +282,7 @@ impl Tokenizer<'_> {
 		Ok(token)
 	}
 
-	fn comparison(&mut self, token: Token) -> Result<Token> {
+	pub fn comparison(&mut self, token: Token) -> Result<Token> {
 		if vec![
 			TokenType::Not,
 			TokenType::Assign,
