@@ -1,4 +1,12 @@
-use inkwell::{FloatPredicate, builder::Builder, context::Context, module::Module, values::FloatValue, values::InstructionValue, values::{BasicValueEnum, FunctionValue, IntValue, PointerValue}};
+use inkwell::{
+	builder::Builder,
+	context::Context,
+	module::Module,
+	values::FloatValue,
+	values::InstructionValue,
+	values::{BasicValueEnum, FunctionValue, IntValue, PointerValue},
+	FloatPredicate,
+};
 use std::collections::HashMap;
 use tutara_interpreter::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
 
@@ -45,19 +53,21 @@ impl Compiler<'_> {
 
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
 		match statement {
-			Statement::If(condition , true_branch , false_branch) => self.evaluate_if(condition, true_branch, false_branch),
+			Statement::If(condition, true_branch, false_branch) => {
+				self.evaluate_if(condition, true_branch, false_branch)
+			}
 			Statement::Expression(expression) => self.evaluate_expression(expression),
 			Statement::Declaration(_mutability, _type_specification, expression) => {
 				self.evaluate_declaration(expression)?;
 				Ok(Operation::NoOp())
-			},
+			}
 			Statement::Body(statements) => {
 				for statement in statements {
 					self.evaluate_statement(statement)?;
 				}
 
 				Ok(Operation::NoOp())
-			},
+			}
 			Statement::Return(expression) => self.evaluate_return(expression),
 			Statement::Comment(_) => Ok(Operation::NoOp()),
 			_ => Err(Error::new_compiler_error(
@@ -66,24 +76,43 @@ impl Compiler<'_> {
 		}
 	}
 
-	pub fn evaluate_if(&mut self, condition: Expression, true_branch: Box<Statement>, false_branch: Option<Box<Statement>>) -> Result<Operation, Error>{		
+	pub fn evaluate_if(
+		&mut self,
+		condition: Expression,
+		true_branch: Box<Statement>,
+		false_branch: Option<Box<Statement>>,
+	) -> Result<Operation, Error> {
 		match self.evaluate_expression(condition)? {
 			Operation::BoolValue(value) => {
 				let parent_block = self.builder.get_insert_block().unwrap();
-				let true_block = self.context.insert_basic_block_after(parent_block, "true_block");
-				let false_block = self.context.insert_basic_block_after(true_block, "false_block");
+				let true_block = self
+					.context
+					.insert_basic_block_after(parent_block, "true_block");
+				let false_block = self
+					.context
+					.insert_basic_block_after(true_block, "false_block");
+				let continuation_block = self
+					.context
+					.insert_basic_block_after(false_block, "continuation_block");
 
-				self.builder.build_conditional_branch(value, true_block, false_block);
+				// If
+				self.builder
+					.build_conditional_branch(value, true_block, false_block);
 
+				// True
 				self.builder.position_at_end(true_block);
 				self.evaluate_statement(*true_branch)?;
+				self.builder.build_unconditional_branch(continuation_block);
 
+				// False
+				self.builder.position_at_end(false_block);
 				if let Some(false_branch) = false_branch {
-					self.builder.position_at_end(false_block);
 					self.evaluate_statement(*false_branch)?;
 				}
+				self.builder.build_unconditional_branch(continuation_block);
 
-				self.builder.position_at_end(parent_block);
+				// Continue
+				self.builder.position_at_end(continuation_block);
 
 				Ok(Operation::NoOp())
 			}
@@ -210,12 +239,40 @@ impl Compiler<'_> {
 			// TODO
 			// TokenType::And => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::??, lhs, rhs, "And"))),
 			// TokenType::Or => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::O, lhs, rhs, "Or"))),
-			TokenType::Equal => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::OEQ, lhs, rhs, "Equal"))),
-			TokenType::NotEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::ONE, lhs, rhs, "NotEqual"))),
-			TokenType::GreaterOrEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::OGE, lhs, rhs, "GreaterOrEqual"))),
-			TokenType::LesserOrEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::OLE, lhs, rhs, "LesserOrEqual"))),
-			TokenType::Greater => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::OGT, lhs, rhs, "Greater"))),
-			TokenType::Lesser => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::OLT, lhs, rhs, "Lesser"))),
+			TokenType::Equal => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				FloatPredicate::OEQ,
+				lhs,
+				rhs,
+				"Equal",
+			))),
+			TokenType::NotEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				FloatPredicate::ONE,
+				lhs,
+				rhs,
+				"NotEqual",
+			))),
+			TokenType::GreaterOrEqual => Ok(Operation::BoolValue(
+				self.builder
+					.build_float_compare(FloatPredicate::OGE, lhs, rhs, "GreaterOrEqual"),
+			)),
+			TokenType::LesserOrEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				FloatPredicate::OLE,
+				lhs,
+				rhs,
+				"LesserOrEqual",
+			))),
+			TokenType::Greater => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				FloatPredicate::OGT,
+				lhs,
+				rhs,
+				"Greater",
+			))),
+			TokenType::Lesser => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				FloatPredicate::OLT,
+				lhs,
+				rhs,
+				"Lesser",
+			))),
 			_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 		}
 	}
