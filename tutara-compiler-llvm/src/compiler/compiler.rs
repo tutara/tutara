@@ -178,31 +178,7 @@ impl Compiler<'_> {
 		}
 	}
 
-	pub fn evaluate_operator(
-		&self,
-		left: Expression,
-		right: Expression,
-		operator: Token,
-	) -> Result<Operation, Error> {
-		let lhs = match self.evaluate_expression(left) {
-			Ok(Operation::FloatValue(value)) => value,
-			Err(err) => return Err(err),
-			_ => {
-				return Err(Error::new_compiler_error(
-					"Unsupported left hand expression".to_string(),
-				))
-			}
-		};
-		let rhs = match self.evaluate_expression(right) {
-			Ok(Operation::FloatValue(value)) => value,
-			Err(err) => return Err(err),
-			_ => {
-				return Err(Error::new_compiler_error(
-					"Unsupported right hand expression".to_string(),
-				))
-			}
-		};
-
+	pub fn evaluate_operator_float<'a, 'b, 'c>(&self, lhs: FloatValue<'a>, rhs: FloatValue<'b>, operator: Token) -> Result<Operation<'c>, Error> {
 		match operator.r#type {
 			TokenType::Plus => Ok(Operation::FloatValue(
 				self.builder.build_float_add(lhs, rhs, "tmpadd"),
@@ -236,9 +212,6 @@ impl Compiler<'_> {
 			TokenType::Modulo => Ok(Operation::FloatValue(
 				self.builder.build_float_rem(lhs, rhs, "tmprem"),
 			)),
-			// TODO
-			// TokenType::And => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::??, lhs, rhs, "And"))),
-			// TokenType::Or => Ok(Operation::BoolValue(self.builder.build_float_compare(FloatPredicate::O, lhs, rhs, "Or"))),
 			TokenType::Equal => Ok(Operation::BoolValue(self.builder.build_float_compare(
 				FloatPredicate::OEQ,
 				lhs,
@@ -275,6 +248,36 @@ impl Compiler<'_> {
 			))),
 			_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 		}
+	}
+
+	pub fn evaluate_operator_bool(&self, lhs: IntValue, rhs: IntValue, operator: Token) -> Result<Operation, Error> {
+		match operator.r#type {
+			TokenType::And => Ok(Operation::BoolValue(self.builder.build_and(lhs, rhs, "And"))),
+			TokenType::Or => Ok(Operation::BoolValue(self.builder.build_or(lhs, rhs, "Or"))),
+			_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
+		}
+	}
+
+	pub fn evaluate_operator(
+		&self,
+		left: Expression,
+		right: Expression,
+		operator: Token,
+	) -> Result<Operation, Error> {
+		let left_operation = self.evaluate_expression(left)?;
+		let right_operation = self.evaluate_expression(right)?;
+
+		if let Operation::FloatValue(lhs) = left_operation {
+			if let Operation::FloatValue(rhs) = right_operation {
+				return self.evaluate_operator_float(lhs, rhs, operator);
+			}
+		} else if let Operation::BoolValue(lhs) = left_operation {
+			if let Operation::BoolValue(rhs) = right_operation {
+				return self.evaluate_operator_bool(lhs, rhs, operator);
+			}
+		}
+
+		unreachable!()// TODO
 	}
 
 	pub fn evaluate_expression(&self, expression: Expression) -> Result<Operation, Error> {
