@@ -5,6 +5,7 @@ use inkwell::{
 	values::FloatValue,
 	values::InstructionValue,
 	values::{BasicValueEnum, FunctionValue, IntValue, PointerValue},
+	FloatPredicate,
 };
 use std::collections::HashMap;
 use tutara_interpreter::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
@@ -52,15 +53,71 @@ impl Compiler<'_> {
 
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
 		match statement {
+			Statement::If(condition, true_branch, false_branch) => {
+				self.evaluate_if(condition, true_branch, false_branch)
+			}
 			Statement::Expression(expression) => self.evaluate_expression(expression),
 			Statement::Declaration(_mutability, _type_specification, expression) => {
 				self.evaluate_declaration(expression)?;
+				Ok(Operation::NoOp())
+			}
+			Statement::Body(statements) => {
+				for statement in statements {
+					self.evaluate_statement(statement)?;
+				}
+
 				Ok(Operation::NoOp())
 			}
 			Statement::Return(expression) => self.evaluate_return(expression),
 			Statement::Comment(_) => Ok(Operation::NoOp()),
 			_ => Err(Error::new_compiler_error(
 				"Unsupported statement".to_string(),
+			)),
+		}
+	}
+
+	pub fn evaluate_if(
+		&mut self,
+		condition: Expression,
+		true_branch: Box<Statement>,
+		false_branch: Option<Box<Statement>>,
+	) -> Result<Operation, Error> {
+		match self.evaluate_expression(condition)? {
+			Operation::BoolValue(value) => {
+				let parent_block = self.builder.get_insert_block().unwrap();
+				let true_block = self
+					.context
+					.insert_basic_block_after(parent_block, "true_block");
+				let false_block = self
+					.context
+					.insert_basic_block_after(true_block, "false_block");
+				let continuation_block = self
+					.context
+					.insert_basic_block_after(false_block, "continuation_block");
+
+				// If
+				self.builder
+					.build_conditional_branch(value, true_block, false_block);
+
+				// True
+				self.builder.position_at_end(true_block);
+				self.evaluate_statement(*true_branch)?;
+				self.builder.build_unconditional_branch(continuation_block);
+
+				// False
+				self.builder.position_at_end(false_block);
+				if let Some(false_branch) = false_branch {
+					self.evaluate_statement(*false_branch)?;
+				}
+				self.builder.build_unconditional_branch(continuation_block);
+
+				// Continue
+				self.builder.position_at_end(continuation_block);
+
+				Ok(Operation::NoOp())
+			}
+			_ => Err(Error::new_compiler_error(
+				"Unsupported type in condition".to_string(),
 			)),
 		}
 	}
@@ -127,59 +184,85 @@ impl Compiler<'_> {
 		right: Expression,
 		operator: Token,
 	) -> Result<Operation, Error> {
-		let lhs = match self.evaluate_expression(left) {
-			Ok(Operation::FloatValue(value)) => value,
-			Err(err) => return Err(err),
-			_ => {
-				return Err(Error::new_compiler_error(
-					"Unsupported left hand expression".to_string(),
-				))
-			}
-		};
-		let rhs = match self.evaluate_expression(right) {
-			Ok(Operation::FloatValue(value)) => value,
-			Err(err) => return Err(err),
-			_ => {
-				return Err(Error::new_compiler_error(
-					"Unsupported right hand expression".to_string(),
-				))
-			}
-		};
+		use Operation::*;
+		use TokenType::*;
 
-		match operator.r#type {
-			TokenType::Plus => Ok(Operation::FloatValue(
-				self.builder.build_float_add(lhs, rhs, "tmpadd"),
-			)),
-			TokenType::Minus => Ok(Operation::FloatValue(
-				self.builder.build_float_sub(lhs, rhs, "tmpsub"),
-			)),
-			TokenType::Multiply => Ok(Operation::FloatValue(
-				self.builder.build_float_mul(lhs, rhs, "tmpmul"),
-			)),
-			TokenType::Division => Ok(Operation::FloatValue(
-				self.builder.build_float_div(lhs, rhs, "tmpdiv"),
-			)),
-			TokenType::Exponentiation => {
-				let f64_type = self.context.f64_type();
-				let pow_fun = self.module.add_function(
-					"llvm.pow.f64",
-					f64_type.fn_type(&[f64_type.into(), f64_type.into()], false),
-					None,
-				);
+		let operations = (
+			self.evaluate_expression(left)?,
+			self.evaluate_expression(right)?,
+		);
 
-				Ok(Operation::FloatValue(
-					self.builder
-						.build_call(pow_fun, &[lhs.into(), rhs.into()], "tmppow")
-						.try_as_basic_value()
-						.left()
-						.unwrap()
-						.into_float_value(),
-				))
+		if let (FloatValue(lhs), FloatValue(rhs)) = operations {
+			match operator.r#type {
+				Plus => Ok(FloatValue(self.builder.build_float_add(lhs, rhs, "tmpadd"))),
+				Minus => Ok(FloatValue(self.builder.build_float_sub(lhs, rhs, "tmpsub"))),
+				Multiply => Ok(FloatValue(self.builder.build_float_mul(lhs, rhs, "tmpmul"))),
+				Division => Ok(FloatValue(self.builder.build_float_div(lhs, rhs, "tmpdiv"))),
+				Exponentiation => {
+					let f64_type = self.context.f64_type();
+					let pow_fun = self.module.add_function(
+						"llvm.pow.f64",
+						f64_type.fn_type(&[f64_type.into(), f64_type.into()], false),
+						None,
+					);
+					Ok(FloatValue(
+						self.builder
+							.build_call(pow_fun, &[lhs.into(), rhs.into()], "tmppow")
+							.try_as_basic_value()
+							.left()
+							.unwrap()
+							.into_float_value(),
+					))
+				}
+				Modulo => Ok(FloatValue(self.builder.build_float_rem(lhs, rhs, "tmprem"))),
+				Equal => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OEQ,
+					lhs,
+					rhs,
+					"Equal",
+				))),
+				NotEqual => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::ONE,
+					lhs,
+					rhs,
+					"NotEqual",
+				))),
+				GreaterOrEqual => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OGE,
+					lhs,
+					rhs,
+					"GreaterOrEqual",
+				))),
+				LesserOrEqual => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OLE,
+					lhs,
+					rhs,
+					"LesserOrEqual",
+				))),
+				Greater => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OGT,
+					lhs,
+					rhs,
+					"Greater",
+				))),
+				Lesser => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OLT,
+					lhs,
+					rhs,
+					"Lesser",
+				))),
+				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 			}
-			TokenType::Modulo => Ok(Operation::FloatValue(
-				self.builder.build_float_rem(lhs, rhs, "tmprem"),
-			)),
-			_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
+		} else if let (Operation::BoolValue(lhs), Operation::BoolValue(rhs)) = operations {
+			match operator.r#type {
+				TokenType::And => Ok(Operation::BoolValue(
+					self.builder.build_and(lhs, rhs, "And"),
+				)),
+				TokenType::Or => Ok(Operation::BoolValue(self.builder.build_or(lhs, rhs, "Or"))),
+				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
+			}
+		} else {
+			Err(Error::new_compiler_error("Unexpected token".to_string()))
 		}
 	}
 
@@ -194,10 +277,10 @@ impl Compiler<'_> {
 				}
 				Some(Literal::Boolean(bool)) => {
 					let r#type = self.context.bool_type();
-					let literal = if bool == false {
-						r#type.const_zero()
-					} else {
+					let literal = if bool {
 						r#type.const_all_ones()
+					} else {
+						r#type.const_zero()
 					};
 
 					Ok(Operation::BoolValue(literal))
@@ -300,7 +383,6 @@ impl Compiler<'_> {
 							},
 						)?
 					};
-
 					let pointer = self.variables.get(&name).unwrap();
 
 					match value {
@@ -335,6 +417,7 @@ impl Compiler<'_> {
 			Expression::Binary(left, operator, right) => {
 				self.evaluate_operator(*left, *right, operator)
 			}
+			Expression::Grouping(expression) => self.evaluate_expression(*expression),
 			Expression::Call(function, _, parameters, _) => {
 				let name = match *function {
 					Expression::Identifier(identifier) => match identifier.literal {
