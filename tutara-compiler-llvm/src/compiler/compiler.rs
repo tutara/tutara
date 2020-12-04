@@ -372,6 +372,9 @@ impl Compiler<'_> {
 			Expression::Binary(left, operator, right) => {
 				self.evaluate_operator(*left, *right, operator)
 			}
+			Expression::Grouping(expression) => {
+				self.evaluate_expression(*expression)
+			}
 			Expression::Call(function, _, parameters, _) => {
 				let name = match *function {
 					Expression::Identifier(identifier) => match identifier.literal {
