@@ -184,33 +184,28 @@ impl Compiler<'_> {
 		right: Expression,
 		operator: Token,
 	) -> Result<Operation, Error> {
+		use Operation::*;
+		use TokenType::*;
+
 		let operations = (
 			self.evaluate_expression(left)?,
 			self.evaluate_expression(right)?,
 		);
 
-		if let (Operation::FloatValue(lhs), Operation::FloatValue(rhs)) = operations {
+		if let (FloatValue(lhs), FloatValue(rhs)) = operations {
 			match operator.r#type {
-				TokenType::Plus => Ok(Operation::FloatValue(
-					self.builder.build_float_add(lhs, rhs, "tmpadd"),
-				)),
-				TokenType::Minus => Ok(Operation::FloatValue(
-					self.builder.build_float_sub(lhs, rhs, "tmpsub"),
-				)),
-				TokenType::Multiply => Ok(Operation::FloatValue(
-					self.builder.build_float_mul(lhs, rhs, "tmpmul"),
-				)),
-				TokenType::Division => Ok(Operation::FloatValue(
-					self.builder.build_float_div(lhs, rhs, "tmpdiv"),
-				)),
-				TokenType::Exponentiation => {
+				Plus => Ok(FloatValue(self.builder.build_float_add(lhs, rhs, "tmpadd"))),
+				Minus => Ok(FloatValue(self.builder.build_float_sub(lhs, rhs, "tmpsub"))),
+				Multiply => Ok(FloatValue(self.builder.build_float_mul(lhs, rhs, "tmpmul"))),
+				Division => Ok(FloatValue(self.builder.build_float_div(lhs, rhs, "tmpdiv"))),
+				Exponentiation => {
 					let f64_type = self.context.f64_type();
 					let pow_fun = self.module.add_function(
 						"llvm.pow.f64",
 						f64_type.fn_type(&[f64_type.into(), f64_type.into()], false),
 						None,
 					);
-					Ok(Operation::FloatValue(
+					Ok(FloatValue(
 						self.builder
 							.build_call(pow_fun, &[lhs.into(), rhs.into()], "tmppow")
 							.try_as_basic_value()
@@ -219,44 +214,38 @@ impl Compiler<'_> {
 							.into_float_value(),
 					))
 				}
-				TokenType::Modulo => Ok(Operation::FloatValue(
-					self.builder.build_float_rem(lhs, rhs, "tmprem"),
-				)),
-				TokenType::Equal => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				Modulo => Ok(FloatValue(self.builder.build_float_rem(lhs, rhs, "tmprem"))),
+				Equal => Ok(BoolValue(self.builder.build_float_compare(
 					FloatPredicate::OEQ,
 					lhs,
 					rhs,
 					"Equal",
 				))),
-				TokenType::NotEqual => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				NotEqual => Ok(BoolValue(self.builder.build_float_compare(
 					FloatPredicate::ONE,
 					lhs,
 					rhs,
 					"NotEqual",
 				))),
-				TokenType::GreaterOrEqual => {
-					Ok(Operation::BoolValue(self.builder.build_float_compare(
-						FloatPredicate::OGE,
-						lhs,
-						rhs,
-						"GreaterOrEqual",
-					)))
-				}
-				TokenType::LesserOrEqual => {
-					Ok(Operation::BoolValue(self.builder.build_float_compare(
-						FloatPredicate::OLE,
-						lhs,
-						rhs,
-						"LesserOrEqual",
-					)))
-				}
-				TokenType::Greater => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				GreaterOrEqual => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OGE,
+					lhs,
+					rhs,
+					"GreaterOrEqual",
+				))),
+				LesserOrEqual => Ok(BoolValue(self.builder.build_float_compare(
+					FloatPredicate::OLE,
+					lhs,
+					rhs,
+					"LesserOrEqual",
+				))),
+				Greater => Ok(BoolValue(self.builder.build_float_compare(
 					FloatPredicate::OGT,
 					lhs,
 					rhs,
 					"Greater",
 				))),
-				TokenType::Lesser => Ok(Operation::BoolValue(self.builder.build_float_compare(
+				Lesser => Ok(BoolValue(self.builder.build_float_compare(
 					FloatPredicate::OLT,
 					lhs,
 					rhs,
@@ -288,18 +277,18 @@ impl Compiler<'_> {
 				}
 				Some(Literal::Boolean(bool)) => {
 					let r#type = self.context.bool_type();
-					let literal = if bool == false {
-						r#type.const_zero()
-					} else {
+					let literal = if bool {
 						r#type.const_all_ones()
+					} else {
+						r#type.const_zero()
 					};
 
 					Ok(Operation::BoolValue(literal))
 				}
 				_ => Err(Error::new_compiler_error("Unsupported literal".to_string())),
 			},
-			Expression::Identifier(identifier) => match &identifier.literal {
-				Some(Literal::String(name)) => match self.variables.get(name) {
+			Expression::Identifier(identifier) => match identifier.literal {
+				Some(Literal::String(name)) => match self.variables.get(&name) {
 					Some(pointer) => {
 						let value = self.builder.build_load(*pointer, &name);
 
@@ -328,17 +317,73 @@ impl Compiler<'_> {
 					"Unsupported identifier".to_string(),
 				)),
 			},
-			Expression::Assignment(identifier, operator, expression) => match &identifier.literal {
+			Expression::Assignment(identifier, operator, expression) => match identifier.literal {
 				Some(Literal::String(name)) => {
 					let value = if operator.r#type == TokenType::Assign {
 						self.evaluate_expression(*expression)?
 					} else {
-						return Err(Error::new_compiler_error(
-							"Unsupported assignment operation".to_string(),
+						let expr = Expression::Identifier(Token::new(
+							TokenType::Identifier,
+							Some(Literal::String(name.clone())),
+							identifier.line,
+							identifier.column,
+							identifier.length,
 						));
+						self.evaluate_operator(
+							expr,
+							*expression,
+							match operator.r#type {
+								TokenType::AssignPlus => Token::new(
+									TokenType::Plus,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								TokenType::AssignMinus => Token::new(
+									TokenType::Minus,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								TokenType::AssignMultiply => Token::new(
+									TokenType::Multiply,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								TokenType::AssignDivision => Token::new(
+									TokenType::Division,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								TokenType::AssignExponentiation => Token::new(
+									TokenType::Exponentiation,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								TokenType::AssignModulo => Token::new(
+									TokenType::Modulo,
+									None,
+									operator.line,
+									operator.column,
+									operator.length,
+								),
+								_ => {
+									return Err(Error::new_compiler_error(
+										"Unsupported assignment operator".to_string(),
+									))
+								}
+							},
+						)?
 					};
-
-					let pointer = self.variables.get(name).unwrap();
+					let pointer = self.variables.get(&name).unwrap();
 
 					match value {
 						Operation::FloatValue(value) => {
@@ -372,9 +417,7 @@ impl Compiler<'_> {
 			Expression::Binary(left, operator, right) => {
 				self.evaluate_operator(*left, *right, operator)
 			}
-			Expression::Grouping(expression) => {
-				self.evaluate_expression(*expression)
-			}
+			Expression::Grouping(expression) => self.evaluate_expression(*expression),
 			Expression::Call(function, _, parameters, _) => {
 				let name = match *function {
 					Expression::Identifier(identifier) => match identifier.literal {
