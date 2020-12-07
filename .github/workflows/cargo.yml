@@ -71,5 +71,7 @@ jobs:
       - uses: hecrj/setup-rust-action@v1
         with:
           rust-version: stable
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/problem-matcher-clippy.json"
       - name: cargo clippy
-        run: cargo clippy --verbose
+        run: cargo clippy --verbose --color never
