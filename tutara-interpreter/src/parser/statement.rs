@@ -101,10 +101,7 @@ impl PartialEq for Statement {
 				}
 				_ => false,
 			},
-			Break => match *other {
-				Break => true,
-				_ => false,
-			},
+			Break => matches!(*other, Break),
 			Return(ref a_expression) => match *other {
 				Return(ref b_expression) => a_expression.eq(b_expression),
 				_ => false,

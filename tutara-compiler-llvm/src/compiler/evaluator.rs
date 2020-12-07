@@ -29,7 +29,7 @@ impl Evaluator {
 		}
 	}
 
-	pub fn save<'a>(analyser: Analyzer<'_>, path: &Path) -> Option<Error> {
+	pub fn save(analyser: Analyzer<'_>, path: &Path) -> Option<Error> {
 		let context = Context::create();
 		let module = context.create_module("init");
 		let builder = context.create_builder();
