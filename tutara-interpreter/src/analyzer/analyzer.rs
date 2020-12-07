@@ -108,7 +108,7 @@ impl Analyzer<'_> {
 					Box::new(Binary(
 						Box::new(Identifier(Token::new(
 							TokenType::Identifier,
-							Some(String(name.clone())),
+							Some(String(name)),
 							identifier.line,
 							identifier.column,
 							identifier.length,

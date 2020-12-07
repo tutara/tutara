@@ -1,3 +1,4 @@
+#![allow(clippy::module_inception)]
 mod tokenizer;
 pub use tokenizer::Tokenizer;
 

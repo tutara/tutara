@@ -1,3 +1,4 @@
+#![allow(clippy::module_inception)]
 mod compiler;
 pub use compiler::Compiler;
 

@@ -305,7 +305,7 @@ impl Parser<'_> {
 								Box::new(body?),
 								Some(Box::new(statement)),
 							)),
-							Err(error) => return Err(error),
+							Err(error) => Err(error),
 						}
 					} else {
 						Ok(Statement::If(expression, Box::new(body?), None))
@@ -323,7 +323,7 @@ impl Parser<'_> {
 
 	fn r#else(&mut self, token: Token) -> Result<Statement> {
 		if let Some(Ok(open_curly_bracket)) = self.next_if_token_type(TokenType::OpenCurlyBracket) {
-			return self.body(open_curly_bracket);
+			self.body(open_curly_bracket)
 		} else {
 			self.create_statement_syntax_error("Expected body".to_string(), token)
 		}
@@ -538,13 +538,13 @@ impl Parser<'_> {
 			}
 		}
 
-		return match self.tokenizer.next() {
+		match self.tokenizer.next() {
 			Some(Ok(next)) => {
 				self.create_expression_syntax_error("Unexpected token".to_string(), next)
 			}
 			Some(Err(err)) => Err(err),
 			None => Err(Error::new(ErrorType::Eof, "Unexpected end of file".to_string())),
-		};
+		}
 	}
 }
 
