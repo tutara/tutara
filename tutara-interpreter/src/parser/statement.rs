@@ -9,12 +9,10 @@ pub enum Statement {
 	Declaration(Token, Option<Token>, Expression), // var | val , Type , Assignment | Identifier
 	Comment(Token),
 	Body(Vec<Statement>),       // Statements
-	Parameters(Vec<Statement>), // Vec<Parameter>
-	Parameter(Token, Token),    // Identifier , Type
 	Function(
 		Option<Token>,          // Type
 		Token,                  // Identifier
-		Option<Box<Statement>>, // Option<Parameters>
+		Vec<(Token, Token)>, // Vec<Parameter(Identifier, Type)>
 		Box<Statement>,         // Body
 	),
 	Loop(Box<Statement>),              // Body
@@ -57,16 +55,6 @@ impl PartialEq for Statement {
 			},
 			Body(ref a_body) => match *other {
 				Body(ref b_body) => a_body.eq(b_body),
-				_ => false,
-			},
-			Parameters(ref a_parameters) => match *other {
-				Parameters(ref b_parameters) => a_parameters.eq(b_parameters),
-				_ => false,
-			},
-			Parameter(ref a_identifier, ref a_type_specification) => match *other {
-				Parameter(ref b_identifier, ref b_type_specification) => {
-					a_identifier.eq(b_identifier) && a_type_specification.eq(b_type_specification)
-				}
 				_ => false,
 			},
 			Function(ref a_type_specification, ref a_identifier, ref a_parameters, ref a_body) => {

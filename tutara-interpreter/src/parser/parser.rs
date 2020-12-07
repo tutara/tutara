@@ -129,11 +129,10 @@ impl Parser<'_> {
 		}
 
 		if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier) {
-			let mut parameters_statement: Option<Box<Statement>> = None;
+			let mut parameters: Vec<(Token, Token)> = Vec::new();
 
 			if let Some(Ok(open_parenthesis)) = self.next_if_token_type(TokenType::OpenParenthesis)
 			{
-				let mut parameters: Vec<Statement> = Vec::new();
 				while let Some(Ok(token)) = self.tokenizer.peek() {
 					if token.r#type == TokenType::CloseParenthesis {
 						break;
@@ -142,13 +141,12 @@ impl Parser<'_> {
 					}
 				}
 
-				if let Some(Ok(_close_parenthesis)) = self.tokenizer.next() {
-					parameters_statement = Some(Box::new(Statement::Parameters(parameters)));
-				} else {
-					return self.create_statement_syntax_error(
+				match self.tokenizer.next() {
+					Some(Ok(_close_parenthesis)) => {}
+					_ => return self.create_statement_syntax_error(
 						"Expected closing parenthesis".to_string(),
 						open_parenthesis,
-					);
+					)
 				}
 			}
 
@@ -159,7 +157,7 @@ impl Parser<'_> {
 					Ok(body) => Ok(Statement::Function(
 						type_specification,
 						identifier,
-						parameters_statement,
+						parameters,
 						Box::new(body),
 					)),
 					Err(error) => Err(error),
@@ -196,30 +194,30 @@ impl Parser<'_> {
 		self.create_statement_syntax_error("Expected end of body".to_string(), open_curly_bracket)
 	}
 
-	fn parameter(&mut self) -> Result<Statement> {
+	fn parameter(&mut self) -> Result<(Token, Token)> {
 		if let Some(Ok(identifier)) = self.next_if_token_type(TokenType::Identifier) {
 			let type_specification: Token;
 
 			match self.next_if_specifier() {
 				Some(next) => type_specification = next?,
 				None => {
-					return self.create_statement_syntax_error(
+					return Err(Error::new_parser_error(
 						"Expected type specification".to_string(),
 						identifier,
-					)
+					));
 				}
 			}
 
 			if let Some(Ok(_)) = self.next_if_token_type(TokenType::Separator) {
-				Ok(Statement::Parameter(identifier, type_specification))
+				Ok((identifier, type_specification))
 			} else if self.peek_token_type(TokenType::CloseParenthesis) {
-				Ok(Statement::Parameter(identifier, type_specification))
+				Ok((identifier, type_specification))
 			} else {
-				self.create_statement_syntax_error("Expected seperator".to_string(), identifier)
+				Err(Error::new_parser_error("Expected seperator".to_string(), identifier))
 			}
 		} else {
 			let token = self.tokenizer.next().unwrap().unwrap();
-			self.create_statement_syntax_error("Expected identifier".to_string(), token)
+			Err(Error::new_parser_error("Expected identifier".to_string(), token))
 		}
 	}
 

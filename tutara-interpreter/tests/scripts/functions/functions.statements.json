@@ -11,7 +11,7 @@
                 "column": 4,
                 "length": 3
             },
-            null,
+            [],
             {
                 "Body": []
             }
@@ -29,32 +29,28 @@
                 "column": 4,
                 "length": 3
             },
-            {
-                "Parameters": [
+            [
+                [
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "parameter"
-                                },
-                                "line": 5,
-                                "column": 8,
-                                "length": 9
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 5,
-                                "column": 19,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "parameter"
+                        },
+                        "line": 5,
+                        "column": 8,
+                        "length": 9
+                    },
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 5,
+                        "column": 19,
+                        "length": 6
                     }
                 ]
-            },
+            ],
             {
                 "Body": []
             }
@@ -72,54 +68,48 @@
                 "column": 4,
                 "length": 3
             },
-            {
-                "Parameters": [
+            [
+                [
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "firstName"
-                                },
-                                "line": 9,
-                                "column": 8,
-                                "length": 9
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 9,
-                                "column": 19,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "firstName"
+                        },
+                        "line": 9,
+                        "column": 8,
+                        "length": 9
                     },
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "lastName"
-                                },
-                                "line": 9,
-                                "column": 27,
-                                "length": 8
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 9,
-                                "column": 37,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 9,
+                        "column": 19,
+                        "length": 6
+                    }
+                ],
+                [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "lastName"
+                        },
+                        "line": 9,
+                        "column": 27,
+                        "length": 8
+                    },
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 9,
+                        "column": 37,
+                        "length": 6
                     }
                 ]
-            },
+            ],
             {
                 "Body": []
             }
@@ -145,7 +135,7 @@
                 "column": 12,
                 "length": 3
             },
-            null,
+            [],
             {
                 "Body": [
                     {
@@ -185,32 +175,28 @@
                 "column": 12,
                 "length": 4
             },
-            {
-                "Parameters": [
+            [
+                [
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "parameter"
-                                },
-                                "line": 17,
-                                "column": 17,
-                                "length": 9
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 17,
-                                "column": 28,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "parameter"
+                        },
+                        "line": 17,
+                        "column": 17,
+                        "length": 9
+                    },
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 17,
+                        "column": 28,
+                        "length": 6
                     }
                 ]
-            },
+            ],
             {
                 "Body": [
                     {
@@ -305,54 +291,48 @@
                 "column": 12,
                 "length": 5
             },
-            {
-                "Parameters": [
+            [
+                [
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "firstName"
-                                },
-                                "line": 22,
-                                "column": 18,
-                                "length": 9
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 22,
-                                "column": 29,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "firstName"
+                        },
+                        "line": 22,
+                        "column": 18,
+                        "length": 9
                     },
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "lastName"
-                                },
-                                "line": 22,
-                                "column": 37,
-                                "length": 8
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 22,
-                                "column": 47,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 22,
+                        "column": 29,
+                        "length": 6
+                    }
+                ],
+                [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "lastName"
+                        },
+                        "line": 22,
+                        "column": 37,
+                        "length": 8
+                    },
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 22,
+                        "column": 47,
+                        "length": 6
                     }
                 ]
-            },
+            ],
             {
                 "Body": [
                     {
@@ -479,54 +459,48 @@
                 "column": 12,
                 "length": 6
             },
-            {
-                "Parameters": [
+            [
+                [
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "firstName"
-                                },
-                                "line": 27,
-                                "column": 19,
-                                "length": 9
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 27,
-                                "column": 30,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "firstName"
+                        },
+                        "line": 27,
+                        "column": 19,
+                        "length": 9
                     },
                     {
-                        "Parameter": [
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "lastName"
-                                },
-                                "line": 27,
-                                "column": 38,
-                                "length": 8
-                            },
-                            {
-                                "type": "Identifier",
-                                "literal": {
-                                    "String": "string"
-                                },
-                                "line": 27,
-                                "column": 48,
-                                "length": 6
-                            }
-                        ]
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 27,
+                        "column": 30,
+                        "length": 6
+                    }
+                ],
+                [
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "lastName"
+                        },
+                        "line": 27,
+                        "column": 38,
+                        "length": 8
+                    },
+                    {
+                        "type": "Identifier",
+                        "literal": {
+                            "String": "string"
+                        },
+                        "line": 27,
+                        "column": 48,
+                        "length": 6
                     }
                 ]
-            },
+            ],
             {
                 "Body": [
                     {
