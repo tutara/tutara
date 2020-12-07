@@ -1,0 +1,20 @@
+{
+	"problemMatcher": [
+		{
+			"owner": "rust-clippy",
+			"pattern": [
+				{
+					"regexp": "^(warning|error):\\s+(.*?)$",
+					"severity": 1,
+					"message": 2
+				},
+				{
+					"regexp": "^\\s+-->\\s+(.*?):(\\d+):(\\d+)$",
+		 			"file": 1,
+		 			"line": 2,
+		 			"column": 3
+				}
+			]
+		}
+	]
+}
