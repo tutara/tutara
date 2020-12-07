@@ -14,26 +14,46 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, nightly]
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
         run: sudo apt install llvm-10-dev
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: ${{ matrix.rust }}
       - name: cargo build
         run: cargo build --verbose
+
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, nightly]
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
         run: sudo apt install llvm-10-dev
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: ${{ matrix.rust }}
       - name: cargo test
         run: cargo test --verbose
+
   bench:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: [stable, nightly]
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
         run: sudo apt install llvm-10-dev
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: ${{ matrix.rust }}
       - name: cargo bench
         run: cargo bench --verbose
       - name: Upload benchmarks
@@ -41,11 +61,15 @@ jobs:
         with:
           name: Benchmarks
           path: ./tutara-interpreter/target/criterion/
+
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
         run: sudo apt install llvm-10-dev
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: stable
       - name: cargo clippy
         run: cargo clippy --verbose
