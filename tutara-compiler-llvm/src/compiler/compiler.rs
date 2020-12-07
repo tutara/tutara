@@ -8,7 +8,7 @@ use inkwell::{
 	FloatPredicate,
 };
 use std::collections::HashMap;
-use tutara_interpreter::{Error, Expression, Literal, Parser, Statement, Token, TokenType};
+use tutara_interpreter::{Analyzer, Error, Expression, Literal, Statement, Token, TokenType};
 
 pub struct Compiler<'a> {
 	pub(super) context: &'a Context,
@@ -26,13 +26,13 @@ pub enum Operation<'a> {
 }
 
 impl Compiler<'_> {
-	pub fn compile<'b>(&mut self, parser: Parser<'b>) -> Result<FunctionValue, Error> {
+	pub fn compile<'b>(&mut self, analyzer: Analyzer<'b>) -> Result<FunctionValue, Error> {
 		let fun_type = self.context.f64_type().fn_type(&[], false);
 		let fun = self.module.add_function("main", fun_type, None);
 		let body = self.context.append_basic_block(fun, "entry");
 		self.builder.position_at_end(body);
 
-		for result in parser {
+		for result in analyzer {
 			match result {
 				Ok(statement) => {
 					if let Operation::Return(_) = self.evaluate_statement(statement)? {
@@ -322,66 +322,9 @@ impl Compiler<'_> {
 					let value = if operator.r#type == TokenType::Assign {
 						self.evaluate_expression(*expression)?
 					} else {
-						let expr = Expression::Identifier(Token::new(
-							TokenType::Identifier,
-							Some(Literal::String(name.clone())),
-							identifier.line,
-							identifier.column,
-							identifier.length,
+						return Err(Error::new_compiler_error(
+							"Unsupported assignment operator".to_string(),
 						));
-						self.evaluate_operator(
-							expr,
-							*expression,
-							match operator.r#type {
-								TokenType::AssignPlus => Token::new(
-									TokenType::Plus,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								TokenType::AssignMinus => Token::new(
-									TokenType::Minus,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								TokenType::AssignMultiply => Token::new(
-									TokenType::Multiply,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								TokenType::AssignDivision => Token::new(
-									TokenType::Division,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								TokenType::AssignExponentiation => Token::new(
-									TokenType::Exponentiation,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								TokenType::AssignModulo => Token::new(
-									TokenType::Modulo,
-									None,
-									operator.line,
-									operator.column,
-									operator.length,
-								),
-								_ => {
-									return Err(Error::new_compiler_error(
-										"Unsupported assignment operator".to_string(),
-									))
-								}
-							},
-						)?
 					};
 					let pointer = self.variables.get(&name).unwrap();
 
