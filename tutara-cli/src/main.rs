@@ -1,12 +1,11 @@
 extern crate tutara_interpreter;
 
-use tutara_interpreter::Analyzer;
 use std::env;
 use std::io;
 use std::io::{Read, Write};
 use std::result::Result;
 use tutara_compiler_llvm::Evaluator;
-use tutara_interpreter::{Parser, Statement, Token, TokenType, Tokenizer};
+use tutara_interpreter::{Parser, Statement, Token, TokenType, Tokenizer, Analyzer};
 
 use clap::{crate_version, App, AppSettings, Arg, ArgSettings};
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
@@ -203,7 +202,8 @@ fn evaluate(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(),
 
 	let tokenizer = Tokenizer::new(&src);
 	let parser = Parser::new(tokenizer.peekable());
-	let evaluation = Evaluator::evaluate(parser);
+	let analyzer = Analyzer::new(parser);
+	let evaluation = Evaluator::evaluate(analyzer);
 
 	match evaluation {
 		Ok(evaluation) => writeln!(output, "{}", evaluation),

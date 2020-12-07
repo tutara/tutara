@@ -1,6 +1,6 @@
 use std::{collections::HashMap, path::Path};
 use inkwell::context::Context;
-use tutara_interpreter::{Error, Parser};
+use tutara_interpreter::{Error, Analyzer};
 use crate::Compiler;
 
 pub struct Evaluator {
@@ -8,7 +8,7 @@ pub struct Evaluator {
 }
 
 impl Evaluator {
-	pub fn evaluate(parser: Parser<'_>) -> Result<f64, Error> {
+	pub fn evaluate(analyser: Analyzer<'_>) -> Result<f64, Error> {
 		let context = Context::create();
 		let module = context.create_module("init");
 		let builder = context.create_builder();
@@ -21,7 +21,7 @@ impl Evaluator {
 		};
 
 		let engine = compiler.module.create_jit_execution_engine(inkwell::OptimizationLevel::None).unwrap();
-		match compiler.compile(parser) {
+		match compiler.compile(analyser) {
 			Ok(fun) => unsafe {
 				Ok(engine.run_function(fun, &[]).as_float(&context.f64_type()))
 			},
@@ -29,7 +29,7 @@ impl Evaluator {
 		}
 	}
 
-	pub fn save<'a>(parser: Parser<'a>, path: &Path) -> Option<Error> {
+	pub fn save<'a>(analyser: Analyzer<'_>, path: &Path) -> Option<Error> {
 		let context = Context::create();
 		let module = context.create_module("init");
 		let builder = context.create_builder();
@@ -41,7 +41,7 @@ impl Evaluator {
 			variables: HashMap::new()
 		};
 
-		match compiler.compile(parser) {
+		match compiler.compile(analyser) {
 			Ok(_) => {
 				compiler.module.write_bitcode_to_path(path);
 
