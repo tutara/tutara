@@ -438,7 +438,7 @@ impl Compiler<'_> {
 					_ => return Err(Error::new_compiler_error("Unsupported call".to_string())),
 				};
 
-				let fun = match self.module.get_function(&name) {
+				let fun = match self.get_function(&name) {
 					Some(fun) => fun,
 					None => {
 						return Err(Error::new_compiler_error(format!(
@@ -484,6 +484,15 @@ impl Compiler<'_> {
 			_ => Err(Error::new_compiler_error(
 				"Unsupported expression".to_string(),
 			)),
+		}
+	}
+}
+
+impl Compiler<'_> {
+	fn get_function(&self, name: &str) -> Option<FunctionValue> {
+		match self.module.get_function(&name) {
+			Some(fun) => Some(fun),
+			None => None
 		}
 	}
 }
