@@ -17,7 +17,8 @@ impl Evaluator {
 			context: &context,
 			module,
 			builder,
-			variables: HashMap::new()
+			variables: HashMap::new(),
+			scope: Vec::new()
 		};
 
 		let engine = compiler.module.create_jit_execution_engine(inkwell::OptimizationLevel::None).unwrap();
@@ -38,7 +39,8 @@ impl Evaluator {
 			context: &context,
 			module,
 			builder,
-			variables: HashMap::new()
+			variables: HashMap::new(),
+			scope: Vec::new()
 		};
 
 		match compiler.compile(analyser) {

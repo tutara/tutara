@@ -1,4 +1,5 @@
 use inkwell::{
+	basic_block::BasicBlock,
 	builder::Builder,
 	context::Context,
 	module::Module,
@@ -15,15 +16,20 @@ pub struct Compiler<'a> {
 	pub(super) module: Module<'a>,
 	pub(super) builder: Builder<'a>,
 
+	pub(super) scope: Vec<Scope<'a>>,
 	pub(super) variables: HashMap<String, PointerValue<'a>>,
+}
+
+pub enum Scope<'a> {
+	While(BasicBlock<'a>, BasicBlock<'a>, BasicBlock<'a>), // Body , Evaluation , Continuation
+	If(BasicBlock<'a>, BasicBlock<'a>),                    // Body , Continuation
 }
 
 pub enum Operation<'a> {
 	FloatValue(FloatValue<'a>),
 	BoolValue(IntValue<'a>),
 	Return(InstructionValue<'a>),
-	Break(),
-	NoOp(),
+	NoOp,
 }
 
 impl Compiler<'_> {
@@ -54,7 +60,7 @@ impl Compiler<'_> {
 
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
 		match statement {
-			Statement::Break => Ok(Operation::Break()),
+			Statement::Break => self.evaluate_break(),
 			Statement::While(condition, body) => self.evaluate_while(condition, body),
 			Statement::If(condition, true_branch, false_branch) => {
 				self.evaluate_if(condition, true_branch, false_branch)
@@ -62,25 +68,39 @@ impl Compiler<'_> {
 			Statement::Expression(expression) => self.evaluate_expression(expression),
 			Statement::Declaration(_mutability, _type_specification, expression) => {
 				self.evaluate_declaration(expression)?;
-				Ok(Operation::NoOp())
+				Ok(Operation::NoOp)
 			}
 			Statement::Body(statements) => self.evaluate_body(statements),
 			Statement::Return(expression) => self.evaluate_return(expression),
-			Statement::Comment(_) => Ok(Operation::NoOp()),
+			Statement::Comment(_) => Ok(Operation::NoOp),
 			_ => Err(Error::new_compiler_error(
 				"Unsupported statement".to_string(),
 			)),
 		}
 	}
 
-	pub fn evaluate_body(&mut self, statements: Vec<Statement>) -> Result<Operation, Error> {
-		for statement in statements {
-			if let Operation::Break() = self.evaluate_statement(statement)? {
-				return Ok(Operation::Break());
+	pub fn evaluate_break(&mut self) -> Result<Operation, Error> {
+		let len = self.scope.len();
+		for index in 0..len {
+			if let Scope::While(body, _evaluation, continuation) = self.scope[len - index - 1] {
+				self.builder.build_unconditional_branch(continuation);
+				let gc = self.context.insert_basic_block_after(body, "gc");
+				self.builder.position_at_end(gc);
+				return Ok(Operation::NoOp);
 			}
 		}
 
-		Ok(Operation::NoOp())
+		Err(Error::new_compiler_error(
+			"Unable to break from current scope".to_string(),
+		))
+	}
+
+	pub fn evaluate_body(&mut self, statements: Vec<Statement>) -> Result<Operation, Error> {
+		for statement in statements {
+			self.evaluate_statement(statement)?;
+		}
+
+		Ok(Operation::NoOp)
 	}
 
 	pub fn evaluate_while(
@@ -91,26 +111,25 @@ impl Compiler<'_> {
 		let parent_block = self.builder.get_insert_block().unwrap();
 		let body_block = self
 			.context
-			.insert_basic_block_after(parent_block, "body_block");
+			.insert_basic_block_after(parent_block, "while_body_block");
 		let evaluation_block = self
 			.context
-			.insert_basic_block_after(body_block, "evaluation_block");
+			.insert_basic_block_after(body_block, "while_evaluation_block");
 		let continuation_block = self
 			.context
-			.insert_basic_block_after(evaluation_block, "continuation_block");
+			.insert_basic_block_after(evaluation_block, "while_continuation_block");
 		self.builder.build_unconditional_branch(evaluation_block);
 
 		// Body
+		self.scope.push(Scope::While(
+			body_block,
+			evaluation_block,
+			continuation_block,
+		));
 		self.builder.position_at_end(body_block);
-
-		match self.evaluate_statement(*body)? {
-			Operation::Break() => {
-				self.builder.build_unconditional_branch(continuation_block);
-			}
-			_ => {
-				self.builder.build_unconditional_branch(evaluation_block);
-			}
-		}
+		self.evaluate_statement(*body)?;
+		self.builder.build_unconditional_branch(evaluation_block);
+		self.scope.pop();
 
 		// Evaluation
 		self.builder.position_at_end(evaluation_block);
@@ -129,7 +148,7 @@ impl Compiler<'_> {
 		// Continue
 		self.builder.position_at_end(continuation_block);
 
-		Ok(Operation::NoOp())
+		Ok(Operation::NoOp)
 	}
 
 	pub fn evaluate_if(
@@ -143,50 +162,44 @@ impl Compiler<'_> {
 				let parent_block = self.builder.get_insert_block().unwrap();
 				let true_block = self
 					.context
-					.insert_basic_block_after(parent_block, "true_block");
+					.insert_basic_block_after(parent_block, "if_true_block");
 				let false_block = self
 					.context
-					.insert_basic_block_after(true_block, "false_block");
+					.insert_basic_block_after(true_block, "if_false_block");
 				let continuation_block = self
 					.context
-					.insert_basic_block_after(false_block, "continuation_block");
-
-				let mut operation = Operation::NoOp();
+					.insert_basic_block_after(false_block, "if_continuation_block");
 
 				// If
 				self.builder
 					.build_conditional_branch(value, true_block, false_block);
 
 				// True
+				self.scope.push(Scope::If(true_block, continuation_block));
 				self.builder.position_at_end(true_block);
-				match self.evaluate_statement(*true_branch)? {
-					Operation::Break() => {
-						operation = Operation::Break();
-					}
-					_ => {}
-				}
+				self.evaluate_statement(*true_branch)?;
 				self.builder.build_unconditional_branch(continuation_block);
+				self.scope.pop();
 
 				// False
 				self.builder.position_at_end(false_block);
 				if let Some(false_branch) = false_branch {
-					match self.evaluate_statement(*false_branch)? {
-						Operation::Break() => {
-							operation = Operation::Break();
-						}
-						_ => {}
-					}
+					self.scope.push(Scope::If(false_block, continuation_block));
+					self.evaluate_statement(*false_branch)?;
+					self.scope.pop();
 				}
 				self.builder.build_unconditional_branch(continuation_block);
 
 				// Continue
 				self.builder.position_at_end(continuation_block);
 
-				Ok(operation)
+				Ok(Operation::NoOp)
 			}
-			_ => Err(Error::new_compiler_error(
-				"Unsupported type in condition".to_string(),
-			)),
+			_ => {
+				Err(Error::new_compiler_error(
+					"Unsupported type in condition".to_string(),
+				))
+			}
 		}
 	}
 
@@ -233,7 +246,7 @@ impl Compiler<'_> {
 						};
 
 						self.variables.insert(name.to_string(), pointer);
-						Ok(Operation::NoOp())
+						Ok(Operation::NoOp)
 					}
 					_ => Err(Error::new_compiler_error(
 						"Unsupported expression".to_string(),
@@ -399,11 +412,11 @@ impl Compiler<'_> {
 					match value {
 						Operation::FloatValue(value) => {
 							self.builder.build_store(*pointer, value);
-							Ok(Operation::NoOp())
+							Ok(Operation::NoOp)
 						}
 						Operation::BoolValue(value) => {
 							self.builder.build_store(*pointer, value);
-							Ok(Operation::NoOp())
+							Ok(Operation::NoOp)
 						}
 						_ => Err(Error::new_compiler_error(
 							"Unsupported assignment operation".to_string(),
