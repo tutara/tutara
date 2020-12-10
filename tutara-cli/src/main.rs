@@ -44,6 +44,7 @@ fn color_for_token(token: &Token) -> Option<Color> {
 		TokenType::While => Some(Color::Rgb(180, 142, 173)),
 		TokenType::For => Some(Color::Rgb(180, 142, 173)),
 		TokenType::Break => Some(Color::Rgb(180, 142, 173)),
+		TokenType::Continue => Some(Color::Rgb(180, 142, 173)),
 		TokenType::In => Some(Color::Rgb(180, 142, 173)),
 		TokenType::OpenParenthesis => Some(Color::Rgb(143, 188, 187)),
 		TokenType::CloseParenthesis => Some(Color::Rgb(143, 188, 187)),

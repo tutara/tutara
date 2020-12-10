@@ -67,6 +67,7 @@ impl Parser<'_> {
 			TokenType::While,
 			TokenType::For,
 			TokenType::Break,
+			TokenType::Continue,
 			TokenType::If,
 		]) {
 			if let Ok(token) = token {
@@ -79,6 +80,7 @@ impl Parser<'_> {
 					TokenType::While => self.r#while(token),
 					TokenType::For => self.r#for(token),
 					TokenType::Break => Ok(Statement::Break),
+					TokenType::Continue => Ok(Statement::Continue),
 					TokenType::If => self.r#if(token),
 					_ => self.create_statement_syntax_error(
 						"statement not implemented please report issue".to_string(),

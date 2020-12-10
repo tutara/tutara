@@ -47,6 +47,7 @@ pub enum TokenType {
 	Match,
 	// Loops
 	Break,
+	Continue,
 	While,
 	Loop,
 	For,
@@ -104,6 +105,7 @@ impl TokenType {
 			"match" => Some(Match),
 
 			"break" => Some(Break),
+			"continue" => Some(Continue),
 			"while" => Some(While),
 			"loop" => Some(Loop),
 			"for" => Some(For),

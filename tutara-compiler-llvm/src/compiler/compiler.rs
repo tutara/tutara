@@ -63,6 +63,7 @@ impl Compiler<'_> {
 
 		match statement {
 			Break => self.evaluate_break(),
+			Continue => self.evaluate_continue(),
 			While(condition, body) => self.evaluate_while(condition, body),
 			If(condition, true_branch, false_branch) => {
 				self.evaluate_if(condition, true_branch, false_branch)
@@ -79,6 +80,22 @@ impl Compiler<'_> {
 				"Unsupported statement".to_string(),
 			)),
 		}
+	}
+
+	pub fn evaluate_continue(&mut self) -> Result<Operation, Error> {
+		let len = self.scope.len();
+		for index in 0..len {
+			if let Scope::While(body, evaluation, _continuation) = self.scope[len - index - 1] {
+				self.builder.build_unconditional_branch(evaluation);
+				let gc = self.context.insert_basic_block_after(body, "gc");
+				self.builder.position_at_end(gc);
+				return Ok(Operation::NoOp);
+			}
+		}
+
+		Err(Error::new_compiler_error(
+			"Unable to continue in current scope".to_string(),
+		))
 	}
 
 	pub fn evaluate_break(&mut self) -> Result<Operation, Error> {

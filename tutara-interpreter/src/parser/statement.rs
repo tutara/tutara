@@ -23,6 +23,7 @@ pub enum Statement {
 		Box<Statement>, // Body
 	),
 	Break,
+	Continue,
 	Return(Option<Expression>), // Option<Expression>
 	If(Expression, Box<Statement>, Option<Box<Statement>>), // Expression , Body A , Body B
 }
@@ -90,6 +91,7 @@ impl PartialEq for Statement {
 				_ => false,
 			},
 			Break => matches!(*other, Break),
+			Continue => matches!(*other, Continue),
 			Return(ref a_expression) => match *other {
 				Return(ref b_expression) => a_expression.eq(b_expression),
 				_ => false,
