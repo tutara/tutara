@@ -59,20 +59,22 @@ impl Compiler<'_> {
 	}
 
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
+		use Statement::*;
+
 		match statement {
-			Statement::Break => self.evaluate_break(),
-			Statement::While(condition, body) => self.evaluate_while(condition, body),
-			Statement::If(condition, true_branch, false_branch) => {
+			Break => self.evaluate_break(),
+			While(condition, body) => self.evaluate_while(condition, body),
+			If(condition, true_branch, false_branch) => {
 				self.evaluate_if(condition, true_branch, false_branch)
 			}
-			Statement::Expression(expression) => self.evaluate_expression(expression),
-			Statement::Declaration(_mutability, _type_specification, expression) => {
+			Expression(expression) => self.evaluate_expression(expression),
+			Declaration(_mutability, _type_specification, expression) => {
 				self.evaluate_declaration(expression)?;
 				Ok(Operation::NoOp)
 			}
-			Statement::Body(statements) => self.evaluate_body(statements),
-			Statement::Return(expression) => self.evaluate_return(expression),
-			Statement::Comment(_) => Ok(Operation::NoOp),
+			Body(statements) => self.evaluate_body(statements),
+			Return(expression) => self.evaluate_return(expression),
+			Comment(_) => Ok(Operation::NoOp),
 			_ => Err(Error::new_compiler_error(
 				"Unsupported statement".to_string(),
 			)),
@@ -195,64 +197,61 @@ impl Compiler<'_> {
 
 				Ok(Operation::NoOp)
 			}
-			_ => {
-				Err(Error::new_compiler_error(
-					"Unsupported type in condition".to_string(),
-				))
-			}
+			_ => Err(Error::new_compiler_error(
+				"Unsupported type in condition".to_string(),
+			)),
 		}
 	}
 
 	pub fn evaluate_return(&self, right: Option<Expression>) -> Result<Operation, Error> {
+		use Operation::*;
+
 		match right {
 			Some(expression) => match self.evaluate_expression(expression) {
-				Ok(Operation::FloatValue(result)) => {
-					Ok(Operation::Return(self.builder.build_return(Some(&result))))
-				}
-				Ok(Operation::BoolValue(result)) => {
-					Ok(Operation::Return(self.builder.build_return(Some(&result))))
-				}
+				Ok(FloatValue(result)) => Ok(Return(self.builder.build_return(Some(&result)))),
+				Ok(BoolValue(result)) => Ok(Return(self.builder.build_return(Some(&result)))),
 				Err(err) => Err(err),
 				_ => Err(Error::new_compiler_error(
 					"Unsupported return operation".to_string(),
 				)),
 			},
-			None => Ok(Operation::Return(self.builder.build_return(None))),
+			None => Ok(Return(self.builder.build_return(None))),
 		}
 	}
 
 	pub fn evaluate_declaration(&mut self, expression: Expression) -> Result<Operation, Error> {
+		use self::Literal::*;
+		use Expression::*;
+		use Operation::*;
+
 		match expression {
-			Expression::Assignment(identifier, _operator, inner_expression) => {
-				match identifier.literal {
-					Some(Literal::String(name)) => {
-						let pointer;
+			Assignment(identifier, _operator, inner_expression) => match identifier.literal {
+				Some(String(name)) => {
+					let pointer;
 
-						match self.evaluate_expression(*inner_expression)? {
-							Operation::FloatValue(value) => {
-								pointer = self.builder.build_alloca(self.context.f64_type(), &name);
-								self.builder.build_store(pointer, value);
-							}
-							Operation::BoolValue(value) => {
-								pointer =
-									self.builder.build_alloca(self.context.bool_type(), &name);
-								self.builder.build_store(pointer, value);
-							}
-							_ => {
-								return Err(Error::new_compiler_error(
-									"Unsupported assignment operation".to_string(),
-								))
-							}
-						};
+					match self.evaluate_expression(*inner_expression)? {
+						FloatValue(value) => {
+							pointer = self.builder.build_alloca(self.context.f64_type(), &name);
+							self.builder.build_store(pointer, value);
+						}
+						BoolValue(value) => {
+							pointer = self.builder.build_alloca(self.context.bool_type(), &name);
+							self.builder.build_store(pointer, value);
+						}
+						_ => {
+							return Err(Error::new_compiler_error(
+								"Unsupported assignment operation".to_string(),
+							))
+						}
+					};
 
-						self.variables.insert(name.to_string(), pointer);
-						Ok(Operation::NoOp)
-					}
-					_ => Err(Error::new_compiler_error(
-						"Unsupported expression".to_string(),
-					)),
+					self.variables.insert(name.to_string(), pointer);
+					Ok(NoOp)
 				}
-			}
+				_ => Err(Error::new_compiler_error(
+					"Unsupported expression".to_string(),
+				)),
+			},
 			_ => Err(Error::new_compiler_error(
 				"Unsupported expression".to_string(),
 			)),
@@ -265,6 +264,7 @@ impl Compiler<'_> {
 		right: Expression,
 		operator: Token,
 	) -> Result<Operation, Error> {
+		use FloatPredicate::*;
 		use Operation::*;
 		use TokenType::*;
 
@@ -296,50 +296,36 @@ impl Compiler<'_> {
 					))
 				}
 				Modulo => Ok(FloatValue(self.builder.build_float_rem(lhs, rhs, "tmprem"))),
-				Equal => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::OEQ,
-					lhs,
-					rhs,
-					"Equal",
-				))),
-				NotEqual => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::ONE,
-					lhs,
-					rhs,
-					"NotEqual",
-				))),
+				Equal => Ok(BoolValue(
+					self.builder.build_float_compare(OEQ, lhs, rhs, "Equal"),
+				)),
+				NotEqual => Ok(BoolValue(
+					self.builder.build_float_compare(ONE, lhs, rhs, "NotEqual"),
+				)),
 				GreaterOrEqual => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::OGE,
+					OGE,
 					lhs,
 					rhs,
 					"GreaterOrEqual",
 				))),
 				LesserOrEqual => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::OLE,
+					OLE,
 					lhs,
 					rhs,
 					"LesserOrEqual",
 				))),
-				Greater => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::OGT,
-					lhs,
-					rhs,
-					"Greater",
-				))),
-				Lesser => Ok(BoolValue(self.builder.build_float_compare(
-					FloatPredicate::OLT,
-					lhs,
-					rhs,
-					"Lesser",
-				))),
+				Greater => Ok(BoolValue(
+					self.builder.build_float_compare(OGT, lhs, rhs, "Greater"),
+				)),
+				Lesser => Ok(BoolValue(
+					self.builder.build_float_compare(OLT, lhs, rhs, "Lesser"),
+				)),
 				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 			}
-		} else if let (Operation::BoolValue(lhs), Operation::BoolValue(rhs)) = operations {
+		} else if let (BoolValue(lhs), BoolValue(rhs)) = operations {
 			match operator.r#type {
-				TokenType::And => Ok(Operation::BoolValue(
-					self.builder.build_and(lhs, rhs, "And"),
-				)),
-				TokenType::Or => Ok(Operation::BoolValue(self.builder.build_or(lhs, rhs, "Or"))),
+				TokenType::And => Ok(BoolValue(self.builder.build_and(lhs, rhs, "And"))),
+				TokenType::Or => Ok(BoolValue(self.builder.build_or(lhs, rhs, "Or"))),
 				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 			}
 		} else {
@@ -348,15 +334,19 @@ impl Compiler<'_> {
 	}
 
 	pub fn evaluate_expression(&self, expression: Expression) -> Result<Operation, Error> {
+		use Expression::*;
+		use Operation::*;
+		use self::Literal::*;
+
 		match expression {
-			Expression::Literal(token) => match token.literal {
-				Some(Literal::Number(number)) => {
+			Literal(token) => match token.literal {
+				Some(Number(number)) => {
 					let r#type = self.context.f64_type();
 					let literal = r#type.const_float(f64::from(number));
 
-					Ok(Operation::FloatValue(literal))
+					Ok(FloatValue(literal))
 				}
-				Some(Literal::Boolean(bool)) => {
+				Some(Boolean(bool)) => {
 					let r#type = self.context.bool_type();
 					let literal = if bool {
 						r#type.const_all_ones()
@@ -364,17 +354,17 @@ impl Compiler<'_> {
 						r#type.const_zero()
 					};
 
-					Ok(Operation::BoolValue(literal))
+					Ok(BoolValue(literal))
 				}
 				_ => Err(Error::new_compiler_error("Unsupported literal".to_string())),
 			},
-			Expression::Identifier(identifier) => match identifier.literal {
-				Some(Literal::String(name)) => match self.variables.get(&name) {
+			Identifier(identifier) => match identifier.literal {
+				Some(String(name)) => match self.variables.get(&name) {
 					Some(pointer) => {
 						let value = self.builder.build_load(*pointer, &name);
 
 						match value {
-							BasicValueEnum::FloatValue(value) => Ok(Operation::FloatValue(value)),
+							BasicValueEnum::FloatValue(value) => Ok(FloatValue(value)),
 							BasicValueEnum::IntValue(value) => {
 								if value.get_type().get_bit_width() == 1 {
 									Ok(Operation::BoolValue(value))
@@ -398,8 +388,8 @@ impl Compiler<'_> {
 					"Unsupported identifier".to_string(),
 				)),
 			},
-			Expression::Assignment(identifier, operator, expression) => match identifier.literal {
-				Some(Literal::String(name)) => {
+			Assignment(identifier, operator, expression) => match identifier.literal {
+				Some(String(name)) => {
 					let value = if operator.r#type == TokenType::Assign {
 						self.evaluate_expression(*expression)?
 					} else {
@@ -410,13 +400,13 @@ impl Compiler<'_> {
 					let pointer = self.variables.get(&name).unwrap();
 
 					match value {
-						Operation::FloatValue(value) => {
+						FloatValue(value) => {
 							self.builder.build_store(*pointer, value);
-							Ok(Operation::NoOp)
+							Ok(NoOp)
 						}
-						Operation::BoolValue(value) => {
+						BoolValue(value) => {
 							self.builder.build_store(*pointer, value);
-							Ok(Operation::NoOp)
+							Ok(NoOp)
 						}
 						_ => Err(Error::new_compiler_error(
 							"Unsupported assignment operation".to_string(),
@@ -427,25 +417,25 @@ impl Compiler<'_> {
 					"Unsupported identifier".to_string(),
 				)),
 			},
-			Expression::Unary(_, expression) => {
+			Unary(_, expression) => {
 				let value = self.evaluate_expression(*expression)?;
 				match value {
-					Operation::BoolValue(value) => {
-						Ok(Operation::BoolValue(self.builder.build_not(value, "not")))
+					BoolValue(value) => {
+						Ok(BoolValue(self.builder.build_not(value, "not")))
 					}
 					_ => Err(Error::new_compiler_error(
 						"Unsupported type for operation".to_string(),
 					)),
 				}
 			}
-			Expression::Binary(left, operator, right) => {
+			Binary(left, operator, right) => {
 				self.evaluate_operator(*left, *right, operator)
 			}
-			Expression::Grouping(expression) => self.evaluate_expression(*expression),
-			Expression::Call(function, _, parameters, _) => {
+			Grouping(expression) => self.evaluate_expression(*expression),
+			Call(function, _, parameters, _) => {
 				let name = match *function {
 					Expression::Identifier(identifier) => match identifier.literal {
-						Some(Literal::String(name)) => name,
+						Some(String(name)) => name,
 						_ => return Err(Error::new_compiler_error("Unsupported call".to_string())),
 					},
 					_ => return Err(Error::new_compiler_error("Unsupported call".to_string())),
@@ -463,8 +453,8 @@ impl Compiler<'_> {
 				let mut args: Vec<_> = Vec::new();
 				for expression in parameters.into_iter() {
 					match self.evaluate_expression(expression)? {
-						Operation::FloatValue(value) => args.push(value.into()),
-						Operation::BoolValue(value) => args.push(value.into()),
+						FloatValue(value) => args.push(value.into()),
+						BoolValue(value) => args.push(value.into()),
 						_ => {
 							return Err(Error::new_compiler_error(
 								"Unsupported return operation".to_string(),
@@ -481,10 +471,10 @@ impl Compiler<'_> {
 					.unwrap();
 
 				match result {
-					BasicValueEnum::FloatValue(value) => Ok(Operation::FloatValue(value)),
+					BasicValueEnum::FloatValue(value) => Ok(FloatValue(value)),
 					BasicValueEnum::IntValue(value) => {
 						if value.get_type().get_bit_width() == 1 {
-							Ok(Operation::BoolValue(value))
+							Ok(BoolValue(value))
 						} else {
 							Err(Error::new_compiler_error(
 								"Unsupported bit width".to_string(),
