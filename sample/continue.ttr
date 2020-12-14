@@ -4,11 +4,11 @@ val c = 0
 
 while (a <= 10) {
    if (b == 2){
-        c = c + 1
+        c += 1
         b = 0
         continue
    }
-   a = a + 1
+   a += 1
    b = b + 1
 }
 

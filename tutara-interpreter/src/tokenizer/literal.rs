@@ -4,7 +4,7 @@ use std::fmt::{self, Debug};
 use super::Literal::*;
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Eq, Serialize, Deserialize)]
+#[derive(Debug, Eq, Serialize, Deserialize, Clone)]
 pub enum Literal {
 	Number(u32),
 	String(String),

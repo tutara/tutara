@@ -3,7 +3,7 @@ use crate::{Expression, Token};
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
 
-#[derive(Debug, Serialize, Deserialize, Eq)]
+#[derive(Debug, Serialize, Deserialize, Eq, Clone)]
 pub enum Statement {
 	Expression(Expression),
 	Declaration(Token, Option<Token>, Expression), // var | val , Type , Assignment | Identifier

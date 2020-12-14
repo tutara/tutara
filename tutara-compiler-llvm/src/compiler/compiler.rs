@@ -9,12 +9,13 @@ use inkwell::{
 	FloatPredicate,
 };
 use std::collections::HashMap;
-use tutara_interpreter::{Analyzer, Error, Expression, Literal, Statement, Token, TokenType};
+use tutara_interpreter::{Parser, Analyzer, Error, Expression, Literal, Statement, Token, TokenType};
 
 pub struct Compiler<'a> {
 	pub(super) context: &'a Context,
 	pub(super) module: Module<'a>,
 	pub(super) builder: Builder<'a>,
+	pub(super) analyzer: Analyzer,
 
 	pub(super) scope: Vec<Scope<'a>>,
 	pub(super) variables: HashMap<String, PointerValue<'a>>,
@@ -33,13 +34,13 @@ pub enum Operation<'a> {
 }
 
 impl Compiler<'_> {
-	pub fn compile<'b>(&mut self, analyzer: Analyzer<'b>) -> Result<FunctionValue, Error> {
+	pub fn compile<'b>(&mut self, parser: Parser<'b>) -> Result<FunctionValue, Error> {
 		let fun_type = self.context.f64_type().fn_type(&[], false);
 		let fun = self.module.add_function("main", fun_type, None);
 		let body = self.context.append_basic_block(fun, "entry");
 		self.builder.position_at_end(body);
 
-		for result in analyzer {
+		for result in parser {
 			match result {
 				Ok(statement) => {
 					if let Operation::Return(_) = self.evaluate_statement(statement)? {
@@ -61,7 +62,9 @@ impl Compiler<'_> {
 	pub fn evaluate_statement(&mut self, statement: Statement) -> Result<Operation, Error> {
 		use Statement::*;
 
-		match statement {
+		let analyzed_statement = self.analyzer.analyze(statement)?;
+
+		match analyzed_statement {
 			Break => self.evaluate_break(),
 			Continue => self.evaluate_continue(),
 			While(condition, body) => self.evaluate_while(condition, body),
