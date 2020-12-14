@@ -5,7 +5,7 @@ use std::io;
 use std::io::{Read, Write};
 use std::result::Result;
 use tutara_compiler_llvm::Evaluator;
-use tutara_interpreter::{Parser, Statement, Token, TokenType, Tokenizer, Analyzer};
+use tutara_interpreter::{Parser, Statement, Token, TokenType, Tokenizer};
 
 use clap::{crate_version, App, AppSettings, Arg, ArgSettings};
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
@@ -99,7 +99,6 @@ fn run(input: &str, output: &str, format: &str) -> Result<(), std::io::Error> {
 		},
 		"tokens" => tokenize(&mut input_read, &mut output_write),
 		"statements" => parse(&mut input_read, &mut output_write),
-		"analyzed_statements" => analyze(&mut input_read, &mut output_write),
 		"result" => evaluate(&mut input_read, &mut output_write),
 		_ => unreachable!(),
 	}
@@ -182,29 +181,13 @@ fn parse(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(), st
 	}
 }
 
-fn analyze(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(), std::io::Error> {
-	let mut src = String::new();
-	input.read_to_string(&mut src)?;
-
-	let tokenizer = Tokenizer::new(&src);
-	let parser = Parser::new(tokenizer.peekable());
-	let analyzer = Analyzer::new(parser);
-	let statements: Result<Vec<Statement>, tutara_interpreter::Error> = analyzer.collect();
-
-	match statements {
-		Ok(statements) => writeln!(output, "{}", serde_json::to_string_pretty(&statements).unwrap()),
-		Err(err) => writeln!(output, "Error: {}", err),
-	}
-}
-
 fn evaluate(input: &mut dyn std::io::Read, output: &mut dyn Write) -> Result<(), std::io::Error> {
 	let mut src = String::new();
 	input.read_to_string(&mut src)?;
 
 	let tokenizer = Tokenizer::new(&src);
 	let parser = Parser::new(tokenizer.peekable());
-	let analyzer = Analyzer::new(parser);
-	let evaluation = Evaluator::evaluate(analyzer);
+	let evaluation = Evaluator::evaluate(parser);
 
 	match evaluation {
 		Ok(evaluation) => writeln!(output, "{}", evaluation),
@@ -271,7 +254,7 @@ fn main() -> Result<(), std::io::Error> {
 						.about("Set format")
 						.setting(ArgSettings::Hidden)
 						.takes_value(true)
-						.possible_values(&["highlight", "tokens", "statements", "analyzed_statements" , "result"])
+						.possible_values(&["highlight", "tokens", "statements", "result"])
 						.default_value("result"),
 				),
 		)
