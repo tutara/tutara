@@ -2,16 +2,16 @@ use inkwell::{
 	basic_block::BasicBlock,
 	builder::Builder,
 	context::Context,
-	module::Module,
+	module::{Linkage, Module},
 	types::BasicTypeEnum,
 	values::FloatValue,
 	values::InstructionValue,
 	values::{BasicValue, BasicValueEnum, FunctionValue, IntValue, PointerValue},
-	FloatPredicate,
+	AddressSpace, FloatPredicate,
 };
 use std::collections::HashMap;
 use tutara_interpreter::{
-	Analyzer, Error, Expression, Literal, parser::Parser, Statement, Token, TokenType,
+	parser::Parser, Analyzer, Error, Expression, Literal, Statement, Token, TokenType,
 };
 
 pub struct Compiler<'a> {
@@ -33,12 +33,27 @@ pub enum Scope<'a> {
 pub enum Operation<'a> {
 	FloatValue(FloatValue<'a>),
 	BoolValue(IntValue<'a>),
+	StringValue(PointerValue<'a>),
 	Return(InstructionValue<'a>),
 	NoOp,
 }
 
 impl Compiler<'_> {
 	pub fn compile<'b>(&mut self, parser: Parser<'b>) -> Result<FunctionValue, Error> {
+		// Temp
+		self.module.add_function(
+			"puts",
+			self.context.f64_type().fn_type(
+				&[self
+					.context
+					.i8_type()
+					.ptr_type(AddressSpace::Generic)
+					.into()],
+				false,
+			),
+			Some(Linkage::External),
+		);
+
 		let fun_type = self.context.f64_type().fn_type(&[], false);
 		let fun = self.module.add_function("main", fun_type, None);
 		let body = self.context.append_basic_block(fun, "entry");
@@ -152,7 +167,7 @@ impl Compiler<'_> {
 				))
 			}
 		};
-		
+
 		// Create function
 		let fun = self.module.add_function(fun_name.as_str(), fun_type, None);
 		let body_block = self
@@ -186,7 +201,7 @@ impl Compiler<'_> {
 		self.evaluate_statement(*body)?;
 		self.scope.pop();
 		self.builder.position_at_end(current.unwrap());
-		
+
 		Ok(Operation::NoOp)
 	}
 
@@ -358,6 +373,7 @@ impl Compiler<'_> {
 			Some(expression) => match self.evaluate_expression(expression) {
 				Ok(FloatValue(result)) => Ok(Return(self.builder.build_return(Some(&result)))),
 				Ok(BoolValue(result)) => Ok(Return(self.builder.build_return(Some(&result)))),
+				Ok(StringValue(result)) => Ok(Return(self.builder.build_return(Some(&result)))),
 				Err(err) => Err(err),
 				_ => Err(Error::new_compiler_error(
 					"Unsupported return operation".to_string(),
@@ -384,6 +400,13 @@ impl Compiler<'_> {
 						}
 						BoolValue(value) => {
 							pointer = self.builder.build_alloca(self.context.bool_type(), &name);
+							self.builder.build_store(pointer, value);
+						}
+						StringValue(value) => {
+							pointer = self.builder.build_alloca(
+								self.context.i8_type().ptr_type(AddressSpace::Generic),
+								&name,
+							);
 							self.builder.build_store(pointer, value);
 						}
 						_ => {
@@ -470,6 +493,13 @@ impl Compiler<'_> {
 				)),
 				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 			}
+		} else if let (StringValue(lhs), StringValue(rhs)) = operations {
+			match operator.r#type {
+				// Plus => Ok(StringValue(self.builder.build_insert_element(lhs, rhs, self.context.i8_type().const_int(0, false), "tmpadd"))),
+				_ => Err(Error::new_compiler_error(
+					"String comparison is not implemented".to_string(),
+				)),
+			}
 		} else if let (BoolValue(lhs), BoolValue(rhs)) = operations {
 			match operator.r#type {
 				TokenType::And => Ok(BoolValue(self.builder.build_and(lhs, rhs, "And"))),
@@ -504,7 +534,15 @@ impl Compiler<'_> {
 
 					Ok(BoolValue(literal))
 				}
-				_ => Err(Error::new_compiler_error("Unsupported literal".to_string())),
+				Some(String(str)) => {
+					let literal = self
+						.builder
+						.build_global_string_ptr(str.as_ref(), "str")
+						.as_pointer_value();
+
+					Ok(StringValue(literal))
+				}
+				None => Err(Error::new_compiler_error("Unsupported literal".to_string())),
 			},
 			Identifier(identifier) => match identifier.literal {
 				Some(String(name)) => match self.variables.get(&name) {
@@ -521,6 +559,9 @@ impl Compiler<'_> {
 										"Unsupported bit width".to_string(),
 									))
 								}
+							}
+							BasicValueEnum::PointerValue(value) => {
+								Ok(Operation::StringValue(value))
 							}
 							_ => Err(Error::new_compiler_error(
 								"Unsupported type for operation".to_string(),
@@ -553,6 +594,10 @@ impl Compiler<'_> {
 							Ok(NoOp)
 						}
 						BoolValue(value) => {
+							self.builder.build_store(*pointer, value);
+							Ok(NoOp)
+						}
+						StringValue(value) => {
 							self.builder.build_store(*pointer, value);
 							Ok(NoOp)
 						}
@@ -599,6 +644,7 @@ impl Compiler<'_> {
 					match self.evaluate_expression(expression)? {
 						FloatValue(value) => args.push(value.into()),
 						BoolValue(value) => args.push(value.into()),
+						StringValue(value) => args.push(value.into()),
 						_ => {
 							return Err(Error::new_compiler_error(
 								"Unsupported return operation".to_string(),
@@ -611,12 +657,11 @@ impl Compiler<'_> {
 					.builder
 					.build_call(fun, &args, &name)
 					.try_as_basic_value()
-					.left()
-					.unwrap();
+					.left();
 
 				match result {
-					BasicValueEnum::FloatValue(value) => Ok(FloatValue(value)),
-					BasicValueEnum::IntValue(value) => {
+					Some(BasicValueEnum::FloatValue(value)) => Ok(FloatValue(value)),
+					Some(BasicValueEnum::IntValue(value)) => {
 						if value.get_type().get_bit_width() == 1 {
 							Ok(BoolValue(value))
 						} else {
