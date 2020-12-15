@@ -1,9 +1,7 @@
-use super::result::Error;
-use super::result::ErrorType;
-use super::result::Result;
-use super::token::Token;
-use super::token_type::TokenType;
-use super::Literal;
+use crate::ast::*;
+use crate::Error;
+use crate::ErrorType;
+use crate::Result;
 
 use std::iter::Peekable;
 use std::str::Chars;

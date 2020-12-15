@@ -1,9 +1,7 @@
 use wasm_bindgen::prelude::*;
 
-use tutara_interpreter::Error;
-use tutara_interpreter::Token;
-use tutara_interpreter::Tokenizer;
-use tutara_interpreter::{Parser, Statement};
+use tutara_interpreter::{Tokenizer, Error, parser::Parser};
+use tutara_interpreter::ast::*;
 
 #[wasm_bindgen]
 pub struct Source {

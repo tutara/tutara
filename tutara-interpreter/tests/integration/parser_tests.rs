@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 use std::fs;
-use tutara_interpreter::{Statement, Tokenizer, Parser};
+use tutara_interpreter::{Statement, Tokenizer, parser::Parser};
 
 fn test_statements(name: &str) {
 	let mut script_path: PathBuf = ["tests", "scripts", name, name].iter().collect();

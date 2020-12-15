@@ -1,9 +1,6 @@
-use crate::Token;
+use crate::ast::*;
 use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug};
-use std::result;
-
-pub type Result<T> = result::Result<T, Error>;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ErrorType {

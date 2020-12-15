@@ -1,4 +1,4 @@
-use tutara_interpreter::{Expression, Literal, Parser, Statement, Token, TokenType, Tokenizer};
+use tutara_interpreter::{Expression, Literal, parser::Parser, Statement, Token, TokenType, Tokenizer};
 
 use Expression::*;
 use Statement::*;

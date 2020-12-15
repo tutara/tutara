@@ -1,7 +1,7 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 use std::fs;
 use std::path::PathBuf;
-use tutara_interpreter::{Error, Parser, Statement, Token, Tokenizer};
+use tutara_interpreter::{parser::Parser, Error, Statement, Token, Tokenizer};
 
 fn tokenizer_benchmark(criterion: &mut Criterion) {
 	criterion.bench_function("tokenizer_benchmark", |bencher| {
