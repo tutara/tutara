@@ -1,6 +1,6 @@
 use std::{collections::HashMap, path::Path};
 use inkwell::context::Context;
-use tutara_interpreter::{Error, Parser, Analyzer};
+use tutara_interpreter::{parser::Parser, Error, Analyzer};
 use crate::Compiler;
 
 pub struct Evaluator {

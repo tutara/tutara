@@ -5,7 +5,7 @@ use std::io;
 use std::io::{Read, Write};
 use std::result::Result;
 use tutara_compiler_llvm::Evaluator;
-use tutara_interpreter::{Parser, Statement, Token, TokenType, Tokenizer};
+use tutara_interpreter::{parser::Parser, Statement, Token, TokenType, Tokenizer};
 
 use clap::{crate_version, App, AppSettings, Arg, ArgSettings};
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};

@@ -11,7 +11,7 @@ use inkwell::{
 };
 use std::collections::HashMap;
 use tutara_interpreter::{
-	Analyzer, Error, Expression, Literal, Parser, Statement, Token, TokenType,
+	Analyzer, Error, Expression, Literal, parser::Parser, Statement, Token, TokenType,
 };
 
 pub struct Compiler<'a> {
