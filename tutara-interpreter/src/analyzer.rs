@@ -24,13 +24,13 @@ impl Analyzer {
 		use Statement::*;
 		
 		match statement {
-			Expression(_) => self.analyze_statement(&statement),
-			Loop(_) => self.analyze_statement(&statement),
+			Expression(_) => self.analyze_statement(statement),
+			Loop(_) => self.analyze_statement(statement),
 			_ => Ok(statement),
 		}
 	}
 
-	pub fn analyze_statement(&mut self, statement: &Statement) -> Result<Statement> {
+	pub fn analyze_statement(&mut self, statement: Statement) -> Result<Statement> {
 		use self::Expression::*;
 		use crate::Literal::*;
 		use Statement::*;
@@ -38,36 +38,36 @@ impl Analyzer {
 		match statement {
 			Expression(expression) => {
 				Ok(Statement::Expression(self.analyze_expression(expression)?))
-			}
+			},
 			Loop(statement) => Ok(While(
 				Literal(Token::new(TokenType::Boolean, Some(Boolean(true)), 0, 0, 0)),
-				Box::new(self.analyze_statement(&**statement)?),
+				Box::new(self.analyze(*statement)?),
 			)),
-			_ => unreachable!(),
+			_ => Ok(statement),
 		}
 	}
 
-	fn analyze_expression(&mut self, expression: &Expression) -> Result<Expression> {
+	fn analyze_expression(&mut self, expression: Expression) -> Result<Expression> {
 		use Expression::*;
 		use TokenType::*;
 		match expression {
 			Assignment(identifier, assignment, expression) => match &assignment.r#type {
-				AssignPlus => self.operation_assignment(identifier, assignment, expression, Plus),
-				AssignMinus => self.operation_assignment(identifier, assignment, expression, Minus),
+				AssignPlus => self.operation_assignment(identifier, assignment, *expression, Plus),
+				AssignMinus => self.operation_assignment(identifier, assignment, *expression, Minus),
 				AssignMultiply => {
-					self.operation_assignment(identifier, assignment, expression, Multiply)
+					self.operation_assignment(identifier, assignment, *expression, Multiply)
 				}
 				AssignDivision => {
-					self.operation_assignment(identifier, assignment, expression, Division)
+					self.operation_assignment(identifier, assignment, *expression, Division)
 				}
 				AssignExponentiation => {
-					self.operation_assignment(identifier, assignment, expression, Exponentiation)
+					self.operation_assignment(identifier, assignment, *expression, Exponentiation)
 				}
 				AssignModulo => {
-					self.operation_assignment(identifier, assignment, expression, Modulo)
+					self.operation_assignment(identifier, assignment, *expression, Modulo)
 				}
 				_ => Ok(Assignment(
-					identifier.clone(),
+					identifier,
 					assignment.clone(),
 					expression.clone(),
 				)),
@@ -80,9 +80,9 @@ impl Analyzer {
 impl Analyzer {
 	fn operation_assignment(
 		&mut self,
-		identifier: &Token,
-		assignment: &Token,
-		expression: &Expression,
+		identifier: Token,
+		assignment: Token,
+		expression: Expression,
 		token_type: TokenType,
 	) -> Result<Expression> {
 		use crate::Literal::*;
@@ -119,7 +119,7 @@ impl Analyzer {
 						assignment.column,
 						assignment.length,
 					),
-					Box::new(expression.clone()),
+					Box::new(expression),
 				)),
 			)),
 			_ => Err(Error::new_compiler_error(
