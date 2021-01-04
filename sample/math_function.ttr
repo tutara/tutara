@@ -1,0 +1,8 @@
+fun: Int add(a: Int, b: Int) {
+    return a + b
+}
+
+val a = 1
+val b = 2
+
+return add(a, b)

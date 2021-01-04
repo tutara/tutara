@@ -1,17 +1,18 @@
+use super::scope::ScopeContext;
+use crate::Scope;
 use inkwell::{
-	basic_block::BasicBlock,
 	builder::Builder,
 	context::Context,
 	module::Module,
 	types::BasicTypeEnum,
-	values::FloatValue,
-	values::InstructionValue,
-	values::{BasicValue, BasicValueEnum, FunctionValue, IntValue, PointerValue},
+	values::{
+		BasicValue, BasicValueEnum, FloatValue, FunctionValue, InstructionValue, IntValue,
+		PointerValue,
+	},
 	FloatPredicate,
 };
-use std::collections::HashMap;
 use tutara_interpreter::{
-	Analyzer, Error, Expression, Literal, parser::Parser, Statement, Token, TokenType,
+	parser::Parser, Analyzer, Error, Expression, Literal, Statement, Token, TokenType,
 };
 
 pub struct Compiler<'a> {
@@ -21,13 +22,6 @@ pub struct Compiler<'a> {
 	pub(super) analyzer: Analyzer,
 
 	pub(super) scope: Vec<Scope<'a>>,
-	pub(super) variables: HashMap<String, PointerValue<'a>>,
-}
-
-pub enum Scope<'a> {
-	While(BasicBlock<'a>, BasicBlock<'a>, BasicBlock<'a>), // Body , Evaluation , Continuation
-	If(BasicBlock<'a>, BasicBlock<'a>),                    // Body , Continuation
-	Fun,
 }
 
 pub enum Operation<'a> {
@@ -43,6 +37,7 @@ impl Compiler<'_> {
 		let fun = self.module.add_function("main", fun_type, None);
 		let body = self.context.append_basic_block(fun, "entry");
 		self.builder.position_at_end(body);
+		self.scope.push(Scope::new(ScopeContext::Main));
 
 		for result in parser {
 			match result {
@@ -88,6 +83,52 @@ impl Compiler<'_> {
 			}
 			_ => Err(Error::new_compiler_error(
 				"Unsupported statement".to_string(),
+			)),
+		}
+	}
+
+	pub fn get_variable(&self, name: &str) -> Result<PointerValue, Error> {
+		let len = self.scope.len();
+		for index in 0..len {
+			if let Some(pointer) = self.scope[len - index - 1].variables.get(name) {
+				return Ok(*pointer);
+			}
+		}
+
+		Err(Error::new_compiler_error(
+			"Variable not found in this scope".to_string(),
+		))
+	}
+
+	pub fn set_variable(&self, name: &str, operator: Token, expression: Expression) -> Result<Operation, Error> {
+		use Operation::*;
+
+		let value = if operator.r#type == TokenType::Assign {
+			self.evaluate_expression(expression)?
+		} else {
+			return Err(Error::new_compiler_error(
+				"Unsupported assignment operator".to_string(),
+			));
+		};
+
+		match self.get_variable(&name) {
+			Ok(pointer) => {
+				match value {
+					FloatValue(value) => {
+						self.builder.build_store(pointer, value);
+						Ok(NoOp)
+					}
+					BoolValue(value) => {
+						self.builder.build_store(pointer, value);
+						Ok(NoOp)
+					}
+					_ => Err(Error::new_compiler_error(
+						"Unsupported assignment operation".to_string(),
+					)),
+				}
+			}
+			Err(_) => Err(Error::new_compiler_error(
+				"Variable not found in this scope".to_string(),
 			)),
 		}
 	}
@@ -152,14 +193,14 @@ impl Compiler<'_> {
 				))
 			}
 		};
-		
+
 		// Create function
 		let fun = self.module.add_function(fun_name.as_str(), fun_type, None);
 		let body_block = self
 			.context
 			.append_basic_block(fun, format!("{}_entry", fun_name).as_str());
 
-		self.scope.push(Scope::Fun);
+		self.scope.push(Scope::new(ScopeContext::Fun));
 		let current = self.builder.get_insert_block();
 		self.builder.position_at_end(body_block);
 
@@ -180,20 +221,25 @@ impl Compiler<'_> {
 				.builder
 				.build_alloca(parameter.get_type(), &parameter_name);
 			self.builder.build_store(alloca, parameter);
-			self.variables.insert(parameter_name.to_string(), alloca);
+			let scope_index = self.scope.len() - 1;
+			self.scope[scope_index]
+				.variables
+				.insert(parameter_name.to_string(), alloca);
 		}
 
 		self.evaluate_statement(*body)?;
 		self.scope.pop();
 		self.builder.position_at_end(current.unwrap());
-		
+
 		Ok(Operation::NoOp)
 	}
 
 	pub fn evaluate_continue(&mut self) -> Result<Operation, Error> {
 		let len = self.scope.len();
 		for index in 0..len {
-			if let Scope::While(body, evaluation, _continuation) = self.scope[len - index - 1] {
+			if let ScopeContext::While(body, evaluation, _continuation) =
+				self.scope[len - index - 1].scope_context
+			{
 				self.builder.build_unconditional_branch(evaluation);
 				let gc = self.context.insert_basic_block_after(body, "gc");
 				self.builder.position_at_end(gc);
@@ -209,7 +255,9 @@ impl Compiler<'_> {
 	pub fn evaluate_break(&mut self) -> Result<Operation, Error> {
 		let len = self.scope.len();
 		for index in 0..len {
-			if let Scope::While(body, _evaluation, continuation) = self.scope[len - index - 1] {
+			if let ScopeContext::While(body, _evaluation, continuation) =
+				self.scope[len - index - 1].scope_context
+			{
 				self.builder.build_unconditional_branch(continuation);
 				let gc = self.context.insert_basic_block_after(body, "gc");
 				self.builder.position_at_end(gc);
@@ -248,11 +296,11 @@ impl Compiler<'_> {
 		self.builder.build_unconditional_branch(evaluation_block);
 
 		// Body
-		self.scope.push(Scope::While(
+		self.scope.push(Scope::new(ScopeContext::While(
 			body_block,
 			evaluation_block,
 			continuation_block,
-		));
+		)));
 		self.builder.position_at_end(body_block);
 		self.evaluate_statement(*body)?;
 		self.builder.build_unconditional_branch(evaluation_block);
@@ -302,7 +350,7 @@ impl Compiler<'_> {
 					.build_conditional_branch(value, true_block, false_block);
 
 				// True
-				self.scope.push(Scope::If(true_block, continuation_block));
+				self.scope.push(Scope::new(ScopeContext::If(true_block, continuation_block)));
 				self.builder.position_at_end(true_block);
 				self.evaluate_statement(*true_branch)?;
 				self.builder.build_unconditional_branch(continuation_block);
@@ -311,7 +359,10 @@ impl Compiler<'_> {
 				// False
 				self.builder.position_at_end(false_block);
 				if let Some(false_branch) = false_branch {
-					self.scope.push(Scope::If(false_block, continuation_block));
+					self.scope.push(Scope::new(ScopeContext::If(
+						false_block,
+						continuation_block,
+					)));
 					self.evaluate_statement(*false_branch)?;
 					self.scope.pop();
 				}
@@ -333,7 +384,7 @@ impl Compiler<'_> {
 
 		let len = self.scope.len();
 		for index in 0..len {
-			if let Scope::Fun = self.scope[len - index - 1] {
+			if let ScopeContext::Fun = self.scope[len - index - 1].scope_context {
 				if let Some(expression) = right {
 					match self.evaluate_expression(expression) {
 						Ok(FloatValue(result)) => self.builder.build_return(Some(&result)),
@@ -392,8 +443,11 @@ impl Compiler<'_> {
 							))
 						}
 					};
+					let scope_index = self.scope.len() - 1;
 
-					self.variables.insert(name.to_string(), pointer);
+					self.scope[scope_index]
+						.variables
+						.insert(name.to_string(), pointer);
 					Ok(NoOp)
 				}
 				_ => Err(Error::new_compiler_error(
@@ -507,9 +561,9 @@ impl Compiler<'_> {
 				_ => Err(Error::new_compiler_error("Unsupported literal".to_string())),
 			},
 			Identifier(identifier) => match identifier.literal {
-				Some(String(name)) => match self.variables.get(&name) {
-					Some(pointer) => {
-						let value = self.builder.build_load(*pointer, &name);
+				Some(String(name)) => match self.get_variable(&name) {
+					Ok(pointer) => {
+						let value = self.builder.build_load(pointer, &name);
 
 						match value {
 							BasicValueEnum::FloatValue(value) => Ok(FloatValue(value)),
@@ -527,10 +581,7 @@ impl Compiler<'_> {
 							)),
 						}
 					}
-					None => Err(Error::new_compiler_error(format!(
-						"Unknown variable {}",
-						name
-					))),
+					Err(err) => Err(err),
 				},
 				_ => Err(Error::new_compiler_error(
 					"Unsupported identifier".to_string(),
@@ -538,28 +589,8 @@ impl Compiler<'_> {
 			},
 			Assignment(identifier, operator, expression) => match identifier.literal {
 				Some(String(name)) => {
-					let value = if operator.r#type == TokenType::Assign {
-						self.evaluate_expression(*expression)?
-					} else {
-						return Err(Error::new_compiler_error(
-							"Unsupported assignment operator".to_string(),
-						));
-					};
-					let pointer = self.variables.get(&name).unwrap();
-
-					match value {
-						FloatValue(value) => {
-							self.builder.build_store(*pointer, value);
-							Ok(NoOp)
-						}
-						BoolValue(value) => {
-							self.builder.build_store(*pointer, value);
-							Ok(NoOp)
-						}
-						_ => Err(Error::new_compiler_error(
-							"Unsupported assignment operation".to_string(),
-						)),
-					}
+					
+					self.set_variable(&name, operator, *expression)
 				}
 				_ => Err(Error::new_compiler_error(
 					"Unsupported identifier".to_string(),
