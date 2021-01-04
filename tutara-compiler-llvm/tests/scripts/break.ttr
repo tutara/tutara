@@ -1,0 +1,18 @@
+val a = 0
+val b = 0
+val c = 0
+
+while (a <= 10) {
+   if (b == 2){
+        c += 1
+        b = 0
+        continue
+   }
+   a += 1
+   b = b + 1
+   if (c == 4){
+       break
+   }
+}
+
+return a

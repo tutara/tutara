@@ -8,6 +8,7 @@ use inkwell::{
 	values::InstructionValue,
 	values::{BasicValue, BasicValueEnum, FunctionValue, IntValue, PointerValue},
 	FloatPredicate,
+	IntPredicate,
 };
 use std::collections::HashMap;
 use tutara_interpreter::{
@@ -474,6 +475,12 @@ impl Compiler<'_> {
 			match operator.r#type {
 				TokenType::And => Ok(BoolValue(self.builder.build_and(lhs, rhs, "And"))),
 				TokenType::Or => Ok(BoolValue(self.builder.build_or(lhs, rhs, "Or"))),
+				Equal => Ok(BoolValue(
+					self.builder.build_int_compare(IntPredicate::EQ, lhs, rhs, "Equal"),
+				)),
+				NotEqual => Ok(BoolValue(
+					self.builder.build_int_compare(IntPredicate::NE, lhs, rhs, "NotEqual"),
+				)),
 				_ => Err(Error::new_compiler_error("Unexpected token".to_string())),
 			}
 		} else {
@@ -569,6 +576,7 @@ impl Compiler<'_> {
 				let value = self.evaluate_expression(*expression)?;
 				match value {
 					BoolValue(value) => Ok(BoolValue(self.builder.build_not(value, "not"))),
+					FloatValue(value) => Ok(FloatValue(self.builder.build_float_neg(value, "neg"))),
 					_ => Err(Error::new_compiler_error(
 						"Unsupported type for operation".to_string(),
 					)),
