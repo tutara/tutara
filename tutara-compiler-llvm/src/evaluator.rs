@@ -1,11 +1,9 @@
-use std::{path::Path};
-use inkwell::context::Context;
-use tutara_interpreter::{parser::Parser, Error, Analyzer};
 use crate::Compiler;
+use inkwell::context::Context;
+use std::path::Path;
+use tutara_interpreter::{parser::Parser, Analyzer, Error};
 
-pub struct Evaluator {
-	
-}
+pub struct Evaluator {}
 
 impl Evaluator {
 	pub fn evaluate(parser: Parser<'_>) -> Result<f64, Error> {
@@ -19,14 +17,15 @@ impl Evaluator {
 			module,
 			builder,
 			analyzer,
-			scope: Vec::new()
+			scope: Vec::new(),
 		};
 
-		let engine = compiler.module.create_jit_execution_engine(inkwell::OptimizationLevel::None).unwrap();
+		let engine = compiler
+			.module
+			.create_jit_execution_engine(inkwell::OptimizationLevel::None)
+			.unwrap();
 		match compiler.compile(parser) {
-			Ok(fun) => unsafe {
-				Ok(engine.run_function(fun, &[]).as_float(&context.f64_type()))
-			},
+			Ok(fun) => unsafe { Ok(engine.run_function(fun, &[]).as_float(&context.f64_type())) },
 			Err(err) => Err(err),
 		}
 	}
@@ -42,7 +41,7 @@ impl Evaluator {
 			module,
 			builder,
 			analyzer,
-			scope: Vec::new()
+			scope: Vec::new(),
 		};
 
 		match compiler.compile(parser) {
@@ -50,7 +49,7 @@ impl Evaluator {
 				compiler.module.write_bitcode_to_path(path);
 
 				None
-			},
+			}
 			Err(err) => Some(err),
 		}
 	}
