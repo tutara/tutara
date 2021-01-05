@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::Path};
+use std::{path::Path};
 use inkwell::context::Context;
 use tutara_interpreter::{parser::Parser, Error, Analyzer};
 use crate::Compiler;
@@ -19,7 +19,6 @@ impl Evaluator {
 			module,
 			builder,
 			analyzer,
-			variables: HashMap::new(),
 			scope: Vec::new()
 		};
 
@@ -43,7 +42,6 @@ impl Evaluator {
 			module,
 			builder,
 			analyzer,
-			variables: HashMap::new(),
 			scope: Vec::new()
 		};
 
