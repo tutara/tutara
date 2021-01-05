@@ -1,0 +1,14 @@
+fun: Bool equal(a: Bool, b: Bool) {
+    return a == b
+}
+
+val a = true
+val b = !false
+
+val c = 0
+
+if (equal(a, b)){
+    c = 1
+}
+
+return c

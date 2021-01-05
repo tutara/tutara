@@ -1,0 +1,22 @@
+val a = 0
+
+val b =  1
+    b += 1
+
+val c =  2
+    c -= 2
+
+val d =  3
+    d *= 3
+
+val e =  4
+    e /= 4
+
+val f =  5
+    f **= 5
+
+val g =  6
+    g %= 6
+
+// Adding them all toghether to produce a result
+return a + b + c + d + e + f + g
