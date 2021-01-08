@@ -4,6 +4,9 @@ pub use tokenizer::*;
 pub mod parser;
 pub use parser::*;
 
+pub mod parsing;
+pub use parsing::*;
+
 pub mod analyzer;
 pub use analyzer::*;
 
