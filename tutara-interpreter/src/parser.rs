@@ -30,31 +30,23 @@ impl Iterator for Parser<'_> {
 // Statement parsing
 impl Parser<'_> {
 	fn statement(&mut self) -> Result<Statement> {
+		use TokenType::*;
+	
 		if let Some(token) = self.next_if_in_token_types(&[
-			TokenType::Var,
-			TokenType::Val,
-			TokenType::Comment,
-			TokenType::Function,
-			TokenType::Return,
-			TokenType::Loop,
-			TokenType::While,
-			TokenType::For,
-			TokenType::Break,
-			TokenType::Continue,
-			TokenType::If,
+			Var, Val, Comment, Function, Return, Loop, While, For, Break, Continue, If,
 		]) {
 			if let Ok(token) = token {
 				match token.r#type {
-					TokenType::Val | TokenType::Var => self.declaration(token),
-					TokenType::Comment => Ok(Statement::Comment(token)),
-					TokenType::Function => self.function(token),
-					TokenType::Return => Ok(Statement::Return(self.expression_root().ok())),
-					TokenType::Loop => self.r#loop(token),
-					TokenType::While => self.r#while(token),
-					TokenType::For => self.r#for(token),
-					TokenType::Break => Ok(Statement::Break),
-					TokenType::Continue => Ok(Statement::Continue),
-					TokenType::If => self.r#if(token),
+					Val | Var => self.declaration(token),
+					Comment => Ok(Statement::Comment(token)),
+					Function => self.function(token),
+					Return => Ok(Statement::Return(self.expression_root().ok())),
+					Loop => self.r#loop(token),
+					While => self.r#while(token),
+					For => self.r#for(token),
+					Break => Ok(Statement::Break),
+					Continue => Ok(Statement::Continue),
+					If => self.r#if(token),
 					_ => self.create_statement_syntax_error(
 						"statement not implemented please report issue".to_string(),
 						token,

@@ -1,10 +1,10 @@
 use crate::ast::*;
-use crate::Result;
+use crate::parser::Parser;
 use crate::Error;
 use crate::ErrorType;
-use crate::parser::Parser;
+use crate::Result;
 
-impl Parser<'_>{
+impl Parser<'_> {
 	pub(crate) fn expression(&mut self) -> Result<Statement> {
 		match self.expression_root() {
 			Ok(expression) => Ok(Statement::Expression(expression)),
@@ -17,16 +17,18 @@ impl Parser<'_>{
 	}
 
 	pub(super) fn assignment(&mut self) -> Result<Expression> {
+		use TokenType::*;
+
 		let expression: Expression = self.or()?;
 
 		if let Some(Ok(token)) = self.next_if_in_token_types(&[
-			TokenType::Assign,
-			TokenType::AssignPlus,
-			TokenType::AssignMinus,
-			TokenType::AssignMultiply,
-			TokenType::AssignDivision,
-			TokenType::AssignExponentiation,
-			TokenType::AssignModulo,
+			Assign,
+			AssignPlus,
+			AssignMinus,
+			AssignMultiply,
+			AssignDivision,
+			AssignExponentiation,
+			AssignModulo,
 		]) {
 			return match expression {
 				Expression::Identifier(_token) => Ok(Expression::Assignment(
@@ -63,15 +65,17 @@ impl Parser<'_>{
 	}
 
 	pub(super) fn comparison(&mut self) -> Result<Expression> {
+		use TokenType::*;
+
 		let mut expression: Expression = self.addition_and_subtraction()?;
 
 		while let Some(Ok(token)) = self.next_if_in_token_types(&[
-			TokenType::Equal,
-			TokenType::NotEqual,
-			TokenType::Greater,
-			TokenType::GreaterOrEqual,
-			TokenType::Lesser,
-			TokenType::LesserOrEqual,
+			Equal,
+			NotEqual,
+			Greater,
+			GreaterOrEqual,
+			Lesser,
+			LesserOrEqual,
 		]) {
 			expression = Expression::Binary(
 				Box::new(expression),
@@ -99,13 +103,11 @@ impl Parser<'_>{
 	}
 
 	pub(super) fn multiplication_division_modulo(&mut self) -> Result<Expression> {
+		use TokenType::*;
+
 		let mut expression = self.involution()?;
 
-		while let Some(Ok(token)) = self.next_if_in_token_types(&[
-			TokenType::Multiply,
-			TokenType::Division,
-			TokenType::Modulo,
-		]) {
+		while let Some(Ok(token)) = self.next_if_in_token_types(&[Multiply, Division, Modulo]) {
 			expression =
 				Expression::Binary(Box::new(expression), token, Box::new(self.involution()?));
 		}
@@ -198,22 +200,20 @@ impl Parser<'_>{
 	}
 
 	pub(crate) fn terms(&mut self) -> Result<Expression> {
-		if let Some(Ok(token)) = self.next_if_token_type(TokenType::Identifier) {
+		use TokenType::*;
+
+		if let Some(Ok(token)) = self.next_if_token_type(Identifier) {
 			return Ok(Expression::Identifier(token));
 		}
 
-		if let Some(Ok(token)) = self.next_if_in_token_types(&[
-			TokenType::String,
-			TokenType::Integer,
-			TokenType::Boolean,
-		]) {
+		if let Some(Ok(token)) = self.next_if_in_token_types(&[String, Integer, Boolean]) {
 			return Ok(Expression::Literal(token));
 		}
 
-		if let Some(Ok(_token)) = self.next_if_token_type(TokenType::OpenParenthesis) {
+		if let Some(Ok(_token)) = self.next_if_token_type(OpenParenthesis) {
 			let expression = self.assignment()?;
 
-			if let Some(Ok(_next)) = self.next_if_token_type(TokenType::CloseParenthesis) {
+			if let Some(Ok(_next)) = self.next_if_token_type(CloseParenthesis) {
 				return Ok(Expression::Grouping(Box::new(expression)));
 			}
 		}
@@ -223,7 +223,10 @@ impl Parser<'_>{
 				self.create_expression_syntax_error("Unexpected token".to_string(), next)
 			}
 			Some(Err(err)) => Err(err),
-			None => Err(Error::new(ErrorType::Eof, "Unexpected end of file".to_string())),
+			None => Err(Error::new(
+				ErrorType::Eof,
+				"Unexpected end of file".to_string(),
+			)),
 		}
 	}
 }
