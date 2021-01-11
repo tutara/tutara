@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - uses: hecrj/setup-rust-action@v1
         with:
           rust-version: ${{ matrix.rust }}
@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - uses: hecrj/setup-rust-action@v1
         with:
           rust-version: ${{ matrix.rust }}
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - uses: actions/checkout@v1
       - uses: actions-rs/toolchain@v1
         with:
@@ -77,7 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - uses: hecrj/setup-rust-action@v1
         with:
           rust-version: ${{ matrix.rust }}
@@ -94,7 +94,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - uses: hecrj/setup-rust-action@v1
         with:
           rust-version: stable

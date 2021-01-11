@@ -37,12 +37,12 @@ The compiler uses LLVM on for resolving, compiling and executing the code. It is
 LLVM can be installed on linux using a package manager. For example, in Debian/Ubuntu you can run the following example:
 
 ```
-sudo apt install llvm-10-dev
+sudo apt install llvm-11-dev
 ```
 
 #### Windows
 
-The LLVM Windows builds don't include the full toolset that is used for development in the interpreter. You will need to build the currently used version (LLVM-10) yourself or find a working build online.
+The LLVM Windows builds don't include the full toolset that is used for development in the interpreter. You will need to build the currently used version (LLVM-11) yourself or find a working build online.
 
 [Installing LLVM on Windows](https://llvm.org/docs/GettingStartedVS.html)
 

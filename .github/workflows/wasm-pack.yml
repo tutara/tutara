@@ -15,7 +15,7 @@ jobs:
       - name: Install wasm-pack
         uses: jetli/wasm-pack-action@v0.3.0
       - name: Install LLVM
-        run: sudo apt install llvm-10-dev
+        run: sudo apt install llvm-11-dev
       - name: Clone repository 
         uses: actions/checkout@v2
         with:
