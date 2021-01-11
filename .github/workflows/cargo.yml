@@ -42,6 +42,25 @@ jobs:
       - name: cargo test
         run: cargo test --verbose
 
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install LLVM
+        run: sudo apt install llvm-10-dev
+      - uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: nightly
+      - name: cargo doc
+        env:
+          RUSTDOCFLAGS: '--enable-index-page -Zunstable-options'
+        run: cargo doc --no-deps
+      - name: Upload docs
+        uses: actions/upload-artifact@v2
+        with:
+          name: Docs
+          path: ./target/doc
+
   code-cov:
     runs-on: ubuntu-latest
     steps:
