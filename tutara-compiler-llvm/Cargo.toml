@@ -6,4 +6,4 @@ edition = "2018"
 
 [dependencies]
 tutara-interpreter = { path = "../tutara-interpreter" }
-inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm10-0"] }
+inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm11-0"] }
