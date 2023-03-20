@@ -8,6 +8,6 @@ default-run = "tutara-cli"
 [dependencies]
 tutara-interpreter = { path = "../tutara-interpreter" }
 tutara-compiler-llvm = { path = "../tutara-compiler-llvm" }
-clap = "3.0.0-beta.2"
+clap = "4.1.11"
 termcolor = "1.1"
 serde_json = "1.0"
